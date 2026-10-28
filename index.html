@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="74 learning game formats matched to content type and setting, with real-world examples.">
+<title>Learning Game Shelf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+body { margin: 0; }
+[hidden] { display: none !important; }
+/* Layout: a game-shop shelf. Two chip rails pick the content and the setting, a clickable fit grid shows coverage, and game "box cards" fill a responsive grid below. */
+:root {
+  --paper: #EEF1F5;
+  --card: #FFFFFF;
+  --ink: #1B2340;
+  --muted: #586180;
+  --line: #D3D9E4;
+  --accent: #E3A008;
+  --accent-soft: #FCEFC9;
+  --accent-ink: #6E4B00;
+  --teal: #0E7471;
+  --teal-soft: #DDF1F0;
+  --heat-0: #F5F7FA;
+  --heat-1: #E2E8F2;
+  --heat-2: #C3CEE3;
+  --heat-3: #8FA2CB;
+  --heat-ink: #1B2340;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", Verdana, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11162A; --card: #1A2138; --ink: #E7EBF5; --muted: #A3ABC6; --line: #2D3654;
+    --accent: #F2B632; --accent-soft: #3A2F12; --accent-ink: #F6CC6A;
+    --teal: #45C4BF; --teal-soft: #12302F;
+    --heat-0: #161C33; --heat-1: #1F2945; --heat-2: #2F3D66; --heat-3: #4A60A0; --heat-ink: #E7EBF5;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11162A; --card: #1A2138; --ink: #E7EBF5; --muted: #A3ABC6; --line: #2D3654;
+  --accent: #F2B632; --accent-soft: #3A2F12; --accent-ink: #F6CC6A;
+  --teal: #45C4BF; --teal-soft: #12302F;
+  --heat-0: #161C33; --heat-1: #1F2945; --heat-2: #2F3D66; --heat-3: #4A60A0; --heat-ink: #E7EBF5;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-weight: 800; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.02; letter-spacing: -0.02em; }
+h2 { font-weight: 600; font-size: 1.15rem; }
+.lede { max-width: 62ch; color: var(--muted); margin: 10px 0 0; font-size: 1.05rem; }
+.steps { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 16px 0 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { counter-increment: s; display: flex; gap: 8px; align-items: baseline; font-size: .95rem; }
+.steps li::before { content: counter(s); font-family: var(--mono); font-size: .75rem; color: var(--accent-ink); background: var(--accent-soft); border-radius: 4px; padding: 1px 6px; }
+
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+.rail { display: flex; flex-direction: column; gap: 8px; }
+.rail-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: .92rem; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip.set[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: var(--card); }
+.chip:focus-visible, .btn:focus-visible, .cell:focus-visible, .used-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 14px; }
+.count { font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.toggle { display: flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--muted); cursor: pointer; }
+.toggle input { width: 18px; height: 18px; accent-color: var(--teal); }
+.btn { font: inherit; font-weight: 700; font-size: .92rem; border: 0; background: var(--accent); color: #1B2340; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.btn:hover { filter: brightness(1.05); }
+
+details.fit { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; }
+details.fit summary { cursor: pointer; font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.fit-note { color: var(--muted); font-size: .9rem; margin: 8px 0 12px; max-width: 70ch; }
+.grid-scroll { overflow-x: auto; }
+table.heat { border-collapse: separate; border-spacing: 4px; font-size: .85rem; min-width: 640px; }
+table.heat th { font-weight: 700; color: var(--muted); text-align: left; padding: 4px 6px; vertical-align: bottom; }
+table.heat thead th { font-size: .78rem; max-width: 110px; }
+.cell { font: inherit; font-family: var(--mono); width: 100%; min-width: 64px; border: 1px solid var(--line); border-radius: 6px; padding: 8px 0; cursor: pointer; color: var(--heat-ink); font-variant-numeric: tabular-nums; }
+.cell[data-l="0"] { background: var(--heat-0); color: var(--muted); }
+.cell[data-l="1"] { background: var(--heat-1); }
+.cell[data-l="2"] { background: var(--heat-2); }
+.cell[data-l="3"] { background: var(--heat-3); }
+.cell.on { outline: 3px solid var(--accent); outline-offset: 1px; }
+
+.shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; align-items: start; }
+.game { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; scroll-margin-top: 20px; }
+.game.pick { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.game.used { opacity: .62; }
+.game-head { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+.game h3 { font-weight: 800; font-size: 1.3rem; line-height: 1.1; }
+.how { margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; border-block: 1px dashed var(--line); padding-block: 9px; }
+.stat { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat span:first-child { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.stat span:last-child { font-family: var(--mono); font-size: .82rem; overflow-wrap: anywhere; }
+.pips { letter-spacing: 2px; color: var(--accent-ink); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: .78rem; border-radius: 999px; padding: 2px 9px; border: 1px solid var(--line); color: var(--ink); }
+.tag.set { background: var(--teal-soft); border-color: transparent; color: var(--teal); }
+.tag.hit { border-color: var(--ink); font-weight: 700; }
+.tag.set.hit { border-color: var(--teal); }
+dl.notes { margin: 0; display: flex; flex-direction: column; gap: 9px; }
+dl.notes div { display: grid; gap: 1px; }
+dl.notes dt { font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); }
+dl.notes dd { margin: 0; font-size: .93rem; }
+.used-btn { font: inherit; font-size: .78rem; flex-shrink: 0; border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 3px 10px; cursor: pointer; white-space: nowrap; }
+.used-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.search { font: inherit; width: 100%; max-width: 420px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 10px; padding: 8px 12px; }
+.search:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.seen a, .srclist a { color: var(--teal); text-underline-offset: 2px; overflow-wrap: anywhere; }
+.srclist { margin: 0; padding-left: 18px; columns: 2 260px; column-gap: 28px; font-size: .9rem; }
+.srclist li { break-inside: avoid; margin-bottom: 4px; }
+.empty { background: var(--card); border: 1px dashed var(--line); border-radius: 14px; padding: 24px; text-align: center; color: var(--muted); }
+.foot { color: var(--muted); font-size: .85rem; max-width: 70ch; }
+@media (prefers-reduced-motion: no-preference) { .game { transition: box-shadow .2s, border-color .2s, opacity .2s; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Learning Game Shelf</h1>
+    <p class="lede"><span id="n-games">74</span> game formats for learning programs, matched to the kind of content you were handed and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
+    <ol class="steps">
+      <li>Pick what most of the content is</li>
+      <li>Pick where people will play</li>
+      <li>Choose a game you haven't run lately</li>
+    </ol>
+  </header>
+
+  <section class="panel" aria-label="Filters">
+    <div class="rail">
+      <span class="rail-label" id="c-label">What is the content mostly?</span>
+      <div class="chips" id="content-chips" role="group" aria-labelledby="c-label"></div>
+    </div>
+    <div class="rail">
+      <span class="rail-label" id="s-label">Where will people play?</span>
+      <div class="chips" id="setting-chips" role="group" aria-labelledby="s-label"></div>
+    </div>
+    <div class="rail">
+      <label class="rail-label" for="q">Search by name or idea</label>
+      <input type="search" id="q" class="search" placeholder="Try 'AI', 'Slack', 'cards', 'mystery'" autocomplete="off">
+    </div>
+    <div class="toolbar">
+      <span class="count" id="count" aria-live="polite"></span>
+      <div class="tools">
+        <label class="toggle"><input type="checkbox" id="hide-used"> Hide games I've used recently</label>
+        <button class="btn" id="surprise" type="button">Surprise me</button>
+      </div>
+    </div>
+  </section>
+
+  <details class="fit" id="fit">
+    <summary>Fit grid: how many games fit each pairing</summary>
+    <p class="fit-note">Each number is how many formats suit that content in that setting. Click a square to filter by both. Thin squares are where a new format would help most.</p>
+    <div class="grid-scroll"><table class="heat" id="heat"></table></div>
+  </details>
+
+  <section class="shelf" id="shelf" aria-label="Games"></section>
+
+  <details class="fit" id="sources">
+    <summary>Where these came from</summary>
+    <p class="fit-note">The shelf started with 30 formats and grew from what corporate L&amp;D teams, facilitators, tool makers, and AI adoption programs describe using. No list is ever complete: facilitation books like Gamestorming hold 80+ more workshop techniques, many of them meeting methods rather than games. Cards link to the examples behind them.</p>
+    <ul class="srclist" id="srclist"></ul>
+  </details>
+
+  <p class="foot">"Used recently" marks are saved in this browser only. Group sizes and times are starting points, not limits.</p>
+</div>
+
+<script>
+const CONTENT = [
+  ["facts", "Facts & terms"],
+  ["process", "Steps & processes"],
+  ["judgment", "Judgment calls"],
+  ["trouble", "Finding problems"],
+  ["tradeoffs", "Tradeoffs & priorities"],
+  ["tools", "Hands-on tool skills"],
+  ["concepts", "Big ideas & how things connect"],
+  ["habits", "Habits & behavior change"]
+];
+const SETTINGS = [
+  ["room", "Live, in the room"],
+  ["call", "Live, on a video call"],
+  ["self", "Self-paced, on their own"],
+  ["community", "Ongoing in Slack or a community"],
+  ["event", "Big event, 100+ people"],
+  ["meeting", "10 minutes in a team meeting"]
+];
+const G = [
+  {n:"Trivia Race", h:"Timed multiple-choice rounds. Faster correct answers score more, with a live leaderboard after each round.", c:["facts","concepts"], s:["call","room","event","meeting"], e:1, g:"5 to 1,000", t:"10–20 min",
+   b:"Have Claude turn the source material into 15 questions with wrong answers that sound plausible, then build a one-page quiz with a timer.", f:"Make the last round worth double, or let teams bet points before each question.", w:"Rewards speed and recall. Use it to warm up a session, not to teach judgment."},
+  {n:"Memory Match", h:"Flip cards two at a time to pair a term with what it means or when to use it.", c:["facts"], s:["self","room"], e:1, g:"1 to 4", t:"5 min",
+   b:"Ask Claude for 8 to 12 pairs and a flip-card grid page.", f:"Pair each tool with the task it is best at, instead of a term with its definition.", w:"Wears out quickly. Keep rounds short."},
+  {n:"Bingo", h:"Players mark squares as they hear, see, or do things. First full line wins.", c:["facts","habits","tools"], s:["event","call","community"], e:1, g:"10 to 3,000", t:"1 session or 1 week",
+   b:"Give Claude 25 or more items and have it generate unique randomized cards.", f:"Run action bingo for a week, where each square is something to try at work, like drafting a reply with AI.", w:"Listening bingo during a talk can pull attention away from the talk."},
+  {n:"Jeopardy Board", h:"Teams pick a category and point value, then answer. Harder questions are worth more.", c:["facts","concepts"], s:["call","room","meeting"], e:1, g:"2 to 6 teams", t:"20–30 min",
+   b:"Give Claude your categories and have it write questions at five difficulty levels, then build a clickable board.", f:"Hide a Daily Double in the category people keep avoiding.", w:"Needs a host to keep it moving."},
+  {n:"Board Race", h:"Players advance pieces across a board by completing learning challenges.", c:["facts","concepts","tools"], s:["self","room","community"], e:2, g:"1 to 100+", t:"Ongoing",
+   b:"Use Claude Design for a 3D board and pieces, and have Claude build a challenge deck from the content.", f:"Add branching paths, shortcuts, and chance cards so no two runs play the same.", w:"If every square is the same quiz question, a new map is only a reskin."},
+  {n:"Escape Room", h:"Solve a chain of locks. Each lock opens only when a step is done correctly.", c:["process","trouble","tools"], s:["self","call"], e:3, g:"1 to 5 per team", t:"30–45 min",
+   b:"Map the process to 4 to 6 locks yourself first, then have Claude build the rooms, clues, and code checks as one page.", f:"Run teams in parallel on a video call and post finish times.", w:"One unclear clue blocks everyone. Playtest with someone who has never seen it."},
+  {n:"Sequence Sort", h:"Drag shuffled steps into the right order and check the answer.", c:["process"], s:["self","call","room","meeting"], e:1, g:"1 to 30", t:"5 min",
+   b:"Ask Claude to split the process into 6 to 10 steps and add one step that doesn't belong.", f:"Include a fake step that sounds right. Spotting it is the real test.", w:"Only works for processes with one right order."},
+  {n:"Branching Scenario", h:"Choose how to respond at each decision point. The story changes based on your choices and shows the consequences.", c:["judgment","trouble"], s:["self","call"], e:2, g:"1, or a room voting", t:"10–20 min",
+   b:"Write the decision points yourself, since that is the expertise. Then have Claude write the branches and build the page.", f:"On a live call, let the room vote on each choice and see the result together.", w:"Branches multiply fast. Keep to 3 or 4 decisions with 2 or 3 choices each."},
+  {n:"Mystery", h:"Search for clues, question characters, and name what went wrong and why.", c:["trouble","judgment","concepts"], s:["self","room","community"], e:3, g:"1 to 6 per team", t:"30–60 min",
+   b:"Rooms to search, clues, witnesses to question, and a final deduction, with 3D models from Claude Design.", f:"Release one clue a day in Slack and let teams post their theories.", w:"The biggest build on the shelf. Save it for content that is really about diagnosis."},
+  {n:"Spot the Mistake", h:"Find the errors planted in a document, screenshot, or AI answer.", c:["trouble","judgment","tools"], s:["self","call","room","meeting","community","event"], e:1, g:"Any", t:"5–10 min",
+   b:"Have Claude write a realistic AI answer with 3 planted errors and a key that explains each one.", f:"For AI fluency, plant made-up citations, invented numbers, or confident wrong math.", w:"Errors should be realistic. Obvious typos teach nothing."},
+  {n:"Two Truths and a Lie", h:"Three statements, one false. Players vote on the lie, then hear why.", c:["facts","concepts"], s:["meeting","call","room","community"], e:1, g:"Any", t:"2–5 min",
+   b:"Ask Claude for sets where the lie is a common misconception.", f:"Have participants write their own sets about the topic.", w:"Light. Best as an opener."},
+  {n:"Token Budget", h:"Spend a limited number of tokens across options, then compare and discuss choices.", c:["tradeoffs","judgment"], s:["room","call","meeting"], e:1, g:"3 to 30", t:"15 min",
+   b:"Have Claude draft 12 to 15 options with real costs and benefits. You set the budget.", f:"Reveal a surprise cost after everyone has spent.", w:"The discussion afterward is the learning. Leave time for it."},
+  {n:"Triage Rush", h:"Requests keep arriving. Sort them by priority before the queue overflows.", c:["tradeoffs","process","judgment"], s:["self","call"], e:2, g:"1 to 20", t:"10 min",
+   b:"Have Claude build a timed queue of tickets or requests, each with a correct priority and a reason.", f:"Speed up the queue each round.", w:"Time pressure can punish careful thinkers. Show the reasoning after each round."},
+  {n:"Real-Tool Scavenger Hunt", h:"Find or do things inside the actual tools and post proof.", c:["tools","habits"], s:["self","community","call"], e:1, g:"Any", t:"1 day to 1 week",
+   b:"Have Claude write 10 tasks from beginner to advanced, plus how to check each one.", f:"Hide one golden task worth big points that few people find.", w:"Everyone needs access to the real tools."},
+  {n:"Quest Board", h:"Ongoing points, badges, and a leaderboard for real contributions in a community.", c:["habits","tools"], s:["community"], e:2, g:"50 to 1,000+", t:"Weeks to quarters",
+   b:"A Claude skill and scheduled task that read community posts and score them against a quest board.", f:"Quarterly resets, seasonal quests, and themed weeks.", w:"People will try to game it. Write anti-gaming rules first."},
+  {n:"Streak Challenge", h:"Do one small thing every day for a set number of days.", c:["habits","tools"], s:["community","self"], e:1, g:"Any", t:"5–30 days",
+   b:"Have Claude write the daily prompts, each one small, getting harder over time.", f:"Team streaks, where the whole team's streak breaks if anyone misses a day.", w:"Missing one day makes people quit. Allow a free skip."},
+  {n:"Role-Play Simulation", h:"Claude plays a customer or stakeholder. The learner practices the conversation and gets scored.", c:["judgment","tools"], s:["self","call"], e:2, g:"1", t:"10–15 min",
+   b:"A skill or Claude Project with the persona, their goals and objections, and a scoring rubric at the end.", f:"Give the persona a hidden goal the learner has to uncover.", w:"Score against your rubric, not Claude's general opinion. Test it against an answer key you write first."},
+  {n:"Prompt Golf", h:"Reach a target output in the fewest words or attempts. Each round is a new hole.", c:["tools"], s:["call","room","community","event"], e:1, g:"5 to 200", t:"15–30 min",
+   b:"Pick the target outputs, and have Claude help write a judging rubric.", f:"Each hole adds a constraint, like no examples allowed.", w:"Shortest is not always best. Score quality too."},
+  {n:"Story Campaign", h:"A story told in weekly chapters. Each chapter's challenge moves the team's adventure forward.", c:["concepts","judgment","habits"], s:["community","meeting"], e:3, g:"Teams of 3 to 6", t:"4–8 weeks",
+   b:"Have Claude draft a story arc where each chapter maps to one learning goal, then release a chapter a week.", f:"Let team choices change what happens in the next chapter.", w:"Needs steady weekly effort from you. Plan every chapter before launch."},
+  {n:"Sort It", h:"Drag items into the right categories, then see the reasoning.", c:["concepts","facts","judgment"], s:["self","call","room","meeting"], e:1, g:"1 to 30", t:"5 min",
+   b:"Ask Claude for 15 to 20 items and 3 or 4 categories, including a few borderline items.", f:"Use the categories Use AI, Don't use AI, and Use AI with a human check.", w:"Borderline items need explanations, or people just feel tricked."},
+  {n:"Lightning Drill", h:"Rapid 60-second rounds of quick questions or shortcuts.", c:["facts","tools"], s:["meeting","call"], e:1, g:"Any", t:"5 min",
+   b:"Have Claude write 20 one-line questions or shortcut drills.", f:"Track personal bests week over week.", w:"Only for things worth knowing by heart."},
+  {n:"Build the Map", h:"Assemble the pieces of a system or workflow diagram in the right places.", c:["concepts","process"], s:["room","call","self"], e:2, g:"1 to 6", t:"15 min",
+   b:"Have Claude split a diagram into labeled pieces and build drag-and-drop with snap points.", f:"Remove one piece and ask what breaks without it.", w:"The diagram has to be correct and simple."},
+  {n:"Defend the Decision", h:"Teams argue opposite sides of a realistic scenario. Judges score the reasoning.", c:["judgment","tradeoffs"], s:["room","call","meeting"], e:1, g:"6 to 40", t:"20 min",
+   b:"Have Claude write scenarios with no obvious answer and a judging guide.", f:"Teams switch sides halfway through.", w:"Needs a good facilitator."},
+  {n:"Build Sprint", h:"Teams build something real with the tools in a set time, then demo it.", c:["tools","habits"], s:["event","community","room"], e:2, g:"10 to 500", t:"2 hours to 2 days",
+   b:"Have Claude write challenge briefs at three difficulty levels and a judging rubric.", f:"Give awards like most hours saved and most reusable.", w:"Beginners stall without setup help. Have helpers on hand."},
+  {n:"Show-and-Tell Bounty", h:"Post bounties like 'show a workflow that does X.' People claim them by demoing.", c:["habits","tools"], s:["community","call"], e:1, g:"20 to 1,000", t:"Ongoing",
+   b:"Have Claude draft bounty cards from your learning goals and post a few each week.", f:"Let members post their own bounties.", w:"Celebrate small entries too, or only experts will join."},
+  {n:"Feature Auction", h:"Bid a limited currency on features, tools, or actions. True values are revealed after bidding.", c:["tradeoffs","concepts"], s:["room","call","event"], e:1, g:"6 to 100", t:"20 min",
+   b:"Have Claude write 10 lots, each with a hidden true value and a reason.", f:"Reveal who overpaid and why.", w:"Fun but loud. Keep every lot tied to a learning goal."},
+  {n:"Find the Risk", h:"Click the hidden risks on a mock screen or document, like data that should not go into a tool.", c:["trouble","judgment"], s:["self","call","event"], e:1, g:"Any", t:"5–10 min",
+   b:"Have Claude build a mock screen with clickable hotspots, each explaining the risk.", f:"Count misses as well as finds.", w:"Close to Spot the Mistake. Pick this one when the content is visual."},
+  {n:"Relay", h:"Each teammate does one step of a process and hands off to the next.", c:["process"], s:["room","call"], e:1, g:"Teams of 4 to 8", t:"15 min",
+   b:"Have Claude split a process into handoff steps, with the check each person must do.", f:"Slip in an error early and see whether later steps catch it.", w:"Keep it team-based so nobody is singled out."},
+  {n:"Choose Your Path", h:"Learners pick a role path, and each path has its own quests.", c:["concepts","tools","habits"], s:["self","community"], e:2, g:"Any", t:"Self-paced",
+   b:"Have Claude map your content to 2 to 4 role paths with a short quest line each.", f:"Unlock a crossover quest when someone finishes two paths.", w:"Every path is more content to keep up to date."},
+  {n:"This or That", h:"Quick polls between two reasonable options, followed by the expert's take.", c:["judgment","tradeoffs"], s:["meeting","community","event","call"], e:1, g:"Any", t:"2–5 min",
+   b:"Have Claude write pairs of options where both sound reasonable.", f:"Show how the room split before giving the expert answer.", w:"Light. Good as an opener or a Slack warm-up."},
+  {n:"Survey Says", h:"Teams guess the most common answers from a real survey of customers or coworkers, Family Feud style.", c:["judgment","facts","concepts"], s:["room","call","event"], e:1, g:"2 teams to 300", t:"20 min",
+   b:"Run a quick survey first, then have Claude group the answers and build a reveal board.", f:"Survey your actual customers or reps so the top answers teach something real.", w:"Only as good as the survey. Ten responses won't give you real top answers.", src:["sko"]},
+  {n:"Ball Toss Review", h:"Whoever catches the ball (or gets called on by name online) answers a review question or shares a takeaway.", c:["facts","concepts"], s:["room","call","meeting"], e:1, g:"5 to 30", t:"5 min",
+   b:"Have Claude write 20 short review prompts that mix recall with 'how would you use this?'", f:"Balloon pop version: questions hidden inside balloons, color-coded by difficulty.", w:"Some people hate being put on the spot. Allow a pass.", src:["arlo","sko"]},
+  {n:"Snowball Fight", h:"Everyone writes an answer or question anonymously, crumples it up, and throws it. Each person reads one aloud.", c:["concepts","judgment"], s:["room"], e:1, g:"10 to 60", t:"10 min",
+   b:"Have Claude draft the prompt, like 'the one thing I'm still unsure about with AI is...'", f:"Online version: an anonymous form, then read random entries aloud.", w:"Needs a facilitator who can answer whatever comes up.", src:["ispring"]},
+  {n:"Word Scramble & Hangman", h:"Unscramble or guess key terms one letter at a time. Crosswords and word searches belong here too.", c:["facts"], s:["self","call"], e:1, g:"1 to 30", t:"5 min",
+   b:"Ask Claude for a term list with hints and a simple scramble, hangman, or crossword page.", f:"Scramble whole sentences, like the steps of a policy, not just single words.", w:"Tests spelling more than understanding. Use lightly.", src:["elb","art","arlo"]},
+  {n:"Daily Puzzle", h:"One short puzzle a day, Wordle style, built from your team's terms or tools. Everyone shares their result.", c:["facts","habits"], s:["community"], e:2, g:"Any", t:"2 min a day",
+   b:"Have Claude build a daily word or logic puzzle page that pulls from a term list.", f:"Post a weekly recap of the hardest puzzle with the explanation.", w:"Runs out of steam if the word list is short. Plan 30 or more entries.", src:["wordle"]},
+  {n:"Press Your Luck", h:"Keep answering to build points, or stop and bank them. One wrong answer loses everything unbanked.", c:["facts","judgment"], s:["self","call"], e:2, g:"1 to 30", t:"10 min",
+   b:"Have Claude build the question ladder and the bank-or-risk logic.", f:"Make later questions harder but worth more, so banking is a real decision.", w:"Can turn into pure gambling. Keep questions tied to your goals.", src:["art"]},
+  {n:"Arcade Runner", h:"A simple arcade game where a character runs or jumps, and wrong answers cost a life.", c:["facts"], s:["self"], e:2, g:"1", t:"5 min",
+   b:"Have Claude build a small browser game that pauses for questions.", f:"Let players pick a character made in Claude Design.", w:"The arcade part can distract from the questions. Keep levels short.", src:["elb"]},
+  {n:"Daily Drip Quiz", h:"One or two scenario questions a day for weeks. Missed questions come back later until people get them right.", c:["facts","judgment","process"], s:["self","community"], e:2, g:"Any", t:"2 min a day, 2–6 weeks",
+   b:"Have Claude write scenario questions and a simple repeat schedule, delivered through Slack or email.", f:"Add a weekly team leaderboard and share the question most people missed.", w:"Needs a channel people already check every day.", src:["qstream"]},
+  {n:"Alternate Reality Game", h:"A story that plays out across real channels like email, Slack, calls, and videos over weeks. Players solve puzzles to move it forward.", c:["concepts","judgment","habits"], s:["community","event"], e:3, g:"100s to 10,000s", t:"2–4 weeks",
+   b:"Have Claude draft the story, characters, and a day-by-day message schedule. You run it.", f:"Let players choose how immersive it gets, from email only to live calls.", w:"The biggest time commitment on the shelf. One tech company's pre-conference version drew about 13,000 of 19,000 attendees, but an agency built it.", src:["arg"]},
+  {n:"Crisis Simulation", h:"Teams make decisions as new information arrives every few minutes by email or chat.", c:["judgment","tradeoffs","trouble"], s:["room","call"], e:2, g:"Teams of 4 to 6", t:"1–2 hours",
+   b:"Have Claude write the scenario and a timed list of new messages, with what each one should prompt the team to do.", f:"Send the messages through real channels, like a fake customer email.", w:"Feeling overwhelmed is part of it, so debrief carefully and send people out confident.", src:["arg"]},
+  {n:"Tabletop Card Drill", h:"A facilitator deals a hidden scenario. Teams play cards for tools and actions to figure out what happened and how to respond.", c:["trouble","process","judgment"], s:["room","call"], e:2, g:"4 to 10", t:"45–60 min",
+   b:"Have Claude design a deck from your own process: causes, clues, and response actions.", f:"Give each team a different deck so no two drills match.", w:"The best-known version is for security teams. Rebuild the deck around your process.", src:["bb","cards"]},
+  {n:"Risk Card Game", h:"Players take turns playing cards that each name a way something could go wrong, applied to a real plan.", c:["trouble","concepts"], s:["room","call"], e:1, g:"3 to 8", t:"30–60 min",
+   b:"Have Claude write a deck of risk cards for your area, like 'sensitive data pasted into a public tool.'", f:"Score a point for each card that really applies to the plan on the table.", w:"Works best with a real plan to test, not a made-up one.", src:["cards"]},
+  {n:"Dungeon One-Shot", h:"A single-session quest in five beats: entrance, puzzle, setback, boss fight, reward.", c:["judgment","concepts"], s:["self","call","room"], e:2, g:"1 to 6", t:"20–40 min",
+   b:"Give Claude your scenario and have it map each beat to a learning moment.", f:"Make the boss fight a realistic hard conversation or tough decision.", w:"Keep it to one session. Longer stories belong in Story Campaign.", src:["tucker"]},
+  {n:"Chat Escape Room", h:"An escape room inside Slack or Teams. Players answer each puzzle with an emoji or message to unlock the next.", c:["tools","process"], s:["community","self"], e:1, g:"Any", t:"10 min",
+   b:"Slack's own team built theirs with Workflow Builder and about six workflows. Claude can write the puzzles and the workflow steps.", f:"Make every puzzle need a real skill, like searching a channel by date.", w:"Wrong answers need their own workflow. Test every path.", src:["slack"]},
+  {n:"House Cup", h:"Everyone, leaders included, joins a house that earns points by completing quests. Power users tutor their housemates.", c:["habits","tools"], s:["community","event"], e:2, g:"100s and up", t:"Weeks",
+   b:"Have Claude design the houses, quest list, and point rules. A scheduled task can tally the points.", f:"Give the tutors a title and quests of their own.", w:"Being sorted can feel forced. Let people choose a house.", src:["google"]},
+  {n:"Team Participation Challenge", h:"Teams compete on the share of members who took part, not total volume, so a small team can beat a big one.", c:["habits","tools"], s:["community"], e:1, g:"Teams of any size", t:"1 month",
+   b:"Have Claude write challenge tracks for each role and a simple tally from a Slack channel.", f:"A physical trophy that moves to the winning team each month.", w:"Proof posts can turn into noise. Ask for an example of the output, not a screenshot of usage.", src:["sfdc"]},
+  {n:"Promptathon", h:"A two-week build event for non-technical staff. People make AI workflows for real work, and others judge them.", c:["tools","habits"], s:["community","event"], e:2, g:"50 to 600+", t:"2 weeks",
+   b:"Have Claude write a brief for each department, a judging rubric, and a submission template.", f:"Theme each round, like 'build an agent for your own team.'", w:"Open sign-ups lean toward engineers. Recruit across departments on purpose.", src:["itbrew"]},
+  {n:"Best-Of Library Contest", h:"People add reusable workflows or skills to a shared library. Each month, the best one gets featured.", c:["tools","habits"], s:["community"], e:1, g:"Any", t:"Monthly",
+   b:"Have Claude draft the submission form and the judging criteria.", f:"Feature the winner in a short live demo.", w:"Needs a library people actually browse.", src:["google"]},
+  {n:"Learning Expo", h:"A multi-week event with live sessions, role breakouts, creative challenges, a points leaderboard, and a badge for finishing.", c:["tools","habits","concepts"], s:["call","event","community"], e:3, g:"100s to 1,000s", t:"1–3 weeks",
+   b:"Have Claude plan the week-by-week agenda, the challenge list, and the point values.", f:"Add playful tasks, like designing an avatar or writing a song with the AI tool.", w:"A big lift. Microsoft ran each session three times to cover time zones.", src:["msft"]},
+  {n:"Station Passport", h:"Players rotate through stations that each teach or test one thing, collecting a stamp at each.", c:["tools","facts","concepts"], s:["event","room"], e:2, g:"20 to 3,000", t:"30–90 min",
+   b:"Have Claude design the stations, each with a 5-minute task and a way to check it.", f:"Full passports go into a prize draw.", w:"Popular stations get crowded. Run two copies of the busiest one.", src:["ispring","arlo"]},
+  {n:"People Bingo", h:"Find colleagues who match each square, like 'has built a Claude skill.'", c:["habits"], s:["event","room","call"], e:1, g:"20 to 3,000", t:"15–30 min",
+   b:"Have Claude write squares around the skills and behaviors you want people to discover in each other.", f:"Squares can only be signed by someone from a different team.", w:"Turns into signature-chasing without a short debrief.", src:["arlo","arg"]},
+  {n:"Bracket Tournament", h:"Options face off head to head, and people vote winners forward until one is left.", c:["tradeoffs","judgment"], s:["community","event"], e:1, g:"Any", t:"1–4 weeks",
+   b:"Have Claude seed 16 or 32 options, like AI use cases, and draft the matchups.", f:"Use the winner to decide what the next training covers.", w:"Popular is not the same as best. Ask for a one-line reason with each vote.", src:["bracket"]},
+  {n:"Fantasy League", h:"Managers draft teams of colleagues, and teams score when members do the target behaviors.", c:["habits"], s:["community"], e:2, g:"20 to 500", t:"1 quarter",
+   b:"Have Claude design the draft, scoring rules, and a weekly standings post.", f:"Allow trades halfway through the season.", w:"The draft can feel like a popularity contest. Use a random draft order.", src:["fantasy"]},
+  {n:"Virtual Journey", h:"Activity moves the team along a map, like walking between office locations, and each stop unlocks something.", c:["habits"], s:["community","self"], e:2, g:"Any", t:"Weeks",
+   b:"Have Claude design the map stops and what each one unlocks.", f:"Each stop reveals a story about that office or team.", w:"Logging progress has to be easy, or nobody moves.", src:["eli5"]},
+  {n:"Software Practice Sim", h:"A mock version of the tool where learners practice tasks, get hints, and earn points.", c:["tools","process"], s:["self"], e:3, g:"1", t:"15–30 min",
+   b:"Have Claude build a clickable mock of the key screens with a hint at each step.", f:"Add a timed expert mode with no hints.", w:"Breaks when the real tool changes. Stick to screens that rarely change.", src:["eli5"]},
+  {n:"Business Simulation", h:"Teams run part of a business over several rounds and live with the results, like the classic supply-chain Beer Game.", c:["concepts","tradeoffs"], s:["room","call"], e:3, g:"4 to 40", t:"1–2 hours",
+   b:"Have Claude design the rounds, the numbers, and a results sheet.", f:"Change one rule partway through and see who adapts.", w:"Hard to balance. Playtest the numbers before the session.", src:["zensimu"]},
+  {n:"Build It Challenge", h:"Teams build something physical against the clock, like the tallest spaghetti-and-marshmallow tower, then debrief.", c:["concepts"], s:["room","event"], e:1, g:"6 to 100", t:"20–30 min",
+   b:"Have Claude write debrief questions that connect the build to your topic, like iterating on prompts.", f:"Run a second round with one new constraint.", w:"The learning is in the debrief, not the build.", src:["ispring","arlo"]},
+  {n:"Brick Models", h:"People build models with LEGO bricks to represent an idea or problem, then explain them to the group.", c:["concepts","judgment"], s:["room"], e:2, g:"4 to 20", t:"1–3 hours",
+   b:"Have Claude draft the build prompts, like 'build what AI changed about your week.'", f:"Combine everyone's models into one shared model.", w:"The formal LEGO Serious Play method uses trained facilitators. A light version works for one session.", src:["lego"]},
+  {n:"Blind Builder", h:"One person describes an image or design, and others recreate it without seeing it.", c:["process","concepts"], s:["room","call"], e:1, g:"2 to 30", t:"10 min",
+   b:"Have Claude pick images that get harder each round.", f:"This is what prompting feels like. Run a round where the builder is an image AI.", w:"Frustrating if the first image is too complex.", src:["ispring"]},
+  {n:"Jigsaw Teach-Back", h:"Small groups each master one piece of the material, then teach it to people from the other groups.", c:["concepts","process"], s:["room","call"], e:1, g:"8 to 40", t:"30–45 min",
+   b:"Have Claude split the material into 4 or 5 balanced pieces with a one-page brief for each.", f:"Each teacher gives their audience a 3-question quiz.", w:"Uneven pieces mean uneven teaching.", src:["arlo"]},
+  {n:"Gallery Walk", h:"Prompts are posted around the room or on a shared whiteboard. Groups rotate and add responses.", c:["concepts","judgment"], s:["room","call"], e:1, g:"10 to 60", t:"20 min",
+   b:"Have Claude write 5 or 6 prompts that build on each other.", f:"In the last rotation, each group sums up the board where they started.", w:"Later rotations get repetitive. Keep groups moving.", src:["arlo"]},
+  {n:"Reverse Brainstorm", h:"Brainstorm ways to make a problem worse, then flip each idea into a fix.", c:["trouble","judgment"], s:["room","call","meeting"], e:1, g:"4 to 40", t:"15 min",
+   b:"Have Claude pick a realistic problem and seed a few 'make it worse' examples.", f:"'How could we make our AI rollout fail?' is a great prompt.", w:"Keep it light so it doesn't turn into complaining.", src:["arlo"]},
+  {n:"Ranking Challenge", h:"Groups rank a list or pick the few items that matter most, then defend their choices against an expert ranking.", c:["tradeoffs","judgment"], s:["room","call","meeting"], e:1, g:"4 to 40", t:"15 min",
+   b:"Have Claude write 12 items with an expert ranking and the reasons.", f:"Reveal the expert ranking and score how close each group got.", w:"Close to Token Budget. Use this one when there is an expert answer.", src:["arlo"]},
+  {n:"Roleplay Rumble", h:"Pairs swap seller and customer roles, handling objections taken from real situations, round after round.", c:["judgment"], s:["room","event","call"], e:1, g:"10 to 200", t:"20–30 min",
+   b:"Have Claude write objection cards from real deal notes, each with what a good response covers.", f:"Judges pick the best handling each round.", w:"Role-play feels like a test when stakes are high. Keep it low-key.", src:["sko"]},
+  {n:"Pitch Challenge", h:"People record a short pitch or explanation ahead of time, and peers vote and score them.", c:["concepts","judgment"], s:["community","event"], e:1, g:"10 to 500", t:"1 week",
+   b:"Have Claude write the prompt and the scoring rubric.", f:"Theme: explain an AI concept to a customer in 60 seconds.", w:"Some people won't record video. Allow audio or text.", src:["sko"]},
+  {n:"Mash-Up Pitch", h:"Teams draw two random cards, like a product and a customer problem, and pitch a combination in 90 seconds.", c:["concepts"], s:["room","event","call"], e:1, g:"6 to 200", t:"15 min",
+   b:"Have Claude make the card decks from your products, tools, and use cases.", f:"Draw an AI tool and a real team task, and pitch how to use one for the other.", w:"Fun but shallow. Follow it with a real exercise.", src:["sko"]},
+  {n:"Capture the Flag", h:"Teams solve hands-on challenges in a practice environment. Each solved challenge reveals a flag worth points.", c:["tools","trouble"], s:["event","community","self"], e:3, g:"10 to 500", t:"2 hours to 2 days",
+   b:"Have Claude write challenges at three levels with a hidden answer for each.", f:"Non-technical version: flags hidden in your own docs, tools, and dashboards.", w:"Practice environments take real setup time.", src:["playing"]},
+  {n:"Break the Bot", h:"Teams try to get an AI tool to give wrong, risky, or made-up answers, and write up what they find.", c:["trouble","tools","judgment"], s:["event","community","call"], e:1, g:"5 to 500", t:"30–60 min",
+   b:"Have Claude write challenge categories, like 'get it to invent a source,' and a findings template.", f:"Feed the findings into your guidance on when to double-check AI.", w:"Use approved tools and fake data only, never real customer information.", src:["defcon"]},
+  {n:"AI or Not", h:"Players look at pairs of text or images, guess which one AI made, and learn what gave it away.", c:["trouble","judgment"], s:["call","event","meeting","room"], e:1, g:"Any", t:"10 min",
+   b:"Have Claude generate the AI samples, and collect human ones from colleagues with their permission.", f:"Include a round where both are AI, or both are human.", w:"The giveaways change as models improve. Teach checking facts, not spotting style.", src:["uci","aha"]},
+  {n:"Slow Reveal", h:"An image or answer is uncovered piece by piece, and players guess as early as they can.", c:["facts","concepts"], s:["call","meeting","room"], e:1, g:"Any", t:"5 min",
+   b:"Have Claude build a tile-reveal page with your images.", f:"Reveal a screenshot of a workflow and ask which tool or step it shows.", w:"Light. Best as a warm-up.", src:["h5p"]},
+  {n:"Interactive Video", h:"A video that pauses for questions or choices, sometimes branching to different clips.", c:["judgment","process"], s:["self"], e:2, g:"1", t:"5–15 min",
+   b:"Write the script with Claude, produce it in Synthesia, then add the pause points.", f:"Branch to different endings based on choices.", w:"Video is expensive to change. Use it for content that will stay stable.", src:["h5p","tucker"]},
+  {n:"360 Explore", h:"A scene you can look around, like an office or a screen, with clickable spots that teach or test.", c:["facts","concepts","trouble"], s:["self"], e:2, g:"1", t:"10 min",
+   b:"Use Claude Design for the scene and have Claude build the page with hotspots.", f:"Hide one hotspot that's hard to find.", w:"Exploring can feel aimless. Give a goal, like 'find the 5 risks.'", src:["h5p"]},
+  {n:"Improv Scenes", h:"Participants act out short, unscripted scenarios on the topic, then the group discusses.", c:["judgment"], s:["room"], e:1, g:"6 to 40", t:"15–20 min",
+   b:"Have Claude write scenario cards, each with a twist.", f:"Freeze the scene midway and let someone else step in.", w:"Not everyone wants to perform. Make it opt-in.", src:["arlo"]},
+  {n:"Puzzle Inside the Tool", h:"A mystery that can only be solved by using the real tool, like a murder mystery solved with database searches.", c:["tools","trouble"], s:["self","community"], e:2, g:"1 to 5", t:"20–45 min",
+   b:"Have Claude design clues hidden in a practice dataset or workspace.", f:"Make each clue require one new feature of the tool.", w:"Needs a safe practice copy of the tool.", src:["playing"]}
+];
+const SRC = {
+  arlo:["Arlo: 28 training activities and games","https://arlo.co/blog/training-activities-and-games"],
+  ispring:["iSpring: 30 training activities","https://www.ispringsolutions.com/blog/training-activities"],
+  sko:["DJ Will Gill: sales kickoff game formats","https://djwillgill.com/the-best-sales-kickoff-games-to-energize-your-team/"],
+  elb:["ELB Learning: Training Arcade game templates","https://knowledgebase.elblearning.com/the-training-arcade"],
+  h5p:["H5P content types","https://openlab.citytech.cuny.edu/oer-h5p-hub/content-type-list/"],
+  art:["Articulate: six e-learning game examples","https://community.articulate.com/articles/learn-to-win-with-these-6-great-game-examples"],
+  qstream:["Qstream: spaced microlearning","https://qstream.com/product-overview"],
+  arg:["eLearning Industry: alternate reality game examples","https://elearningindustry.com/alternate-reality-game-examples-using-args-corporate-training"],
+  bb:["Black Hills: Backdoors & Breaches","https://www.blackhillsinfosec.com/projects/backdoorsandbreaches/"],
+  cards:["GitHub: awesome security card games","https://github.com/Karneades/awesome-security-card-games"],
+  tucker:["Christy Tucker: game design links for IDs","https://www.christytuckerlearning.com/games-organizing-motivation-id-links-10-25-22/"],
+  slack:["Slack: an escape room for search skills","https://slack.com/blog/productivity/unlock-search-skills-with-a-slack-escape-room"],
+  google:["Google Workspace: gamifying AI adoption","https://workspace.google.com/blog/ai-and-machine-learning/learning-from-hogwarts-magic-three-blueprints-to-gamify-and-evangelize-ai-adoption"],
+  sfdc:["Salesforce blog: a gamified AI adoption challenge","https://www.salesforce.com/blog/gamified-ai-adoption/"],
+  itbrew:["IT Brew: promptathons","https://www.itbrew.com/stories/2026/03/24/how-do-you-boost-ai-use-try-promptathons"],
+  msft:["Microsoft Inside Track: Copilot Expo","https://www.microsoft.com/insidetrack/blog/enabling-meaningful-AI"],
+  bracket:["LinkedIn Learning: skills bracket","https://learning.linkedin.com/blog/productivity-tips/how-to-make-the-most-out-of-march-madness--the-2019-skills-brack"],
+  fantasy:["Bullhorn: fantasy sales leagues","https://www.bullhorn.com/blog/fantasy-football-and-sales-gamification/"],
+  eli5:["eLearning Industry: gamification beyond badges","https://elearningindustry.com/5-examples-gamification-in-corporate-training-beyond-badges-leaderboards"],
+  zensimu:["Zensimu: Beer Game simulations","https://zensimu.com/best-training-game-simulator"],
+  lego:["LEGO: the Serious Play method","https://www.lego.com/en-us/themes/serious-play/about"],
+  playing:["GitHub: awesome learn by playing","https://github.com/lmammino/awesome-learn-by-playing"],
+  defcon:["CNBC: DEF CON's chatbot hacking event","https://www.cnbc.com/2023/08/15/def-con-hackers-try-to-crack-chatbots-from-openai-google-microsoft.html"],
+  uci:["UC Irvine: Spot the Bot workshop","https://wics.ics.uci.edu/?p=7675"],
+  aha:["AhaSlides: spotting AI hallucinations","https://ahaslides.com/templates/courses/verifying-ai-output/"],
+  wordle:["HR Grapevine: coworker Wordle competitions","https://www.hrgrapevine.com/us/content/article/2024-05-03-puzzle-game-popularity-has-peaked-could-co-worker-wordle-competition-be-good-for-employee-engagement"],
+  twine:["Teaching Professor: Twine branching toolkit","https://www.teachingprofessor.com/topics/online-learning/entwined-a-tool-kit-for-creating-branching-narratives"]
+};
+const EXTRA_SRC = {
+  "Trivia Race":["arlo","elb"], "Memory Match":["elb","h5p"], "Bingo":["arlo","sko"], "Jeopardy Board":["elb","sko"],
+  "Escape Room":["google","slack"], "Sequence Sort":["h5p"], "Branching Scenario":["h5p","twine","ispring"],
+  "Mystery":["elb","eli5"], "Spot the Mistake":["aha"], "Two Truths and a Lie":["arlo","ispring"],
+  "Real-Tool Scavenger Hunt":["msft","ispring"], "Quest Board":["google"], "Role-Play Simulation":["ispring","arlo"],
+  "Story Campaign":["tucker"], "Sort It":["elb","h5p"], "Lightning Drill":["arlo"], "Build the Map":["arlo"],
+  "Defend the Decision":["ispring"], "Show-and-Tell Bounty":["google"], "Feature Auction":["sko"],
+  "Find the Risk":["h5p"], "Choose Your Path":["eli5"], "This or That":["ispring"]
+};
+G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; });
+G.forEach((g, i) => g.id = "g" + i);
+
+const lab = Object.fromEntries([...CONTENT, ...SETTINGS]);
+const state = { c: null, s: null, q: "", hide: false, used: new Set() };
+try { const saved = JSON.parse(localStorage.getItem("shelf-used") || "[]"); saved.forEach(x => state.used.add(x)); } catch (e) {}
+try { state.hide = localStorage.getItem("shelf-hide") === "1"; } catch (e) {}
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+
+function chips(el, list, key, cls) {
+  el.innerHTML = "";
+  [["", "Any"], ...list].forEach(([k, label]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip" + (cls ? " " + cls : ""); b.textContent = label;
+    b.setAttribute("aria-pressed", String((state[key] || "") === k));
+    b.addEventListener("click", () => { state[key] = k || null; render(); });
+    el.appendChild(b);
+  });
+}
+
+function matches() {
+  const q = state.q.trim().toLowerCase();
+  return G.filter(g => (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) &&
+                       (!q || [g.n, g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
+          .sort((a, b) => a.e - b.e || a.n.localeCompare(b.n));
+}
+
+function card(g) {
+  const used = state.used.has(g.n);
+  const tags = g.c.map(k => `<span class="tag${k === state.c ? " hit" : ""}">${esc(lab[k])}</span>`).join("") +
+               g.s.map(k => `<span class="tag set${k === state.s ? " hit" : ""}">${esc(lab[k])}</span>`).join("");
+  const pips = "●".repeat(g.e) + "○".repeat(3 - g.e);
+  const eff = ["", "Low", "Medium", "High"][g.e];
+  return `<article class="game${used ? " used" : ""}" id="${g.id}">
+    <div class="game-head"><h3>${esc(g.n)}</h3>
+      <button type="button" class="used-btn" data-n="${esc(g.n)}" aria-pressed="${used}">${used ? "Used recently" : "Mark as used"}</button></div>
+    <p class="how">${esc(g.h)}</p>
+    <div class="stats">
+      <div class="stat"><span>Build effort</span><span><span class="pips" aria-hidden="true">${pips}</span> ${eff}</span></div>
+      <div class="stat"><span>Players</span><span>${esc(g.g)}</span></div>
+      <div class="stat"><span>Time</span><span>${esc(g.t)}</span></div>
+    </div>
+    <div class="tags">${tags}</div>
+    <dl class="notes">
+      <div><dt>Build it with Claude</dt><dd>${esc(g.b)}</dd></div>
+      <div><dt>Keep it fresh</dt><dd>${esc(g.f)}</dd></div>
+      <div><dt>Watch out</dt><dd>${esc(g.w)}</dd></div>
+      ${g.src.length ? `<div><dt>Seen in</dt><dd class="seen">${g.src.map(k => `<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`).join("")}</dd></div>` : ""}
+    </dl>
+  </article>`;
+}
+
+function heat() {
+  const head = `<thead><tr><th></th>${SETTINGS.map(([, l]) => `<th scope="col">${esc(l)}</th>`).join("")}</tr></thead>`;
+  const rows = CONTENT.map(([ck, cl]) => {
+    const cells = SETTINGS.map(([sk, sl]) => {
+      const n = G.filter(g => g.c.includes(ck) && g.s.includes(sk)).length;
+      const l = n === 0 ? 0 : n <= 2 ? 1 : n <= 4 ? 2 : 3;
+      const on = state.c === ck && state.s === sk;
+      return `<td><button type="button" class="cell${on ? " on" : ""}" data-l="${l}" data-c="${ck}" data-s="${sk}" aria-label="${n} games for ${esc(cl)}, ${esc(sl)}">${n}</button></td>`;
+    }).join("");
+    return `<tr><th scope="row">${esc(cl)}</th>${cells}</tr>`;
+  }).join("");
+  $("heat").innerHTML = head + `<tbody>${rows}</tbody>`;
+}
+
+function render(pickId) {
+  chips($("content-chips"), CONTENT, "c");
+  chips($("setting-chips"), SETTINGS, "s", "set");
+  $("hide-used").checked = state.hide;
+  const list = matches();
+  $("count").textContent = list.length === 1 ? "1 game fits" : `${list.length} games fit`;
+  $("shelf").innerHTML = list.length ? list.map(card).join("") :
+    `<div class="empty">No games fit${state.q ? " that search and" : ""} this pairing${state.hide ? " that you haven't used recently" : ""}. Try "Any" for the setting, clear the search, or turn off "Hide games I've used recently."</div>`;
+  heat();
+  if (pickId) { const el = $(pickId); if (el) { el.classList.add("pick"); el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }); } }
+}
+
+$("shelf").addEventListener("click", e => {
+  const b = e.target.closest(".used-btn"); if (!b) return;
+  const n = b.dataset.n;
+  state.used.has(n) ? state.used.delete(n) : state.used.add(n);
+  try { localStorage.setItem("shelf-used", JSON.stringify([...state.used])); } catch (err) {}
+  render();
+});
+$("heat").addEventListener("click", e => {
+  const b = e.target.closest(".cell"); if (!b) return;
+  state.c = b.dataset.c; state.s = b.dataset.s; render();
+  $("shelf").scrollIntoView({ behavior: "auto", block: "start" });
+});
+$("q").addEventListener("input", e => { state.q = e.target.value; render(); });
+$("hide-used").addEventListener("change", e => {
+  state.hide = e.target.checked;
+  try { localStorage.setItem("shelf-hide", state.hide ? "1" : "0"); } catch (err) {}
+  render();
+});
+$("surprise").addEventListener("click", () => {
+  const list = matches().filter(g => !state.used.has(g.n));
+  const pool = list.length ? list : matches();
+  if (!pool.length) return;
+  render(pool[Math.floor(Math.random() * pool.length)].id);
+});
+$("n-games").textContent = G.length;
+$("srclist").innerHTML = Object.values(SRC).sort((a, b) => a[0].localeCompare(b[0])).map(([l, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(l)}</a></li>`).join("");
+render();
+</script>
+
+</body>
+</html>
