@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="74 learning game formats matched to content type and setting, with real-world examples.">
+<meta name="description" content="105 learning game formats, including 31 adapted from popular games, matched to content type and setting.">
 <title>Learning Game Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,6 +119,8 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 .seen a, .srclist a { color: var(--teal); text-underline-offset: 2px; overflow-wrap: anywhere; }
 .srclist { margin: 0; padding-left: 18px; columns: 2 260px; column-gap: 28px; font-size: .9rem; }
 .srclist li { break-inside: avoid; margin-bottom: 4px; }
+.title-block { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.inspired { font-size: .78rem; color: var(--accent-ink); font-weight: 700; }
 .empty { background: var(--card); border: 1px dashed var(--line); border-radius: 14px; padding: 24px; text-align: center; color: var(--muted); }
 .foot { color: var(--muted); font-size: .85rem; max-width: 70ch; }
 @media (prefers-reduced-motion: no-preference) { .game { transition: box-shadow .2s, border-color .2s, opacity .2s; } }
@@ -153,6 +155,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
     <div class="toolbar">
       <span class="count" id="count" aria-live="polite"></span>
       <div class="tools">
+        <label class="toggle"><input type="checkbox" id="pop-only"> Only games adapted from popular games</label>
         <label class="toggle"><input type="checkbox" id="hide-used"> Hide games I've used recently</label>
         <button class="btn" id="surprise" type="button">Surprise me</button>
       </div>
@@ -173,7 +176,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
     <ul class="srclist" id="srclist"></ul>
   </details>
 
-  <p class="foot">"Used recently" marks are saved in this browser only. Group sizes and times are starting points, not limits.</p>
+  <p class="foot">"Used recently" marks are saved in this browser only. Group sizes and times are starting points, not limits. Games marked "Inspired by" borrow a mechanic from a popular game; the game names are their owners' trademarks, so build yours with its own name, theme, and art.</p>
 </div>
 
 <script>
@@ -343,7 +346,69 @@ const G = [
   {n:"Improv Scenes", h:"Participants act out short, unscripted scenarios on the topic, then the group discusses.", c:["judgment"], s:["room"], e:1, g:"6 to 40", t:"15–20 min",
    b:"Have Claude write scenario cards, each with a twist.", f:"Freeze the scene midway and let someone else step in.", w:"Not everyone wants to perform. Make it opt-in.", src:["arlo"]},
   {n:"Puzzle Inside the Tool", h:"A mystery that can only be solved by using the real tool, like a murder mystery solved with database searches.", c:["tools","trouble"], s:["self","community"], e:2, g:"1 to 5", t:"20–45 min",
-   b:"Have Claude design clues hidden in a practice dataset or workspace.", f:"Make each clue require one new feature of the tool.", w:"Needs a safe practice copy of the tool.", src:["playing"]}
+   b:"Have Claude design clues hidden in a practice dataset or workspace.", f:"Make each clue require one new feature of the tool.", w:"Needs a safe practice copy of the tool.", src:["playing"]},
+  {n:"Clue Giver", i:"Codenames", h:"A grid of terms on the table. One teammate gives a one-word clue that links several of their team's terms, and the team guesses which ones.", c:["concepts","facts"], s:["room","call","event"], e:1, g:"2 teams of 2 to 8", t:"15–20 min",
+   b:"Have Claude pick 25 terms from your content and build a clickable grid with team colors and one trap card.", f:"Make the trap card a common misconception, so guessing it costs the round.", w:"Players need to know the terms already. Use it to review, not to introduce.", src:[]},
+  {n:"Scale Guess", i:"Wavelength", h:"A clue-giver secretly places a scenario on a spectrum, like 'low risk to high risk to paste into AI.' The team discusses and guesses where it landed.", c:["judgment","tradeoffs"], s:["room","call","meeting"], e:1, g:"4 to 30", t:"10–15 min",
+   b:"Have Claude write 20 scenarios with an expert position on the scale and a one-line reason.", f:"Let the room vote first, then reveal the expert's position and argue it out.", w:"The discussion is the learning. A guess with no debate teaches nothing.", src:[]},
+  {n:"Explain It Without", i:"Taboo", h:"Explain a term to your team without saying the term or the forbidden words listed under it.", c:["concepts"], s:["room","call","meeting"], e:1, g:"3 to 30", t:"10–30 min",
+   b:"Have Claude write cards with each term and the 3 to 5 jargon words people lean on to explain it.", f:"Customer mode: forbid all technical words, so people practice explaining AI to a customer.", w:"People need some grasp of the terms to explain them.", src:["taboo"]},
+  {n:"Draw the Concept", i:"Pictionary and charades", h:"One person draws or acts out a concept while their team guesses it.", c:["concepts","facts"], s:["room","call","meeting"], e:1, g:"4 to 30", t:"10 min",
+   b:"Have Claude pick concepts that are tricky but possible to draw, like 'context window.'", f:"Afterward, ask the drawer why they drew it that way. Their picture shows how they understand it.", w:"Some people dread drawing. Let pairs draw together.", src:[]},
+  {n:"Prompt Telephone", i:"Telephone and Gartic Phone", h:"Someone writes a prompt, an AI makes something from it, the next person describes the result as a new prompt, and so on down the line. Then everyone sees how far it drifted.", c:["tools","concepts"], s:["call","room","community"], e:1, g:"4 to 12 per chain", t:"15–20 min",
+   b:"Have Claude write starting prompts and a simple sheet or channel thread to pass the chain along.", f:"Run two chains from the same start: one with vague prompts and one with detailed prompts.", w:"Use an approved AI tool and nothing sensitive in the prompts.", src:[]},
+  {n:"Hidden Saboteur", i:"Werewolf and Mafia", h:"One player secretly gets bad information or a bad goal. The group works on a problem together and has to figure out who is steering them wrong.", c:["trouble","judgment"], s:["room","call"], e:1, g:"5 to 12", t:"20–30 min",
+   b:"Have Claude write a scenario, the correct briefing, and a subtly wrong briefing for the saboteur.", f:"Make the saboteur an AI answer that sounds confident but is wrong.", w:"Keep it friendly. Debrief on how the group caught the bad information, not on who fooled whom.", src:[]},
+  {n:"Imposter Tasks", i:"Among Us", h:"Everyone completes small tasks in a shared space or tool. One secret imposter quietly makes mistakes. Players discuss and vote out who they suspect.", c:["tools","trouble"], s:["call","room"], e:2, g:"5 to 10", t:"20–30 min",
+   b:"Have Claude design task cards in your tool and a list of subtle mistakes for the imposter.", f:"Mistakes are things people really get wrong, like skipping a review step.", w:"Needs a shared space where people can see each other's work.", src:[]},
+  {n:"Co-op Outbreak", i:"Pandemic", h:"The whole team plays against the game. Problems spread each round, and each player has a role with a special ability. Everyone wins or loses together.", c:["tradeoffs","judgment","concepts"], s:["room","call"], e:3, g:"3 to 5 per table", t:"45–60 min",
+   b:"Have Claude design the map, how problems spread, and role abilities based on real jobs.", f:"Base roles on real teams, so people see what each one contributes.", w:"Balancing difficulty takes playtesting. Too easy is boring; too hard is deflating.", src:[]},
+  {n:"Trade & Build", i:"Catan", h:"Players collect different resources and must trade with each other to build what they need.", c:["tradeoffs"], s:["room"], e:2, g:"3 to 6 per table", t:"45 min",
+   b:"Have Claude turn real resources, like budget, headcount, and data access, into cards and build costs.", f:"Give each team a resource only another team has, so they have to negotiate.", w:"Long to learn. Simplify the rules a lot for a one-hour session.", src:[]},
+  {n:"Route Builder", i:"Ticket to Ride", h:"Players claim connections between points on a map to complete routes, like linking the steps of a process or the systems in a workflow.", c:["process","concepts"], s:["room","self"], e:2, g:"2 to 5", t:"30 min",
+   b:"Have Claude draw the process or system map and write route cards to complete.", f:"Routes that reuse the same connection score more, which shows where steps are shared.", w:"The map has to be correct. Check it with the process owner.", src:[]},
+  {n:"Deduction Grid", i:"Clue", h:"Players ask questions and use a grid to rule things out until they can name what happened, where, and why.", c:["trouble"], s:["room","call","self"], e:2, g:"3 to 6", t:"20–30 min",
+   b:"Have Claude design the possible causes, places, and reasons, plus the clues that rule each one out.", f:"Use a real past incident with the details changed.", w:"Clues must be consistent. Have Claude check that only one answer is possible.", src:[]},
+  {n:"Twenty Questions", i:"Guess Who", h:"Find the hidden answer, like a cause or a customer type, using only yes-or-no questions. Fewer questions score more.", c:["trouble","concepts"], s:["call","meeting","room"], e:1, g:"Any", t:"5–10 min",
+   b:"Have Claude list hidden answers and the facts someone could ask about for each.", f:"Have an AI hold the secret and answer the questions.", w:"Light. Best as a warm-up or a quick check.", src:[]},
+  {n:"Best Match Card", i:"Apples to Apples", h:"A prompt card is played. Everyone answers it with a card from their hand, and a rotating judge picks the best one and explains why.", c:["judgment","concepts"], s:["room","call","community"], e:1, g:"4 to 10", t:"15–20 min",
+   b:"Have Claude write prompt cards, like 'the best first use of AI for a new hire,' and answer cards.", f:"In Slack, post one prompt a day and let reactions pick the winner.", w:"Keep it work-safe. Have the judge explain each pick so it stays tied to learning.", src:[]},
+  {n:"Question Tower", i:"Jenga", h:"Pull a block from the tower and answer the question on it. If the tower falls, the round ends.", c:["facts","concepts"], s:["room"], e:1, g:"3 to 8", t:"15 min",
+   b:"Have Claude write short questions to tape onto blocks, color-coded by difficulty.", f:"Harder blocks lower in the tower are worth more points.", w:"Needs a physical set. In-person only.", src:[]},
+  {n:"Kitchen Chaos", i:"Overcooked", h:"Orders keep arriving, and the team must split up the work, hand things off, and deliver before time runs out.", c:["process","tradeoffs"], s:["room","call"], e:2, g:"3 to 6 per team", t:"20 min",
+   b:"Have Claude turn your process into stations and order tickets, with a timer that speeds up.", f:"Change who does what in round two and compare results.", w:"Chaos is the point, but the debrief has to connect it back to real handoffs.", src:[]},
+  {n:"Inspector Desk", i:"Papers, Please", h:"Requests arrive one at a time. Approve or reject each one against a rulebook that changes every day, under time pressure.", c:["judgment","trouble","process"], s:["self","call"], e:2, g:"1 to 30", t:"10–15 min",
+   b:"Have Claude write the rulebook, a few days of requests, and which ones break which rule.", f:"Each 'day' adds one new rule, like a policy update.", w:"Great for compliance and data-handling rules. Make the rules accurate.", src:[]},
+  {n:"Swipe Decisions", i:"Reigns", h:"Make a quick yes-or-no decision on each card. Every choice moves meters like trust, cost, and speed, and you lose if any meter hits zero or overflows.", c:["judgment","tradeoffs"], s:["self","community"], e:2, g:"1", t:"5–10 min",
+   b:"Have Claude write decision cards and how each choice moves each meter.", f:"Show players which decision ended their run and why.", w:"Meters simplify reality. Debrief on what the meters leave out.", src:[]},
+  {n:"Defuse Together", i:"Keep Talking and Nobody Explodes", h:"One player sees the problem but has no manual. The others have the manual but can't see the problem. They solve it by talking.", c:["process","trouble","tools"], s:["call","room"], e:2, g:"2 to 6", t:"20–45 min",
+   b:"Have Claude write the 'manual' from your real troubleshooting guide, and a set of problems to solve.", f:"Use your real support documentation as the manual, and see where it falls short.", w:"Wharton's Learning Lab uses the original game to teach communication under pressure. A homemade version needs careful testing.", src:["wharton","karlsen"]},
+  {n:"Habit Garden", i:"Animal Crossing and Stardew Valley", h:"Each daily action grows something in a shared garden or town. Skip days and it wilts.", c:["habits"], s:["community"], e:2, g:"Any", t:"Weeks",
+   b:"Have Claude build a page showing the garden, updated from a simple tally.", f:"Rare plants unlock for advanced actions.", w:"Has to be easy to log, or the garden just dies.", src:[]},
+  {n:"Collect the Set", i:"Pokémon cards", h:"Earn collectible cards by showing a skill. Trade duplicates and try to complete a set.", c:["habits","tools"], s:["community","event"], e:2, g:"20 to 1,000", t:"Weeks",
+   b:"Have Claude write the card list, how each card is earned, and the rarity of each.", f:"Use Claude Design for the card art, and make physical cards for live events.", w:"Track who earned what, or it turns into a pile of cards.", src:[]},
+  {n:"Where Is This?", i:"GeoGuessr", h:"Players see a cropped screenshot of a tool, report, or setting and guess exactly where it lives and how to get there.", c:["tools","facts"], s:["call","meeting","community"], e:1, g:"Any", t:"5 min",
+   b:"Have Claude help pick screenshots and write the answer with the click path.", f:"Score by how many clicks off the guess was.", w:"Screens change. Refresh the screenshots when tools update.", src:[]},
+  {n:"Elimination Quiz", i:"HQ Trivia and battle royale games", h:"Everyone answers at once. A wrong answer knocks you out, until one player is left standing.", c:["facts","concepts"], s:["event","call"], e:1, g:"50 to 3,000", t:"10 min",
+   b:"Have Claude write 12 questions that get harder each round.", f:"Let knocked-out players keep answering for a consolation prize.", w:"Most people are out early. Keep it short.", src:[]},
+  {n:"Lifeline Ladder", i:"Who Wants to Be a Millionaire", h:"Climb a ladder of harder and harder questions, with a few lifelines along the way.", c:["facts","judgment"], s:["event","call","room"], e:1, g:"1 player, any audience", t:"10–15 min",
+   b:"Have Claude write the ladder and decide the lifelines.", f:"Make 'ask the AI' a lifeline, and show when it helps and when it's wrong.", w:"Only one player is active at a time. Let the audience vote along.", src:[]},
+  {n:"Estimate It", i:"The Price Is Right", h:"Guess a number, like time saved, cost, or error rate. The closest guess without going over wins.", c:["facts","tradeoffs"], s:["meeting","call","event"], e:1, g:"Any", t:"5 min",
+   b:"Have Claude pick real numbers from your data and write the story behind each one.", f:"Use your own team's numbers to build intuition about what AI saves.", w:"Use real numbers only, and check them first.", src:[]},
+  {n:"Pitch Tank", i:"Shark Tank", h:"Teams pitch an idea to a panel of 'investors' with a fake budget, who decide what to fund and why.", c:["tradeoffs","concepts"], s:["event","room","call"], e:1, g:"10 to 200", t:"30–60 min",
+   b:"Have Claude write the investor personas, their priorities, and a scoring sheet.", f:"Give each investor a hidden priority, like risk or speed.", w:"Judges should explain their decisions, or it's just entertainment.", src:[]},
+  {n:"Technical Challenge", i:"The Great British Bake Off", h:"Everyone gets the same task with bare-bones instructions. Results are judged blind and ranked.", c:["tools","process"], s:["call","event","community"], e:1, g:"5 to 200", t:"20–45 min",
+   b:"Have Claude write the task, the minimal instructions, and the judging criteria.", f:"Reveal the 'perfect bake' after judging and walk through how it was made.", w:"Rank kindly. The goal is to compare approaches, not to embarrass anyone.", src:[]},
+  {n:"Mystery Basket", i:"Chopped", h:"Teams open a basket of random ingredients, like a tool, a task, and a constraint, and must build something with all of them in a set time.", c:["tools"], s:["event","call","community"], e:1, g:"5 to 200", t:"30–60 min",
+   b:"Have Claude write three decks: tools, real tasks, and constraints.", f:"Add a surprise ingredient halfway through.", w:"Random combinations can be impossible. Check the decks first.", src:[]},
+  {n:"Speedrun", i:"Video game speedrunning", h:"Complete a real task in the tool as fast as possible, share your route, and climb the leaderboard.", c:["tools","process"], s:["community","event","self"], e:1, g:"Any", t:"Ongoing",
+   b:"Have Claude define the task, what counts as done, and how to submit a time.", f:"Ask top runners to share their route. Their shortcuts are the real lesson.", w:"Speed can hurt quality. Disqualify runs that skip required checks.", src:[]},
+  {n:"Secret Helper", i:"Secret Santa", h:"Each person is secretly assigned a colleague to help learn one new thing that week. Helpers are revealed at the end.", c:["habits"], s:["community"], e:1, g:"10 to 200", t:"1 week",
+   b:"Have Claude make the pairings and write a short list of easy ways to help.", f:"Reveal week: each helper shares what they taught.", w:"Some people are too busy. Make it opt-in.", src:[]},
+  {n:"Crowd Plays", i:"Twitch Plays", h:"The whole audience votes on every move in a scenario, live, and sees the result of the majority choice.", c:["judgment"], s:["event","call"], e:2, g:"50 to 3,000", t:"15–20 min",
+   b:"Have Claude write a branching scenario with a live poll at each choice.", f:"After a bad outcome, rewind and let the room choose differently.", w:"The majority isn't always right. That's a good thing to discuss.", src:[]},
+  {n:"Timeline", i:"Timeline card game", h:"Place cards with events, features, or steps in the right order relative to the cards already on the table.", c:["facts","process"], s:["room","call","self"], e:1, g:"2 to 8", t:"10–15 min",
+   b:"Have Claude write cards with dates or step numbers on the back.", f:"Use the history of your own team's tools and decisions.", w:"Only works when the order really matters.", src:[]}
 ];
 const SRC = {
   arlo:["Arlo: 28 training activities and games","https://arlo.co/blog/training-activities-and-games"],
@@ -372,7 +437,10 @@ const SRC = {
   uci:["UC Irvine: Spot the Bot workshop","https://wics.ics.uci.edu/?p=7675"],
   aha:["AhaSlides: spotting AI hallucinations","https://ahaslides.com/templates/courses/verifying-ai-output/"],
   wordle:["HR Grapevine: coworker Wordle competitions","https://www.hrgrapevine.com/us/content/article/2024-05-03-puzzle-game-popularity-has-peaked-could-co-worker-wordle-competition-be-good-for-employee-engagement"],
-  twine:["Teaching Professor: Twine branching toolkit","https://www.teachingprofessor.com/topics/online-learning/entwined-a-tool-kit-for-creating-branching-narratives"]
+  twine:["Teaching Professor: Twine branching toolkit","https://www.teachingprofessor.com/topics/online-learning/entwined-a-tool-kit-for-creating-branching-narratives"],
+  wharton:["Wharton Learning Lab: Keep Talking and Nobody Explodes","https://simulations.wharton.upenn.edu/?p=6803"],
+  karlsen:["Håvard Karlsen: using Keep Talking in a seminar","https://hkarlsen.rbind.io/posts/eng/002-keep-talking/"],
+  taboo:["Lucerne University: the Taboo method","https://rcc.hslu.ch/en/tools/utilities/methods/zeige/Taboo-Method"]
 };
 const EXTRA_SRC = {
   "Trivia Race":["arlo","elb"], "Memory Match":["elb","h5p"], "Bingo":["arlo","sko"], "Jeopardy Board":["elb","sko"],
@@ -387,7 +455,7 @@ G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; });
 G.forEach((g, i) => g.id = "g" + i);
 
 const lab = Object.fromEntries([...CONTENT, ...SETTINGS]);
-const state = { c: null, s: null, q: "", hide: false, used: new Set() };
+const state = { c: null, s: null, q: "", pop: false, hide: false, used: new Set() };
 try { const saved = JSON.parse(localStorage.getItem("shelf-used") || "[]"); saved.forEach(x => state.used.add(x)); } catch (e) {}
 try { state.hide = localStorage.getItem("shelf-hide") === "1"; } catch (e) {}
 
@@ -407,8 +475,8 @@ function chips(el, list, key, cls) {
 
 function matches() {
   const q = state.q.trim().toLowerCase();
-  return G.filter(g => (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) &&
-                       (!q || [g.n, g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
+  return G.filter(g => (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) &&
+                       (!q || [g.n, g.i || "", g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
           .sort((a, b) => a.e - b.e || a.n.localeCompare(b.n));
 }
 
@@ -419,7 +487,7 @@ function card(g) {
   const pips = "●".repeat(g.e) + "○".repeat(3 - g.e);
   const eff = ["", "Low", "Medium", "High"][g.e];
   return `<article class="game${used ? " used" : ""}" id="${g.id}">
-    <div class="game-head"><h3>${esc(g.n)}</h3>
+    <div class="game-head"><div class="title-block"><h3>${esc(g.n)}</h3>${g.i ? `<span class="inspired">Inspired by ${esc(g.i)}</span>` : ""}</div>
       <button type="button" class="used-btn" data-n="${esc(g.n)}" aria-pressed="${used}">${used ? "Used recently" : "Mark as used"}</button></div>
     <p class="how">${esc(g.h)}</p>
     <div class="stats">
@@ -475,6 +543,7 @@ $("heat").addEventListener("click", e => {
   state.c = b.dataset.c; state.s = b.dataset.s; render();
   $("shelf").scrollIntoView({ behavior: "auto", block: "start" });
 });
+$("pop-only").addEventListener("change", e => { state.pop = e.target.checked; render(); });
 $("q").addEventListener("input", e => { state.q = e.target.value; render(); });
 $("hide-used").addEventListener("change", e => {
   state.hide = e.target.checked;

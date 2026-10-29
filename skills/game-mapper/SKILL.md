@@ -69,7 +69,7 @@ Turn the content into at most three goals, each written as "After playing, peopl
 
 First ask which formats they've used recently, so you can steer away from them.
 
-Then recommend two or three games from the shelf below that fit the dominant content type and the setting. Include one stretch pick they probably haven't tried. For each:
+Then recommend two or three games from the shelf below that fit the dominant content type and the setting. Include one stretch pick they probably haven't tried, and consider an adaptation of a popular game people already know, since familiar rules mean less explaining. For each:
 - Why it fits this specific content (point to actual pieces)
 - How the pieces would become game parts (for example, "the 5 escalation steps become 5 locks")
 - Build effort
@@ -102,7 +102,7 @@ Ask if they want changes, then offer to start the build.
 
 ## The game shelf
 
-This matches the Learning Game Shelf page in this repo (index.html), which has 74 formats with how each plays, build tips, twists, pitfalls, and links to real-world examples. Effort: 1 low, 2 medium, 3 high.
+This matches the Learning Game Shelf page in this repo (index.html), which has 105 formats, including 31 adapted from popular games, with how each plays, build tips, twists, pitfalls, and links to real-world examples. Effort: 1 low, 2 medium, 3 high.
 
 | Game | Best content types | Settings | Effort |
 |---|---|---|---|
@@ -180,5 +180,36 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 7
 | 360 Explore | Facts, Big ideas, Finding problems | Self-paced | 2 |
 | Improv Scenes | Judgment | Room | 1 |
 | Puzzle Inside the Tool | Tool skills, Finding problems | Self-paced, Community | 2 |
+| Clue Giver (like Codenames) | Big ideas, Facts | Room, Video call, Big event | 1 |
+| Scale Guess (like Wavelength) | Judgment, Tradeoffs | Room, Video call, Team meeting | 1 |
+| Explain It Without (like Taboo) | Big ideas | Room, Video call, Team meeting | 1 |
+| Draw the Concept (like Pictionary and charades) | Big ideas, Facts | Room, Video call, Team meeting | 1 |
+| Prompt Telephone (like Telephone and Gartic Phone) | Tool skills, Big ideas | Video call, Room, Community | 1 |
+| Hidden Saboteur (like Werewolf and Mafia) | Finding problems, Judgment | Room, Video call | 1 |
+| Imposter Tasks (like Among Us) | Tool skills, Finding problems | Video call, Room | 2 |
+| Co-op Outbreak (like Pandemic) | Tradeoffs, Judgment, Big ideas | Room, Video call | 3 |
+| Trade & Build (like Catan) | Tradeoffs | Room | 2 |
+| Route Builder (like Ticket to Ride) | Steps, Big ideas | Room, Self-paced | 2 |
+| Deduction Grid (like Clue) | Finding problems | Room, Video call, Self-paced | 2 |
+| Twenty Questions (like Guess Who) | Finding problems, Big ideas | Video call, Team meeting, Room | 1 |
+| Best Match Card (like Apples to Apples) | Judgment, Big ideas | Room, Video call, Community | 1 |
+| Question Tower (like Jenga) | Facts, Big ideas | Room | 1 |
+| Kitchen Chaos (like Overcooked) | Steps, Tradeoffs | Room, Video call | 2 |
+| Inspector Desk (like Papers, Please) | Judgment, Finding problems, Steps | Self-paced, Video call | 2 |
+| Swipe Decisions (like Reigns) | Judgment, Tradeoffs | Self-paced, Community | 2 |
+| Defuse Together (like Keep Talking and Nobody Explodes) | Steps, Finding problems, Tool skills | Video call, Room | 2 |
+| Habit Garden (like Animal Crossing and Stardew Valley) | Habits | Community | 2 |
+| Collect the Set (like Pokémon cards) | Habits, Tool skills | Community, Big event | 2 |
+| Where Is This? (like GeoGuessr) | Tool skills, Facts | Video call, Team meeting, Community | 1 |
+| Elimination Quiz (like HQ Trivia and battle royale games) | Facts, Big ideas | Big event, Video call | 1 |
+| Lifeline Ladder (like Who Wants to Be a Millionaire) | Facts, Judgment | Big event, Video call, Room | 1 |
+| Estimate It (like The Price Is Right) | Facts, Tradeoffs | Team meeting, Video call, Big event | 1 |
+| Pitch Tank (like Shark Tank) | Tradeoffs, Big ideas | Big event, Room, Video call | 1 |
+| Technical Challenge (like The Great British Bake Off) | Tool skills, Steps | Video call, Big event, Community | 1 |
+| Mystery Basket (like Chopped) | Tool skills | Big event, Video call, Community | 1 |
+| Speedrun (like Video game speedrunning) | Tool skills, Steps | Community, Big event, Self-paced | 1 |
+| Secret Helper (like Secret Santa) | Habits | Community | 1 |
+| Crowd Plays (like Twitch Plays) | Judgment | Big event, Video call | 2 |
+| Timeline (like Timeline card game) | Facts, Steps | Room, Video call, Self-paced | 1 |
 
-Thin spots on the shelf, where few formats fit: steps and processes at big events or in communities, habits in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
+Thin spots on the shelf, where few formats fit: steps and processes in a 10-minute team meeting or at big events, habits in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
