@@ -1,6 +1,6 @@
 # Learning Game Shelf
 
-A catalog of 105 learning game formats, matched to the kind of content you have and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
+A catalog of 106 learning game formats, matched to the kind of content you have and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
 
 **Try it:** https://vinesc1234.github.io/learning-game-shelf/
 
@@ -14,7 +14,8 @@ The fix ended up being simple: the mechanic should come from the content. A proc
 
 - `index.html` is the shelf. Pick what the content mostly is (facts, steps, judgment calls, finding problems, tradeoffs, tool skills, big ideas, or habits) and where people will play (in the room, on a video call, self-paced, in Slack, at a big event, or in a 10-minute team meeting). It shows the games that fit, easiest to build first.
 - Every game card has how it plays, build effort, group size, time, a tip for building it with Claude, a twist to keep it fresh, the most common way it goes wrong, and links to real examples where I found them.
-- 31 of the formats borrow a mechanic from a popular board, party, video, or TV game, like Codenames, Overcooked, or Keep Talking and Nobody Explodes. A filter shows just those. The game names belong to their owners, so build your version with its own name and look.
+- Every format names a well-known game to use as a reference, with what to borrow from it. 32 borrow their mechanic straight from a popular board, party, video, or TV game, like Codenames, Overcooked, or Super Mario 64 (a filter shows just those). The rest list a game that feels right, like Diner Dash for a triage game or Wordle for a daily puzzle. Giving Claude a specific game to match gets much better results than describing a feel from scratch.
+- The game names belong to their owners. Borrow the mechanic by describing how it plays, never by copying code, art, or assets, and give your version its own name and look.
 - A fit grid shows how many formats fit each pairing, so you can see where the gaps are.
 - "Mark as used" and "Hide games I've used recently" help you avoid repeating yourself. Those marks are saved in your own browser only.
 - `skills/game-mapper/SKILL.md` is a Claude skill for the step before the shelf. You drop in everything you were given, and Claude walks through it with you: what's actually in there, what conflicts, what type of content each piece is, what the learning goals are, and which two or three games fit. It ends with a game brief and a prompt to start building.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="105 learning game formats, including 31 adapted from popular games, matched to content type and setting.">
+<meta name="description" content="106 learning game formats, each mapped to a well-known reference game, matched to content type and setting.">
 <title>Learning Game Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +121,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 .srclist li { break-inside: avoid; margin-bottom: 4px; }
 .title-block { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .inspired { font-size: .78rem; color: var(--accent-ink); font-weight: 700; }
+.inspired.feels { color: var(--teal); }
 .empty { background: var(--card); border: 1px dashed var(--line); border-radius: 14px; padding: 24px; text-align: center; color: var(--muted); }
 .foot { color: var(--muted); font-size: .85rem; max-width: 70ch; }
 @media (prefers-reduced-motion: no-preference) { .game { transition: box-shadow .2s, border-color .2s, opacity .2s; } }
@@ -176,7 +177,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
     <ul class="srclist" id="srclist"></ul>
   </details>
 
-  <p class="foot">"Used recently" marks are saved in this browser only. Group sizes and times are starting points, not limits. Games marked "Inspired by" borrow a mechanic from a popular game; the game names are their owners' trademarks, so build yours with its own name, theme, and art.</p>
+  <p class="foot">"Used recently" marks are saved in this browser only. Group sizes and times are starting points, not limits. Every game names a well-known game to use as a feel reference: "Inspired by" means the mechanic comes straight from that game, and "Feels like" means it's a good reference for pacing and feel. Describe what you want from playing the game, never by copying its code, art, or assets. the game names are their owners' trademarks, so build yours with its own name, theme, and art.</p>
 </div>
 
 <script>
@@ -347,6 +348,8 @@ const G = [
    b:"Have Claude write scenario cards, each with a twist.", f:"Freeze the scene midway and let someone else step in.", w:"Not everyone wants to perform. Make it opt-in.", src:["arlo"]},
   {n:"Puzzle Inside the Tool", h:"A mystery that can only be solved by using the real tool, like a murder mystery solved with database searches.", c:["tools","trouble"], s:["self","community"], e:2, g:"1 to 5", t:"20–45 min",
    b:"Have Claude design clues hidden in a practice dataset or workspace.", f:"Make each clue require one new feature of the tool.", w:"Needs a safe practice copy of the tool.", src:["playing"]},
+  {n:"Hub World", i:"Super Mario 64 and other 3D platformers", h:"A central hub where each door opens a world. Tokens earned in the worlds unlock new doors and, at the end, a final challenge that ties everything together.", c:["concepts","tools","habits"], s:["self","community"], e:2, g:"Any", t:"Weeks, at each person's pace",
+   b:"Have Claude build the hub as a page or a 3D room in Claude Design, with one door per module. Each world can be any other game on this shelf.", f:"Add a secret door that only opens for people who go back and master an earlier world.", w:"Locked doors can strand people. Let them in with fewer tokens than the total available.", src:[]},
   {n:"Clue Giver", i:"Codenames", h:"A grid of terms on the table. One teammate gives a one-word clue that links several of their team's terms, and the team guesses which ones.", c:["concepts","facts"], s:["room","call","event"], e:1, g:"2 teams of 2 to 8", t:"15–20 min",
    b:"Have Claude pick 25 terms from your content and build a clickable grid with team colors and one trap card.", f:"Make the trap card a common misconception, so guessing it costs the round.", w:"Players need to know the terms already. Use it to review, not to introduce.", src:[]},
   {n:"Scale Guess", i:"Wavelength", h:"A clue-giver secretly places a scenario on a spectrum, like 'low risk to high risk to paste into AI.' The team discusses and guesses where it landed.", c:["judgment","tradeoffs"], s:["room","call","meeting"], e:1, g:"4 to 30", t:"10–15 min",
@@ -451,7 +454,305 @@ const EXTRA_SRC = {
   "Defend the Decision":["ispring"], "Show-and-Tell Bounty":["google"], "Feature Auction":["sko"],
   "Find the Risk":["h5p"], "Choose Your Path":["eli5"], "This or That":["ispring"]
 };
-G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; });
+const REF = {
+"Trivia Race": [
+"Kahoot!",
+"Faster correct answers score more, with the answer and leaderboard shown after every question."
+],
+"Memory Match": [
+"Concentration (the card game)",
+"Flip two cards, keep matching pairs, and mismatches flip back face down."
+],
+"Bingo": [
+"Bingo",
+"Everyone has their own card, and the first full line calls it."
+],
+"Jeopardy Board": [
+"Jeopardy!",
+"A category grid with point values that rise as questions get harder."
+],
+"Board Race": [
+"Mario Party",
+"Roll and move, spaces trigger events, and short minigames decide who gets ahead."
+],
+"Escape Room": [
+"The Room (puzzle game series)",
+"Puzzles nested inside puzzles, where solving one reveals the next, with clues hidden in the scene."
+],
+"Sequence Sort": [
+"Cooking Mama",
+"Each step has to be done in the right order before the next one unlocks."
+],
+"Branching Scenario": [
+"Telltale's The Walking Dead",
+"Choices are remembered, and the game tells you when a character will remember what you did."
+],
+"Mystery": [
+"Return of the Obra Dinn",
+"Work out who, how, and why from limited evidence, and confirm a few answers at a time."
+],
+"Spot the Mistake": [
+"The Exit 8",
+"Walk the same hallway again and again, and turn back the moment something is off."
+],
+"Two Truths and a Lie": [
+"Two Truths and a Lie",
+"The party game itself."
+],
+"Token Budget": [
+"Plants vs. Zombies",
+"Limited slots and a budget to spend before the round starts, so every pick has a cost."
+],
+"Triage Rush": [
+"Diner Dash",
+"Customers queue with patience meters, and serving them in a smart order is the whole game."
+],
+"Real-Tool Scavenger Hunt": [
+"Pokémon GO",
+"Go out into the real world, find things, and log proof to collect them."
+],
+"Quest Board": [
+"Destiny bounties",
+"A board of daily and weekly bounties you pick up, complete, and turn in for rewards."
+],
+"Streak Challenge": [
+"Duolingo",
+"A visible streak counter, a daily reminder, and a streak freeze for missed days."
+],
+"Role-Play Simulation": [
+"Mass Effect dialogue",
+"Pick from dialogue choices, the character reacts, and the relationship shifts."
+],
+"Prompt Golf": [
+"Code golf",
+"Each hole has a par, and the fewest strokes wins."
+],
+"Story Campaign": [
+"Dungeons & Dragons campaigns",
+"Weekly sessions with recurring characters, where the party's choices carry forward."
+],
+"Sort It": [
+"Unpacking",
+"Put each item where it belongs, and wrong spots are gently rejected."
+],
+"Lightning Drill": [
+"WarioWare",
+"Five-second microgames back to back, speeding up as you go."
+],
+"Build the Map": [
+"Pipe Mania",
+"Place pieces so the flow connects end to end before time runs out."
+],
+"Defend the Decision": [
+"Ace Attorney",
+"Present your case, the other side objects, and you counter with evidence."
+],
+"Build Sprint": [
+"Game jams like Ludum Dare",
+"A theme revealed at the start, a fixed deadline, and everyone shows what they made."
+],
+"Show-and-Tell Bounty": [
+"Monster Hunter quest board",
+"Pick a posted job, complete it, and claim the reward."
+],
+"Feature Auction": [
+"Modern Art (board game)",
+"Bid on items whose true value is only revealed after the round."
+],
+"Find the Risk": [
+"Hidden Folks",
+"Search a busy scene for specific things, with a counter of how many are left."
+],
+"Relay": [
+"Moving Out",
+"Carry things through a space together, with handoffs where teamwork breaks or works."
+],
+"Choose Your Path": [
+"Skyrim skill trees",
+"Pick a path, and each path has its own tree of skills to unlock."
+],
+"This or That": [
+"Would You Rather",
+"Two options, everyone picks, then the room sees the split."
+],
+"Survey Says": [
+"Family Feud",
+"Guess the most popular answers from a real survey and reveal them one by one."
+],
+"Ball Toss Review": [
+"Hot Potato",
+"Pass it on fast, and whoever is holding it has to answer."
+],
+"Snowball Fight": [
+"Snowball fight",
+"Crumpled paper flying across the room, then everyone reads one aloud."
+],
+"Word Scramble & Hangman": [
+"Wheel of Fortune",
+"Letters revealed one guess at a time, with limited wrong guesses."
+],
+"Daily Puzzle": [
+"Wordle",
+"One puzzle a day for everyone, with a shareable result grid."
+],
+"Press Your Luck": [
+"Can't Stop (board game)",
+"Keep rolling for more, or stop and lock in what you have before you bust."
+],
+"Arcade Runner": [
+"Subway Surfers",
+"An endless runner with lanes to switch between and lives to lose."
+],
+"Daily Drip Quiz": [
+"Anki flashcards",
+"Cards you miss come back sooner, and cards you know come back later."
+],
+"Alternate Reality Game": [
+"I Love Bees (Halo 2's alternate reality game)",
+"The story leaks into real channels, and the community solves it together."
+],
+"Crisis Simulation": [
+"Frostpunk",
+"Crises arrive on a clock, and every decision trades one problem for another."
+],
+"Tabletop Card Drill": [
+"Backdoors & Breaches",
+"A hidden incident, cards played to investigate, and a facilitator revealing what you find."
+],
+"Risk Card Game": [
+"Elevation of Privilege",
+"Each card names a threat, and you score by showing it applies to the design on the table."
+],
+"Dungeon One-Shot": [
+"Zelda dungeons",
+"Enter, solve a puzzle, find the key item, beat the boss, collect the reward."
+],
+"Chat Escape Room": [
+"Zork",
+"Type a command, and the world answers in text."
+],
+"House Cup": [
+"Splatfest in Splatoon",
+"Pick a team, and everything you play counts toward your team's total."
+],
+"Team Participation Challenge": [
+"Strava club challenges",
+"A team leaderboard where everyone's activity counts toward the group."
+],
+"Promptathon": [
+"Super Mario Maker",
+"Everyone builds, everyone plays each other's builds, and likes surface the best."
+],
+"Best-Of Library Contest": [
+"Steam Workshop",
+"Anyone can upload, and the best-rated creations get featured."
+],
+"Learning Expo": [
+"Fortnite seasons",
+"Weekly challenges, a tiered rewards track, and a season that ends on a set date."
+],
+"Station Passport": [
+"Pokémon Stamp Rally",
+"Visit stations, collect a stamp at each, and complete the sheet for a prize."
+],
+"People Bingo": [
+"Find Someone Who",
+"The classic icebreaker itself."
+],
+"Bracket Tournament": [
+"March Madness brackets",
+"Head-to-head matchups, winners move on, and everyone fills out a bracket."
+],
+"Fantasy League": [
+"Fantasy football",
+"Draft a team, score weekly, and follow the standings."
+],
+"Virtual Journey": [
+"The Oregon Trail",
+"Progress moves you along a map, and landmarks unlock stories along the way."
+],
+"Software Practice Sim": [
+"PC Building Simulator",
+"Do the real procedure step by step in a safe copy, with optional hints."
+],
+"Business Simulation": [
+"RollerCoaster Tycoon",
+"Run the business, change one thing, and watch the numbers move each round."
+],
+"Build It Challenge": [
+"Poly Bridge",
+"Build with limited materials, test it, watch it fail, and try again."
+],
+"Brick Models": [
+"LEGO Serious Play",
+"The method itself."
+],
+"Blind Builder": [
+"Spaceteam",
+"Only one person has the information, and others have to act on it through talk alone."
+],
+"Jigsaw Teach-Back": [
+"Hanabi",
+"No one has the full picture, so the team only wins by sharing what each person knows."
+],
+"Gallery Walk": [
+"The museum in Animal Crossing",
+"Walk room to room, take in each exhibit, and add what you notice."
+],
+"Reverse Brainstorm": [
+"Untitled Goose Game",
+"Your job is to cause as much trouble as possible, on purpose."
+],
+"Ranking Challenge": [
+"Top Trumps",
+"Compare items stat by stat to decide which ranks higher."
+],
+"Roleplay Rumble": [
+"Street Fighter",
+"Short rounds, best of three, swap sides, and reset fast."
+],
+"Pitch Challenge": [
+"American Idol",
+"Perform, the judges give feedback, and the audience votes."
+],
+"Mash-Up Pitch": [
+"Snake Oil (party game)",
+"Draw word cards, combine them into an invention, and pitch it to a buyer."
+],
+"Capture the Flag": [
+"picoCTF",
+"Solve hands-on challenges to reveal hidden flags worth points."
+],
+"Break the Bot": [
+"Gandalf by Lakera",
+"Trick the AI into revealing a secret, with defenses that get stronger every level."
+],
+"AI or Not": [
+"Human or Not",
+"Chat, then guess whether you were talking to a person or an AI."
+],
+"Slow Reveal": [
+"Framed (daily movie game)",
+"Each wrong guess reveals a little more."
+],
+"Interactive Video": [
+"Black Mirror: Bandersnatch",
+"The video pauses and you choose what happens next."
+],
+"360 Explore": [
+"Myst",
+"Look around a scene, click to inspect things, and piece together clues."
+],
+"Improv Scenes": [
+"Whose Line Is It Anyway?",
+"Suggestions from the audience and short scenes that get cut off."
+],
+"Puzzle Inside the Tool": [
+"SQL Murder Mystery",
+"Solve a mystery by running queries in the real tool."
+]
+};
+G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; });
 G.forEach((g, i) => g.id = "g" + i);
 
 const lab = Object.fromEntries([...CONTENT, ...SETTINGS]);
@@ -476,7 +777,7 @@ function chips(el, list, key, cls) {
 function matches() {
   const q = state.q.trim().toLowerCase();
   return G.filter(g => (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) &&
-                       (!q || [g.n, g.i || "", g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
+                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
           .sort((a, b) => a.e - b.e || a.n.localeCompare(b.n));
 }
 
@@ -487,7 +788,7 @@ function card(g) {
   const pips = "●".repeat(g.e) + "○".repeat(3 - g.e);
   const eff = ["", "Low", "Medium", "High"][g.e];
   return `<article class="game${used ? " used" : ""}" id="${g.id}">
-    <div class="game-head"><div class="title-block"><h3>${esc(g.n)}</h3>${g.i ? `<span class="inspired">Inspired by ${esc(g.i)}</span>` : ""}</div>
+    <div class="game-head"><div class="title-block"><h3>${esc(g.n)}</h3>${g.i ? `<span class="inspired">Inspired by ${esc(g.i)}</span>` : g.r ? `<span class="inspired feels">Feels like ${esc(g.r[0])}</span>` : ""}</div>
       <button type="button" class="used-btn" data-n="${esc(g.n)}" aria-pressed="${used}">${used ? "Used recently" : "Mark as used"}</button></div>
     <p class="how">${esc(g.h)}</p>
     <div class="stats">
@@ -497,6 +798,7 @@ function card(g) {
     </div>
     <div class="tags">${tags}</div>
     <dl class="notes">
+      ${g.r ? `<div><dt>Borrow from ${esc(g.r[0])}</dt><dd>${esc(g.r[1])}</dd></div>` : ""}
       <div><dt>Build it with Claude</dt><dd>${esc(g.b)}</dd></div>
       <div><dt>Keep it fresh</dt><dd>${esc(g.f)}</dd></div>
       <div><dt>Watch out</dt><dd>${esc(g.w)}</dd></div>

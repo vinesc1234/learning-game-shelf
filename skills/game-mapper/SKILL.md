@@ -74,6 +74,7 @@ Then recommend two or three games from the shelf below that fit the dominant con
 - How the pieces would become game parts (for example, "the 5 escalation steps become 5 locks")
 - Build effort
 - One way to keep it fresh
+- Its reference game from the table, and what to borrow from it
 
 Let them choose. If they want to combine two formats, help with that. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
 
@@ -87,7 +88,15 @@ Once they pick, write a short brief:
 - **Content map:** a table of each content piece and the game part it becomes (card, lock, branch, clue, quest, round)
 - **Gaps to fill before building:** open questions and conflicts, and who to ask
 - **Keep it fresh:** the twist that makes this version feel new
-- **First build prompt:** a ready-to-paste prompt for Claude (and Claude Design if there are visuals or 3D models) to start building
+- **Reference game and feel spec:** the game this should feel like (from the table) and 3 to 5 specific things to borrow, like pacing, scoring, or how choices feel. Describe them from playing the game. Never decompile, copy, or reuse a commercial game's code, art, or assets.
+- **Name and look:** give the game its own name, theme, and art, even when it borrows a mechanic from a famous game
+- **Asset budget:** a hard spending cap for any paid image or 3D generation tools, or "none" if it uses only Claude Design
+- **First build prompt:** a ready-to-paste prompt for Claude (and Claude Design if there are visuals or 3D models) to start building. The prompt always includes the feel spec and the asset budget, and always asks Claude to:
+  - keep a short build log of what it built and why
+  - take screenshots (or a short screen recording) at each milestone
+  - list every asset it generates
+  - finish with a summary of time spent, tokens used, and cost
+  - for visual games, put together a short walkthrough or trailer at the end
 
 Ask if they want changes, then offer to start the build.
 
@@ -102,114 +111,115 @@ Ask if they want changes, then offer to start the build.
 
 ## The game shelf
 
-This matches the Learning Game Shelf page in this repo (index.html), which has 105 formats, including 31 adapted from popular games, with how each plays, build tips, twists, pitfalls, and links to real-world examples. Effort: 1 low, 2 medium, 3 high.
+This matches the Learning Game Shelf page in this repo (index.html), which has 106 formats. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Effort: 1 low, 2 medium, 3 high.
 
-| Game | Best content types | Settings | Effort |
-|---|---|---|---|
-| Trivia Race | Facts, Big ideas | Video call, Room, Big event, Team meeting | 1 |
-| Memory Match | Facts | Self-paced, Room | 1 |
-| Bingo | Facts, Habits, Tool skills | Big event, Video call, Community | 1 |
-| Jeopardy Board | Facts, Big ideas | Video call, Room, Team meeting | 1 |
-| Board Race | Facts, Big ideas, Tool skills | Self-paced, Room, Community | 2 |
-| Escape Room | Steps, Finding problems, Tool skills | Self-paced, Video call | 3 |
-| Sequence Sort | Steps | Self-paced, Video call, Room, Team meeting | 1 |
-| Branching Scenario | Judgment, Finding problems | Self-paced, Video call | 2 |
-| Mystery | Finding problems, Judgment, Big ideas | Self-paced, Room, Community | 3 |
-| Spot the Mistake | Finding problems, Judgment, Tool skills | All settings | 1 |
-| Two Truths and a Lie | Facts, Big ideas | Team meeting, Video call, Room, Community | 1 |
-| Token Budget | Tradeoffs, Judgment | Room, Video call, Team meeting | 1 |
-| Triage Rush | Tradeoffs, Steps, Judgment | Self-paced, Video call | 2 |
-| Real-Tool Scavenger Hunt | Tool skills, Habits | Self-paced, Community, Video call | 1 |
-| Quest Board | Habits, Tool skills | Community | 2 |
-| Streak Challenge | Habits, Tool skills | Community, Self-paced | 1 |
-| Role-Play Simulation | Judgment, Tool skills | Self-paced, Video call | 2 |
-| Prompt Golf | Tool skills | Video call, Room, Community, Big event | 1 |
-| Story Campaign | Big ideas, Judgment, Habits | Community, Team meeting | 3 |
-| Sort It | Big ideas, Facts, Judgment | Self-paced, Video call, Room, Team meeting | 1 |
-| Lightning Drill | Facts, Tool skills | Team meeting, Video call | 1 |
-| Build the Map | Big ideas, Steps | Room, Video call, Self-paced | 2 |
-| Defend the Decision | Judgment, Tradeoffs | Room, Video call, Team meeting | 1 |
-| Build Sprint | Tool skills, Habits | Big event, Community, Room | 2 |
-| Show-and-Tell Bounty | Habits, Tool skills | Community, Video call | 1 |
-| Feature Auction | Tradeoffs, Big ideas | Room, Video call, Big event | 1 |
-| Find the Risk | Finding problems, Judgment | Self-paced, Video call, Big event | 1 |
-| Relay | Steps | Room, Video call | 1 |
-| Choose Your Path | Big ideas, Tool skills, Habits | Self-paced, Community | 2 |
-| This or That | Judgment, Tradeoffs | Team meeting, Community, Big event, Video call | 1 |
-| Survey Says | Judgment, Facts, Big ideas | Room, Video call, Big event | 1 |
-| Ball Toss Review | Facts, Big ideas | Room, Video call, Team meeting | 1 |
-| Snowball Fight | Big ideas, Judgment | Room | 1 |
-| Word Scramble & Hangman | Facts | Self-paced, Video call | 1 |
-| Daily Puzzle | Facts, Habits | Community | 2 |
-| Press Your Luck | Facts, Judgment | Self-paced, Video call | 2 |
-| Arcade Runner | Facts | Self-paced | 2 |
-| Daily Drip Quiz | Facts, Judgment, Steps | Self-paced, Community | 2 |
-| Alternate Reality Game | Big ideas, Judgment, Habits | Community, Big event | 3 |
-| Crisis Simulation | Judgment, Tradeoffs, Finding problems | Room, Video call | 2 |
-| Tabletop Card Drill | Finding problems, Steps, Judgment | Room, Video call | 2 |
-| Risk Card Game | Finding problems, Big ideas | Room, Video call | 1 |
-| Dungeon One-Shot | Judgment, Big ideas | Self-paced, Video call, Room | 2 |
-| Chat Escape Room | Tool skills, Steps | Community, Self-paced | 1 |
-| House Cup | Habits, Tool skills | Community, Big event | 2 |
-| Team Participation Challenge | Habits, Tool skills | Community | 1 |
-| Promptathon | Tool skills, Habits | Community, Big event | 2 |
-| Best-Of Library Contest | Tool skills, Habits | Community | 1 |
-| Learning Expo | Tool skills, Habits, Big ideas | Video call, Big event, Community | 3 |
-| Station Passport | Tool skills, Facts, Big ideas | Big event, Room | 2 |
-| People Bingo | Habits | Big event, Room, Video call | 1 |
-| Bracket Tournament | Tradeoffs, Judgment | Community, Big event | 1 |
-| Fantasy League | Habits | Community | 2 |
-| Virtual Journey | Habits | Community, Self-paced | 2 |
-| Software Practice Sim | Tool skills, Steps | Self-paced | 3 |
-| Business Simulation | Big ideas, Tradeoffs | Room, Video call | 3 |
-| Build It Challenge | Big ideas | Room, Big event | 1 |
-| Brick Models | Big ideas, Judgment | Room | 2 |
-| Blind Builder | Steps, Big ideas | Room, Video call | 1 |
-| Jigsaw Teach-Back | Big ideas, Steps | Room, Video call | 1 |
-| Gallery Walk | Big ideas, Judgment | Room, Video call | 1 |
-| Reverse Brainstorm | Finding problems, Judgment | Room, Video call, Team meeting | 1 |
-| Ranking Challenge | Tradeoffs, Judgment | Room, Video call, Team meeting | 1 |
-| Roleplay Rumble | Judgment | Room, Big event, Video call | 1 |
-| Pitch Challenge | Big ideas, Judgment | Community, Big event | 1 |
-| Mash-Up Pitch | Big ideas | Room, Big event, Video call | 1 |
-| Capture the Flag | Tool skills, Finding problems | Big event, Community, Self-paced | 3 |
-| Break the Bot | Finding problems, Tool skills, Judgment | Big event, Community, Video call | 1 |
-| AI or Not | Finding problems, Judgment | Video call, Big event, Team meeting, Room | 1 |
-| Slow Reveal | Facts, Big ideas | Video call, Team meeting, Room | 1 |
-| Interactive Video | Judgment, Steps | Self-paced | 2 |
-| 360 Explore | Facts, Big ideas, Finding problems | Self-paced | 2 |
-| Improv Scenes | Judgment | Room | 1 |
-| Puzzle Inside the Tool | Tool skills, Finding problems | Self-paced, Community | 2 |
-| Clue Giver (like Codenames) | Big ideas, Facts | Room, Video call, Big event | 1 |
-| Scale Guess (like Wavelength) | Judgment, Tradeoffs | Room, Video call, Team meeting | 1 |
-| Explain It Without (like Taboo) | Big ideas | Room, Video call, Team meeting | 1 |
-| Draw the Concept (like Pictionary and charades) | Big ideas, Facts | Room, Video call, Team meeting | 1 |
-| Prompt Telephone (like Telephone and Gartic Phone) | Tool skills, Big ideas | Video call, Room, Community | 1 |
-| Hidden Saboteur (like Werewolf and Mafia) | Finding problems, Judgment | Room, Video call | 1 |
-| Imposter Tasks (like Among Us) | Tool skills, Finding problems | Video call, Room | 2 |
-| Co-op Outbreak (like Pandemic) | Tradeoffs, Judgment, Big ideas | Room, Video call | 3 |
-| Trade & Build (like Catan) | Tradeoffs | Room | 2 |
-| Route Builder (like Ticket to Ride) | Steps, Big ideas | Room, Self-paced | 2 |
-| Deduction Grid (like Clue) | Finding problems | Room, Video call, Self-paced | 2 |
-| Twenty Questions (like Guess Who) | Finding problems, Big ideas | Video call, Team meeting, Room | 1 |
-| Best Match Card (like Apples to Apples) | Judgment, Big ideas | Room, Video call, Community | 1 |
-| Question Tower (like Jenga) | Facts, Big ideas | Room | 1 |
-| Kitchen Chaos (like Overcooked) | Steps, Tradeoffs | Room, Video call | 2 |
-| Inspector Desk (like Papers, Please) | Judgment, Finding problems, Steps | Self-paced, Video call | 2 |
-| Swipe Decisions (like Reigns) | Judgment, Tradeoffs | Self-paced, Community | 2 |
-| Defuse Together (like Keep Talking and Nobody Explodes) | Steps, Finding problems, Tool skills | Video call, Room | 2 |
-| Habit Garden (like Animal Crossing and Stardew Valley) | Habits | Community | 2 |
-| Collect the Set (like Pokémon cards) | Habits, Tool skills | Community, Big event | 2 |
-| Where Is This? (like GeoGuessr) | Tool skills, Facts | Video call, Team meeting, Community | 1 |
-| Elimination Quiz (like HQ Trivia and battle royale games) | Facts, Big ideas | Big event, Video call | 1 |
-| Lifeline Ladder (like Who Wants to Be a Millionaire) | Facts, Judgment | Big event, Video call, Room | 1 |
-| Estimate It (like The Price Is Right) | Facts, Tradeoffs | Team meeting, Video call, Big event | 1 |
-| Pitch Tank (like Shark Tank) | Tradeoffs, Big ideas | Big event, Room, Video call | 1 |
-| Technical Challenge (like The Great British Bake Off) | Tool skills, Steps | Video call, Big event, Community | 1 |
-| Mystery Basket (like Chopped) | Tool skills | Big event, Video call, Community | 1 |
-| Speedrun (like Video game speedrunning) | Tool skills, Steps | Community, Big event, Self-paced | 1 |
-| Secret Helper (like Secret Santa) | Habits | Community | 1 |
-| Crowd Plays (like Twitch Plays) | Judgment | Big event, Video call | 2 |
-| Timeline (like Timeline card game) | Facts, Steps | Room, Video call, Self-paced | 1 |
+| Game | Reference game | Best content types | Settings | Effort |
+|---|---|---|---|---|
+| Trivia Race | Feels like Kahoot! | Facts, Big ideas | Video call, Room, Big event, Team meeting | 1 |
+| Memory Match | Feels like Concentration (the card game) | Facts | Self-paced, Room | 1 |
+| Bingo | Feels like Bingo | Facts, Habits, Tool skills | Big event, Video call, Community | 1 |
+| Jeopardy Board | Feels like Jeopardy! | Facts, Big ideas | Video call, Room, Team meeting | 1 |
+| Board Race | Feels like Mario Party | Facts, Big ideas, Tool skills | Self-paced, Room, Community | 2 |
+| Escape Room | Feels like The Room (puzzle game series) | Steps, Finding problems, Tool skills | Self-paced, Video call | 3 |
+| Sequence Sort | Feels like Cooking Mama | Steps | Self-paced, Video call, Room, Team meeting | 1 |
+| Branching Scenario | Feels like Telltale's The Walking Dead | Judgment, Finding problems | Self-paced, Video call | 2 |
+| Mystery | Feels like Return of the Obra Dinn | Finding problems, Judgment, Big ideas | Self-paced, Room, Community | 3 |
+| Spot the Mistake | Feels like The Exit 8 | Finding problems, Judgment, Tool skills | All settings | 1 |
+| Two Truths and a Lie | Feels like Two Truths and a Lie | Facts, Big ideas | Team meeting, Video call, Room, Community | 1 |
+| Token Budget | Feels like Plants vs. Zombies | Tradeoffs, Judgment | Room, Video call, Team meeting | 1 |
+| Triage Rush | Feels like Diner Dash | Tradeoffs, Steps, Judgment | Self-paced, Video call | 2 |
+| Real-Tool Scavenger Hunt | Feels like Pokémon GO | Tool skills, Habits | Self-paced, Community, Video call | 1 |
+| Quest Board | Feels like Destiny bounties | Habits, Tool skills | Community | 2 |
+| Streak Challenge | Feels like Duolingo | Habits, Tool skills | Community, Self-paced | 1 |
+| Role-Play Simulation | Feels like Mass Effect dialogue | Judgment, Tool skills | Self-paced, Video call | 2 |
+| Prompt Golf | Feels like Code golf | Tool skills | Video call, Room, Community, Big event | 1 |
+| Story Campaign | Feels like Dungeons & Dragons campaigns | Big ideas, Judgment, Habits | Community, Team meeting | 3 |
+| Sort It | Feels like Unpacking | Big ideas, Facts, Judgment | Self-paced, Video call, Room, Team meeting | 1 |
+| Lightning Drill | Feels like WarioWare | Facts, Tool skills | Team meeting, Video call | 1 |
+| Build the Map | Feels like Pipe Mania | Big ideas, Steps | Room, Video call, Self-paced | 2 |
+| Defend the Decision | Feels like Ace Attorney | Judgment, Tradeoffs | Room, Video call, Team meeting | 1 |
+| Build Sprint | Feels like Game jams like Ludum Dare | Tool skills, Habits | Big event, Community, Room | 2 |
+| Show-and-Tell Bounty | Feels like Monster Hunter quest board | Habits, Tool skills | Community, Video call | 1 |
+| Feature Auction | Feels like Modern Art (board game) | Tradeoffs, Big ideas | Room, Video call, Big event | 1 |
+| Find the Risk | Feels like Hidden Folks | Finding problems, Judgment | Self-paced, Video call, Big event | 1 |
+| Relay | Feels like Moving Out | Steps | Room, Video call | 1 |
+| Choose Your Path | Feels like Skyrim skill trees | Big ideas, Tool skills, Habits | Self-paced, Community | 2 |
+| This or That | Feels like Would You Rather | Judgment, Tradeoffs | Team meeting, Community, Big event, Video call | 1 |
+| Survey Says | Feels like Family Feud | Judgment, Facts, Big ideas | Room, Video call, Big event | 1 |
+| Ball Toss Review | Feels like Hot Potato | Facts, Big ideas | Room, Video call, Team meeting | 1 |
+| Snowball Fight | Feels like Snowball fight | Big ideas, Judgment | Room | 1 |
+| Word Scramble & Hangman | Feels like Wheel of Fortune | Facts | Self-paced, Video call | 1 |
+| Daily Puzzle | Feels like Wordle | Facts, Habits | Community | 2 |
+| Press Your Luck | Feels like Can't Stop (board game) | Facts, Judgment | Self-paced, Video call | 2 |
+| Arcade Runner | Feels like Subway Surfers | Facts | Self-paced | 2 |
+| Daily Drip Quiz | Feels like Anki flashcards | Facts, Judgment, Steps | Self-paced, Community | 2 |
+| Alternate Reality Game | Feels like I Love Bees (Halo 2's alternate reality game) | Big ideas, Judgment, Habits | Community, Big event | 3 |
+| Crisis Simulation | Feels like Frostpunk | Judgment, Tradeoffs, Finding problems | Room, Video call | 2 |
+| Tabletop Card Drill | Feels like Backdoors & Breaches | Finding problems, Steps, Judgment | Room, Video call | 2 |
+| Risk Card Game | Feels like Elevation of Privilege | Finding problems, Big ideas | Room, Video call | 1 |
+| Dungeon One-Shot | Feels like Zelda dungeons | Judgment, Big ideas | Self-paced, Video call, Room | 2 |
+| Chat Escape Room | Feels like Zork | Tool skills, Steps | Community, Self-paced | 1 |
+| House Cup | Feels like Splatfest in Splatoon | Habits, Tool skills | Community, Big event | 2 |
+| Team Participation Challenge | Feels like Strava club challenges | Habits, Tool skills | Community | 1 |
+| Promptathon | Feels like Super Mario Maker | Tool skills, Habits | Community, Big event | 2 |
+| Best-Of Library Contest | Feels like Steam Workshop | Tool skills, Habits | Community | 1 |
+| Learning Expo | Feels like Fortnite seasons | Tool skills, Habits, Big ideas | Video call, Big event, Community | 3 |
+| Station Passport | Feels like Pokémon Stamp Rally | Tool skills, Facts, Big ideas | Big event, Room | 2 |
+| People Bingo | Feels like Find Someone Who | Habits | Big event, Room, Video call | 1 |
+| Bracket Tournament | Feels like March Madness brackets | Tradeoffs, Judgment | Community, Big event | 1 |
+| Fantasy League | Feels like Fantasy football | Habits | Community | 2 |
+| Virtual Journey | Feels like The Oregon Trail | Habits | Community, Self-paced | 2 |
+| Software Practice Sim | Feels like PC Building Simulator | Tool skills, Steps | Self-paced | 3 |
+| Business Simulation | Feels like RollerCoaster Tycoon | Big ideas, Tradeoffs | Room, Video call | 3 |
+| Build It Challenge | Feels like Poly Bridge | Big ideas | Room, Big event | 1 |
+| Brick Models | Feels like LEGO Serious Play | Big ideas, Judgment | Room | 2 |
+| Blind Builder | Feels like Spaceteam | Steps, Big ideas | Room, Video call | 1 |
+| Jigsaw Teach-Back | Feels like Hanabi | Big ideas, Steps | Room, Video call | 1 |
+| Gallery Walk | Feels like The museum in Animal Crossing | Big ideas, Judgment | Room, Video call | 1 |
+| Reverse Brainstorm | Feels like Untitled Goose Game | Finding problems, Judgment | Room, Video call, Team meeting | 1 |
+| Ranking Challenge | Feels like Top Trumps | Tradeoffs, Judgment | Room, Video call, Team meeting | 1 |
+| Roleplay Rumble | Feels like Street Fighter | Judgment | Room, Big event, Video call | 1 |
+| Pitch Challenge | Feels like American Idol | Big ideas, Judgment | Community, Big event | 1 |
+| Mash-Up Pitch | Feels like Snake Oil (party game) | Big ideas | Room, Big event, Video call | 1 |
+| Capture the Flag | Feels like picoCTF | Tool skills, Finding problems | Big event, Community, Self-paced | 3 |
+| Break the Bot | Feels like Gandalf by Lakera | Finding problems, Tool skills, Judgment | Big event, Community, Video call | 1 |
+| AI or Not | Feels like Human or Not | Finding problems, Judgment | Video call, Big event, Team meeting, Room | 1 |
+| Slow Reveal | Feels like Framed (daily movie game) | Facts, Big ideas | Video call, Team meeting, Room | 1 |
+| Interactive Video | Feels like Black Mirror: Bandersnatch | Judgment, Steps | Self-paced | 2 |
+| 360 Explore | Feels like Myst | Facts, Big ideas, Finding problems | Self-paced | 2 |
+| Improv Scenes | Feels like Whose Line Is It Anyway? | Judgment | Room | 1 |
+| Puzzle Inside the Tool | Feels like SQL Murder Mystery | Tool skills, Finding problems | Self-paced, Community | 2 |
+| Hub World | Inspired by Super Mario 64 and other 3D platformers | Big ideas, Tool skills, Habits | Self-paced, Community | 2 |
+| Clue Giver | Inspired by Codenames | Big ideas, Facts | Room, Video call, Big event | 1 |
+| Scale Guess | Inspired by Wavelength | Judgment, Tradeoffs | Room, Video call, Team meeting | 1 |
+| Explain It Without | Inspired by Taboo | Big ideas | Room, Video call, Team meeting | 1 |
+| Draw the Concept | Inspired by Pictionary and charades | Big ideas, Facts | Room, Video call, Team meeting | 1 |
+| Prompt Telephone | Inspired by Telephone and Gartic Phone | Tool skills, Big ideas | Video call, Room, Community | 1 |
+| Hidden Saboteur | Inspired by Werewolf and Mafia | Finding problems, Judgment | Room, Video call | 1 |
+| Imposter Tasks | Inspired by Among Us | Tool skills, Finding problems | Video call, Room | 2 |
+| Co-op Outbreak | Inspired by Pandemic | Tradeoffs, Judgment, Big ideas | Room, Video call | 3 |
+| Trade & Build | Inspired by Catan | Tradeoffs | Room | 2 |
+| Route Builder | Inspired by Ticket to Ride | Steps, Big ideas | Room, Self-paced | 2 |
+| Deduction Grid | Inspired by Clue | Finding problems | Room, Video call, Self-paced | 2 |
+| Twenty Questions | Inspired by Guess Who | Finding problems, Big ideas | Video call, Team meeting, Room | 1 |
+| Best Match Card | Inspired by Apples to Apples | Judgment, Big ideas | Room, Video call, Community | 1 |
+| Question Tower | Inspired by Jenga | Facts, Big ideas | Room | 1 |
+| Kitchen Chaos | Inspired by Overcooked | Steps, Tradeoffs | Room, Video call | 2 |
+| Inspector Desk | Inspired by Papers, Please | Judgment, Finding problems, Steps | Self-paced, Video call | 2 |
+| Swipe Decisions | Inspired by Reigns | Judgment, Tradeoffs | Self-paced, Community | 2 |
+| Defuse Together | Inspired by Keep Talking and Nobody Explodes | Steps, Finding problems, Tool skills | Video call, Room | 2 |
+| Habit Garden | Inspired by Animal Crossing and Stardew Valley | Habits | Community | 2 |
+| Collect the Set | Inspired by Pokémon cards | Habits, Tool skills | Community, Big event | 2 |
+| Where Is This? | Inspired by GeoGuessr | Tool skills, Facts | Video call, Team meeting, Community | 1 |
+| Elimination Quiz | Inspired by HQ Trivia and battle royale games | Facts, Big ideas | Big event, Video call | 1 |
+| Lifeline Ladder | Inspired by Who Wants to Be a Millionaire | Facts, Judgment | Big event, Video call, Room | 1 |
+| Estimate It | Inspired by The Price Is Right | Facts, Tradeoffs | Team meeting, Video call, Big event | 1 |
+| Pitch Tank | Inspired by Shark Tank | Tradeoffs, Big ideas | Big event, Room, Video call | 1 |
+| Technical Challenge | Inspired by The Great British Bake Off | Tool skills, Steps | Video call, Big event, Community | 1 |
+| Mystery Basket | Inspired by Chopped | Tool skills | Big event, Video call, Community | 1 |
+| Speedrun | Inspired by Video game speedrunning | Tool skills, Steps | Community, Big event, Self-paced | 1 |
+| Secret Helper | Inspired by Secret Santa | Habits | Community | 1 |
+| Crowd Plays | Inspired by Twitch Plays | Judgment | Big event, Video call | 2 |
+| Timeline | Inspired by Timeline card game | Facts, Steps | Room, Video call, Self-paced | 1 |
 
 Thin spots on the shelf, where few formats fit: steps and processes in a 10-minute team meeting or at big events, habits in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
