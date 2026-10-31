@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="106 learning game formats, each mapped to a well-known reference game, matched to content type and setting.">
+<meta name="description" content="93 game formats for learning and selling technology, each with a reference game and a tech-company example.">
 <title>Learning Game Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,6 +122,12 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 .title-block { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .inspired { font-size: .78rem; color: var(--accent-ink); font-weight: 700; }
 .inspired.feels { color: var(--teal); }
+.chip.foc[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #1B2340; }
+.focus-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ftag { font-size: .76rem; font-weight: 700; border-radius: 6px; padding: 2px 8px; background: var(--accent-soft); color: var(--accent-ink); }
+.ftag.hit { outline: 2px solid var(--accent); }
+.example { margin: 0; font-size: .93rem; border-left: 3px solid var(--accent); padding-left: 10px; border-radius: 0; }
+.example span { display: block; font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); }
 .empty { background: var(--card); border: 1px dashed var(--line); border-radius: 14px; padding: 24px; text-align: center; color: var(--muted); }
 .foot { color: var(--muted); font-size: .85rem; max-width: 70ch; }
 @media (prefers-reduced-motion: no-preference) { .game { transition: box-shadow .2s, border-color .2s, opacity .2s; } }
@@ -132,8 +138,9 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 <div class="wrap">
   <header>
     <h1>Learning Game Shelf</h1>
-    <p class="lede"><span id="n-games">74</span> game formats for learning programs, matched to the kind of content you were handed and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
+    <p class="lede"><span id="n-games">93</span> game formats for learning and selling technology, matched to the focus, the kind of content you were handed, and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
     <ol class="steps">
+      <li>Pick the focus: learning or implementing technology or sales</li>
       <li>Pick what most of the content is</li>
       <li>Pick where people will play</li>
       <li>Choose a game you haven't run lately</li>
@@ -141,6 +148,10 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
   </header>
 
   <section class="panel" aria-label="Filters">
+    <div class="rail">
+      <span class="rail-label" id="f-label">What's the focus?</span>
+      <div class="chips" id="focus-chips" role="group" aria-labelledby="f-label"></div>
+    </div>
     <div class="rail">
       <span class="rail-label" id="c-label">What is the content mostly?</span>
       <div class="chips" id="content-chips" role="group" aria-labelledby="c-label"></div>
@@ -173,7 +184,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 
   <details class="fit" id="sources">
     <summary>Where these came from</summary>
-    <p class="fit-note">The shelf started with 30 formats and grew from what corporate L&amp;D teams, facilitators, tool makers, and AI adoption programs describe using. No list is ever complete: facilitation books like Gamestorming hold 80+ more workshop techniques, many of them meeting methods rather than games. Cards link to the examples behind them.</p>
+    <p class="fit-note">The shelf is tuned for a technology company: every game here can carry product, sales, or implementation content, and generic icebreakers and team-building games were left out. It started with 30 formats and grew from what corporate L&amp;D teams, facilitators, tool makers, and AI adoption programs describe using. No list is ever complete: facilitation books like Gamestorming hold 80+ more workshop techniques, many of them meeting methods rather than games. Cards link to the examples behind them.</p>
     <ul class="srclist" id="srclist"></ul>
   </details>
 
@@ -202,8 +213,6 @@ const SETTINGS = [
 const G = [
   {n:"Trivia Race", h:"Timed multiple-choice rounds. Faster correct answers score more, with a live leaderboard after each round.", c:["facts","concepts"], s:["call","room","event","meeting"], e:1, g:"5 to 1,000", t:"10–20 min",
    b:"Have Claude turn the source material into 15 questions with wrong answers that sound plausible, then build a one-page quiz with a timer.", f:"Make the last round worth double, or let teams bet points before each question.", w:"Rewards speed and recall. Use it to warm up a session, not to teach judgment."},
-  {n:"Memory Match", h:"Flip cards two at a time to pair a term with what it means or when to use it.", c:["facts"], s:["self","room"], e:1, g:"1 to 4", t:"5 min",
-   b:"Ask Claude for 8 to 12 pairs and a flip-card grid page.", f:"Pair each tool with the task it is best at, instead of a term with its definition.", w:"Wears out quickly. Keep rounds short."},
   {n:"Bingo", h:"Players mark squares as they hear, see, or do things. First full line wins.", c:["facts","habits","tools"], s:["event","call","community"], e:1, g:"10 to 3,000", t:"1 session or 1 week",
    b:"Give Claude 25 or more items and have it generate unique randomized cards.", f:"Run action bingo for a week, where each square is something to try at work, like drafting a reply with AI.", w:"Listening bingo during a talk can pull attention away from the talk."},
   {n:"Jeopardy Board", h:"Teams pick a category and point value, then answer. Harder questions are worth more.", c:["facts","concepts"], s:["call","room","meeting"], e:1, g:"2 to 6 teams", t:"20–30 min",
@@ -262,18 +271,8 @@ const G = [
    b:"Have Claude write pairs of options where both sound reasonable.", f:"Show how the room split before giving the expert answer.", w:"Light. Good as an opener or a Slack warm-up."},
   {n:"Survey Says", h:"Teams guess the most common answers from a real survey of customers or coworkers, Family Feud style.", c:["judgment","facts","concepts"], s:["room","call","event"], e:1, g:"2 teams to 300", t:"20 min",
    b:"Run a quick survey first, then have Claude group the answers and build a reveal board.", f:"Survey your actual customers or reps so the top answers teach something real.", w:"Only as good as the survey. Ten responses won't give you real top answers.", src:["sko"]},
-  {n:"Ball Toss Review", h:"Whoever catches the ball (or gets called on by name online) answers a review question or shares a takeaway.", c:["facts","concepts"], s:["room","call","meeting"], e:1, g:"5 to 30", t:"5 min",
-   b:"Have Claude write 20 short review prompts that mix recall with 'how would you use this?'", f:"Balloon pop version: questions hidden inside balloons, color-coded by difficulty.", w:"Some people hate being put on the spot. Allow a pass.", src:["arlo","sko"]},
-  {n:"Snowball Fight", h:"Everyone writes an answer or question anonymously, crumples it up, and throws it. Each person reads one aloud.", c:["concepts","judgment"], s:["room"], e:1, g:"10 to 60", t:"10 min",
-   b:"Have Claude draft the prompt, like 'the one thing I'm still unsure about with AI is...'", f:"Online version: an anonymous form, then read random entries aloud.", w:"Needs a facilitator who can answer whatever comes up.", src:["ispring"]},
-  {n:"Word Scramble & Hangman", h:"Unscramble or guess key terms one letter at a time. Crosswords and word searches belong here too.", c:["facts"], s:["self","call"], e:1, g:"1 to 30", t:"5 min",
-   b:"Ask Claude for a term list with hints and a simple scramble, hangman, or crossword page.", f:"Scramble whole sentences, like the steps of a policy, not just single words.", w:"Tests spelling more than understanding. Use lightly.", src:["elb","art","arlo"]},
-  {n:"Daily Puzzle", h:"One short puzzle a day, Wordle style, built from your team's terms or tools. Everyone shares their result.", c:["facts","habits"], s:["community"], e:2, g:"Any", t:"2 min a day",
-   b:"Have Claude build a daily word or logic puzzle page that pulls from a term list.", f:"Post a weekly recap of the hardest puzzle with the explanation.", w:"Runs out of steam if the word list is short. Plan 30 or more entries.", src:["wordle"]},
   {n:"Press Your Luck", h:"Keep answering to build points, or stop and bank them. One wrong answer loses everything unbanked.", c:["facts","judgment"], s:["self","call"], e:2, g:"1 to 30", t:"10 min",
    b:"Have Claude build the question ladder and the bank-or-risk logic.", f:"Make later questions harder but worth more, so banking is a real decision.", w:"Can turn into pure gambling. Keep questions tied to your goals.", src:["art"]},
-  {n:"Arcade Runner", h:"A simple arcade game where a character runs or jumps, and wrong answers cost a life.", c:["facts"], s:["self"], e:2, g:"1", t:"5 min",
-   b:"Have Claude build a small browser game that pauses for questions.", f:"Let players pick a character made in Claude Design.", w:"The arcade part can distract from the questions. Keep levels short.", src:["elb"]},
   {n:"Daily Drip Quiz", h:"One or two scenario questions a day for weeks. Missed questions come back later until people get them right.", c:["facts","judgment","process"], s:["self","community"], e:2, g:"Any", t:"2 min a day, 2–6 weeks",
    b:"Have Claude write scenario questions and a simple repeat schedule, delivered through Slack or email.", f:"Add a weekly team leaderboard and share the question most people missed.", w:"Needs a channel people already check every day.", src:["qstream"]},
   {n:"Alternate Reality Game", h:"A story that plays out across real channels like email, Slack, calls, and videos over weeks. Players solve puzzles to move it forward.", c:["concepts","judgment","habits"], s:["community","event"], e:3, g:"100s to 10,000s", t:"2–4 weeks",
@@ -300,8 +299,6 @@ const G = [
    b:"Have Claude plan the week-by-week agenda, the challenge list, and the point values.", f:"Add playful tasks, like designing an avatar or writing a song with the AI tool.", w:"A big lift. Microsoft ran each session three times to cover time zones.", src:["msft"]},
   {n:"Station Passport", h:"Players rotate through stations that each teach or test one thing, collecting a stamp at each.", c:["tools","facts","concepts"], s:["event","room"], e:2, g:"20 to 3,000", t:"30–90 min",
    b:"Have Claude design the stations, each with a 5-minute task and a way to check it.", f:"Full passports go into a prize draw.", w:"Popular stations get crowded. Run two copies of the busiest one.", src:["ispring","arlo"]},
-  {n:"People Bingo", h:"Find colleagues who match each square, like 'has built a Claude skill.'", c:["habits"], s:["event","room","call"], e:1, g:"20 to 3,000", t:"15–30 min",
-   b:"Have Claude write squares around the skills and behaviors you want people to discover in each other.", f:"Squares can only be signed by someone from a different team.", w:"Turns into signature-chasing without a short debrief.", src:["arlo","arg"]},
   {n:"Bracket Tournament", h:"Options face off head to head, and people vote winners forward until one is left.", c:["tradeoffs","judgment"], s:["community","event"], e:1, g:"Any", t:"1–4 weeks",
    b:"Have Claude seed 16 or 32 options, like AI use cases, and draft the matchups.", f:"Use the winner to decide what the next training covers.", w:"Popular is not the same as best. Ask for a one-line reason with each vote.", src:["bracket"]},
   {n:"Fantasy League", h:"Managers draft teams of colleagues, and teams score when members do the target behaviors.", c:["habits"], s:["community"], e:2, g:"20 to 500", t:"1 quarter",
@@ -312,16 +309,10 @@ const G = [
    b:"Have Claude build a clickable mock of the key screens with a hint at each step.", f:"Add a timed expert mode with no hints.", w:"Breaks when the real tool changes. Stick to screens that rarely change.", src:["eli5"]},
   {n:"Business Simulation", h:"Teams run part of a business over several rounds and live with the results, like the classic supply-chain Beer Game.", c:["concepts","tradeoffs"], s:["room","call"], e:3, g:"4 to 40", t:"1–2 hours",
    b:"Have Claude design the rounds, the numbers, and a results sheet.", f:"Change one rule partway through and see who adapts.", w:"Hard to balance. Playtest the numbers before the session.", src:["zensimu"]},
-  {n:"Build It Challenge", h:"Teams build something physical against the clock, like the tallest spaghetti-and-marshmallow tower, then debrief.", c:["concepts"], s:["room","event"], e:1, g:"6 to 100", t:"20–30 min",
-   b:"Have Claude write debrief questions that connect the build to your topic, like iterating on prompts.", f:"Run a second round with one new constraint.", w:"The learning is in the debrief, not the build.", src:["ispring","arlo"]},
-  {n:"Brick Models", h:"People build models with LEGO bricks to represent an idea or problem, then explain them to the group.", c:["concepts","judgment"], s:["room"], e:2, g:"4 to 20", t:"1–3 hours",
-   b:"Have Claude draft the build prompts, like 'build what AI changed about your week.'", f:"Combine everyone's models into one shared model.", w:"The formal LEGO Serious Play method uses trained facilitators. A light version works for one session.", src:["lego"]},
   {n:"Blind Builder", h:"One person describes an image or design, and others recreate it without seeing it.", c:["process","concepts"], s:["room","call"], e:1, g:"2 to 30", t:"10 min",
    b:"Have Claude pick images that get harder each round.", f:"This is what prompting feels like. Run a round where the builder is an image AI.", w:"Frustrating if the first image is too complex.", src:["ispring"]},
   {n:"Jigsaw Teach-Back", h:"Small groups each master one piece of the material, then teach it to people from the other groups.", c:["concepts","process"], s:["room","call"], e:1, g:"8 to 40", t:"30–45 min",
    b:"Have Claude split the material into 4 or 5 balanced pieces with a one-page brief for each.", f:"Each teacher gives their audience a 3-question quiz.", w:"Uneven pieces mean uneven teaching.", src:["arlo"]},
-  {n:"Gallery Walk", h:"Prompts are posted around the room or on a shared whiteboard. Groups rotate and add responses.", c:["concepts","judgment"], s:["room","call"], e:1, g:"10 to 60", t:"20 min",
-   b:"Have Claude write 5 or 6 prompts that build on each other.", f:"In the last rotation, each group sums up the board where they started.", w:"Later rotations get repetitive. Keep groups moving.", src:["arlo"]},
   {n:"Reverse Brainstorm", h:"Brainstorm ways to make a problem worse, then flip each idea into a fix.", c:["trouble","judgment"], s:["room","call","meeting"], e:1, g:"4 to 40", t:"15 min",
    b:"Have Claude pick a realistic problem and seed a few 'make it worse' examples.", f:"'How could we make our AI rollout fail?' is a great prompt.", w:"Keep it light so it doesn't turn into complaining.", src:["arlo"]},
   {n:"Ranking Challenge", h:"Groups rank a list or pick the few items that matter most, then defend their choices against an expert ranking.", c:["tradeoffs","judgment"], s:["room","call","meeting"], e:1, g:"4 to 40", t:"15 min",
@@ -344,8 +335,6 @@ const G = [
    b:"Write the script with Claude, produce it in Synthesia, then add the pause points.", f:"Branch to different endings based on choices.", w:"Video is expensive to change. Use it for content that will stay stable.", src:["h5p","tucker"]},
   {n:"360 Explore", h:"A scene you can look around, like an office or a screen, with clickable spots that teach or test.", c:["facts","concepts","trouble"], s:["self"], e:2, g:"1", t:"10 min",
    b:"Use Claude Design for the scene and have Claude build the page with hotspots.", f:"Hide one hotspot that's hard to find.", w:"Exploring can feel aimless. Give a goal, like 'find the 5 risks.'", src:["h5p"]},
-  {n:"Improv Scenes", h:"Participants act out short, unscripted scenarios on the topic, then the group discusses.", c:["judgment"], s:["room"], e:1, g:"6 to 40", t:"15–20 min",
-   b:"Have Claude write scenario cards, each with a twist.", f:"Freeze the scene midway and let someone else step in.", w:"Not everyone wants to perform. Make it opt-in.", src:["arlo"]},
   {n:"Puzzle Inside the Tool", h:"A mystery that can only be solved by using the real tool, like a murder mystery solved with database searches.", c:["tools","trouble"], s:["self","community"], e:2, g:"1 to 5", t:"20–45 min",
    b:"Have Claude design clues hidden in a practice dataset or workspace.", f:"Make each clue require one new feature of the tool.", w:"Needs a safe practice copy of the tool.", src:["playing"]},
   {n:"Hub World", i:"Super Mario 64 and other 3D platformers", h:"A central hub where each door opens a world. Tokens earned in the worlds unlock new doors and, at the end, a final challenge that ties everything together.", c:["concepts","tools","habits"], s:["self","community"], e:2, g:"Any", t:"Weeks, at each person's pace",
@@ -356,8 +345,6 @@ const G = [
    b:"Have Claude write 20 scenarios with an expert position on the scale and a one-line reason.", f:"Let the room vote first, then reveal the expert's position and argue it out.", w:"The discussion is the learning. A guess with no debate teaches nothing.", src:[]},
   {n:"Explain It Without", i:"Taboo", h:"Explain a term to your team without saying the term or the forbidden words listed under it.", c:["concepts"], s:["room","call","meeting"], e:1, g:"3 to 30", t:"10–30 min",
    b:"Have Claude write cards with each term and the 3 to 5 jargon words people lean on to explain it.", f:"Customer mode: forbid all technical words, so people practice explaining AI to a customer.", w:"People need some grasp of the terms to explain them.", src:["taboo"]},
-  {n:"Draw the Concept", i:"Pictionary and charades", h:"One person draws or acts out a concept while their team guesses it.", c:["concepts","facts"], s:["room","call","meeting"], e:1, g:"4 to 30", t:"10 min",
-   b:"Have Claude pick concepts that are tricky but possible to draw, like 'context window.'", f:"Afterward, ask the drawer why they drew it that way. Their picture shows how they understand it.", w:"Some people dread drawing. Let pairs draw together.", src:[]},
   {n:"Prompt Telephone", i:"Telephone and Gartic Phone", h:"Someone writes a prompt, an AI makes something from it, the next person describes the result as a new prompt, and so on down the line. Then everyone sees how far it drifted.", c:["tools","concepts"], s:["call","room","community"], e:1, g:"4 to 12 per chain", t:"15–20 min",
    b:"Have Claude write starting prompts and a simple sheet or channel thread to pass the chain along.", f:"Run two chains from the same start: one with vague prompts and one with detailed prompts.", w:"Use an approved AI tool and nothing sensitive in the prompts.", src:[]},
   {n:"Hidden Saboteur", i:"Werewolf and Mafia", h:"One player secretly gets bad information or a bad goal. The group works on a problem together and has to figure out who is steering them wrong.", c:["trouble","judgment"], s:["room","call"], e:1, g:"5 to 12", t:"20–30 min",
@@ -376,8 +363,6 @@ const G = [
    b:"Have Claude list hidden answers and the facts someone could ask about for each.", f:"Have an AI hold the secret and answer the questions.", w:"Light. Best as a warm-up or a quick check.", src:[]},
   {n:"Best Match Card", i:"Apples to Apples", h:"A prompt card is played. Everyone answers it with a card from their hand, and a rotating judge picks the best one and explains why.", c:["judgment","concepts"], s:["room","call","community"], e:1, g:"4 to 10", t:"15–20 min",
    b:"Have Claude write prompt cards, like 'the best first use of AI for a new hire,' and answer cards.", f:"In Slack, post one prompt a day and let reactions pick the winner.", w:"Keep it work-safe. Have the judge explain each pick so it stays tied to learning.", src:[]},
-  {n:"Question Tower", i:"Jenga", h:"Pull a block from the tower and answer the question on it. If the tower falls, the round ends.", c:["facts","concepts"], s:["room"], e:1, g:"3 to 8", t:"15 min",
-   b:"Have Claude write short questions to tape onto blocks, color-coded by difficulty.", f:"Harder blocks lower in the tower are worth more points.", w:"Needs a physical set. In-person only.", src:[]},
   {n:"Kitchen Chaos", i:"Overcooked", h:"Orders keep arriving, and the team must split up the work, hand things off, and deliver before time runs out.", c:["process","tradeoffs"], s:["room","call"], e:2, g:"3 to 6 per team", t:"20 min",
    b:"Have Claude turn your process into stations and order tickets, with a timer that speeds up.", f:"Change who does what in round two and compare results.", w:"Chaos is the point, but the debrief has to connect it back to real handoffs.", src:[]},
   {n:"Inspector Desk", i:"Papers, Please", h:"Requests arrive one at a time. Approve or reject each one against a rulebook that changes every day, under time pressure.", c:["judgment","trouble","process"], s:["self","call"], e:2, g:"1 to 30", t:"10–15 min",
@@ -752,11 +737,649 @@ const REF = {
 "Solve a mystery by running queries in the real tool."
 ]
 };
-G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; });
+const FOCUS_AREAS = [["lt","Learning a technology"],["ls","Learning sales"],["it","Implementing technology"],["is","Implementing sales"]];
+const FOCUS = {
+"Trivia Race": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Quick-fire questions on product features, licensing, and competitor positioning before a launch."
+},
+"Bingo": {
+"a": [
+"lt",
+"it",
+"is"
+],
+"x": "Action bingo for a rollout week, with squares like 'logged a call with AI in the CRM' or 'ran your first report in the new tool.'"
+},
+"Jeopardy Board": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Categories like Product Lines, Pricing, Competitors, and Customer Pain Points."
+},
+"Board Race": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Each square is a product or sales challenge, and you advance by answering it or showing it in a demo."
+},
+"Escape Room": {
+"a": [
+"lt",
+"it"
+],
+"x": "Each lock is one step of configuring or deploying the product correctly."
+},
+"Sequence Sort": {
+"a": [
+"it",
+"is"
+],
+"x": "Put the deployment steps, or the stages of your sales process, in the right order."
+},
+"Branching Scenario": {
+"a": [
+"ls",
+"it"
+],
+"x": "A discovery call where each question you choose changes what the customer reveals, or a go-live decision with real consequences."
+},
+"Mystery": {
+"a": [
+"lt",
+"it"
+],
+"x": "Why did the customer's deployment fail? Gather logs, configs, and interviews to find the cause."
+},
+"Spot the Mistake": {
+"a": [
+"lt",
+"ls",
+"it"
+],
+"x": "Find the errors in an AI-written proposal, a config file, or a solution diagram."
+},
+"Two Truths and a Lie": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Bust common myths about the product or a competitor."
+},
+"Token Budget": {
+"a": [
+"ls",
+"it"
+],
+"x": "Spend a fixed project budget across features, training, and support, or a discount budget across a deal, then compare outcomes."
+},
+"Triage Rush": {
+"a": [
+"it",
+"is"
+],
+"x": "Support tickets or inbound leads arrive faster than you can handle them, so you have to prioritize correctly."
+},
+"Real-Tool Scavenger Hunt": {
+"a": [
+"lt",
+"it",
+"is"
+],
+"x": "Find things in the product or the CRM, like a hidden setting, a report, or a dashboard."
+},
+"Quest Board": {
+"a": [
+"lt",
+"is"
+],
+"x": "Points for real behaviors, like logging calls with AI, sharing a customer win, or finishing a certification."
+},
+"Streak Challenge": {
+"a": [
+"lt",
+"is"
+],
+"x": "Use the new tool once a day, or update your pipeline daily, for 30 days."
+},
+"Role-Play Simulation": {
+"a": [
+"ls",
+"lt"
+],
+"x": "Claude plays a skeptical CIO, and you practice discovery and objection handling, scored on your rubric."
+},
+"Prompt Golf": {
+"a": [
+"lt"
+],
+"x": "Get an AI assistant to give a correct product answer in the fewest words."
+},
+"Story Campaign": {
+"a": [
+"ls",
+"it"
+],
+"x": "A season following one customer from first meeting through deployment to renewal, one chapter a week."
+},
+"Sort It": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Sort features into product lines, or customer needs into the right solution."
+},
+"Lightning Drill": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Sixty seconds to name the right product for each customer need."
+},
+"Build the Map": {
+"a": [
+"lt",
+"it"
+],
+"x": "Assemble a reference architecture or an integration diagram."
+},
+"Defend the Decision": {
+"a": [
+"ls",
+"it"
+],
+"x": "Defend a recommended solution or deal strategy against tough questions."
+},
+"Build Sprint": {
+"a": [
+"lt",
+"it"
+],
+"x": "Teams build a working demo or integration with the product in an afternoon."
+},
+"Show-and-Tell Bounty": {
+"a": [
+"lt",
+"is"
+],
+"x": "Bounties like 'show a demo flow that wins against a competitor' or 'show your best AI follow-up email.'"
+},
+"Feature Auction": {
+"a": [
+"ls",
+"it"
+],
+"x": "Bid on features for a customer's roadmap, then see which ones actually delivered value."
+},
+"Find the Risk": {
+"a": [
+"it",
+"is"
+],
+"x": "Click the risks in a mock deployment plan or deal record, like missing approvals or exposed data."
+},
+"Relay": {
+"a": [
+"it",
+"is"
+],
+"x": "Each teammate handles one stage, like qualify, demo, proposal, close, and deploy, and hands off to the next."
+},
+"Choose Your Path": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Role paths for sellers, sales engineers, customer success, and partners."
+},
+"This or That": {
+"a": [
+"ls",
+"lt"
+],
+"x": "Two reasonable responses to a customer objection. Which would you use, and why?"
+},
+"Survey Says": {
+"a": [
+"ls"
+],
+"x": "Guess the top reasons customers buy, churn, or object, from real survey data."
+},
+"Press Your Luck": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Climb a ladder of harder product questions, banking points before you risk them."
+},
+"Daily Drip Quiz": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Two questions a day on new features or pricing for the six weeks after a launch."
+},
+"Alternate Reality Game": {
+"a": [
+"lt",
+"ls"
+],
+"x": "A pre-kickoff story about a competitor's secret launch, solved through clues in real channels."
+},
+"Crisis Simulation": {
+"a": [
+"it",
+"ls"
+],
+"x": "A major customer outage in the middle of a renewal, with messages arriving from support, the customer, and leadership."
+},
+"Tabletop Card Drill": {
+"a": [
+"it"
+],
+"x": "A deployment goes wrong, and teams play cards to diagnose and respond."
+},
+"Risk Card Game": {
+"a": [
+"it",
+"ls"
+],
+"x": "Play risk cards against a real deployment plan or deal, like a security review, a data migration, or a budget freeze."
+},
+"Dungeon One-Shot": {
+"a": [
+"ls"
+],
+"x": "One quest through a tough deal: the gatekeeper, a procurement puzzle, a setback, and the CFO as the boss."
+},
+"Chat Escape Room": {
+"a": [
+"lt"
+],
+"x": "Puzzles in Slack that can only be solved by using features of the tool being rolled out."
+},
+"House Cup": {
+"a": [
+"lt",
+"is"
+],
+"x": "Teams compete on adoption of new sales tools or a new sales methodology."
+},
+"Team Participation Challenge": {
+"a": [
+"lt",
+"is"
+],
+"x": "Teams ranked by the share of reps using the new CRM AI features each week."
+},
+"Promptathon": {
+"a": [
+"lt",
+"it"
+],
+"x": "Two weeks to build AI workflows for real sales or delivery tasks."
+},
+"Best-Of Library Contest": {
+"a": [
+"lt",
+"is"
+],
+"x": "The month's best shared prompt, template, or demo script gets featured."
+},
+"Learning Expo": {
+"a": [
+"lt",
+"ls"
+],
+"x": "A launch season for a new product, with weekly sessions, challenges, and a completion badge."
+},
+"Station Passport": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Kickoff stations for product demo, pricing, competitors, and customer stories."
+},
+"Bracket Tournament": {
+"a": [
+"ls",
+"lt"
+],
+"x": "Vote head to head on which customer use case or value message is strongest."
+},
+"Fantasy League": {
+"a": [
+"is"
+],
+"x": "Managers draft reps, who score points for pipeline hygiene, discovery calls, and logged next steps."
+},
+"Virtual Journey": {
+"a": [
+"is",
+"it"
+],
+"x": "The team moves along a deployment or territory map as adoption milestones are hit."
+},
+"Software Practice Sim": {
+"a": [
+"lt",
+"it"
+],
+"x": "Practice configuring the product or the CRM in a safe mock-up."
+},
+"Business Simulation": {
+"a": [
+"ls",
+"is"
+],
+"x": "Run a sales territory over four quarters and live with your pipeline choices."
+},
+"Blind Builder": {
+"a": [
+"lt",
+"ls"
+],
+"x": "One person describes an architecture diagram and others recreate it, which shows how clearly sellers explain technology."
+},
+"Jigsaw Teach-Back": {
+"a": [
+"lt"
+],
+"x": "Each group masters one product module, then teaches it to the others."
+},
+"Reverse Brainstorm": {
+"a": [
+"it",
+"is"
+],
+"x": "How could we make this rollout, or this new sales process, fail? Then flip each idea into a fix."
+},
+"Ranking Challenge": {
+"a": [
+"ls",
+"it"
+],
+"x": "Rank customer requirements or deal risks, then compare with the expert ranking."
+},
+"Roleplay Rumble": {
+"a": [
+"ls"
+],
+"x": "Rapid rounds of objection handling taken from real deals."
+},
+"Pitch Challenge": {
+"a": [
+"ls"
+],
+"x": "Recorded 60-second value pitches, scored by peers."
+},
+"Mash-Up Pitch": {
+"a": [
+"ls",
+"lt"
+],
+"x": "Draw a product card and a customer problem card, and pitch the fit in 90 seconds."
+},
+"Capture the Flag": {
+"a": [
+"lt",
+"it"
+],
+"x": "Hands-on challenges in a sandbox of the product, where each solved task reveals a flag."
+},
+"Break the Bot": {
+"a": [
+"lt"
+],
+"x": "Find where your AI tools give wrong answers about your products, and log them."
+},
+"AI or Not": {
+"a": [
+"lt"
+],
+"x": "Spot AI-written emails or proposals, and learn what to check before sending."
+},
+"Slow Reveal": {
+"a": [
+"lt"
+],
+"x": "A product screen revealed piece by piece. Name the feature or workflow."
+},
+"Interactive Video": {
+"a": [
+"ls",
+"lt"
+],
+"x": "A recorded customer meeting that pauses for you to choose the next question."
+},
+"360 Explore": {
+"a": [
+"lt",
+"it"
+],
+"x": "Explore a customer's environment, like a data center or an office, and find where the product fits."
+},
+"Puzzle Inside the Tool": {
+"a": [
+"lt"
+],
+"x": "Solve a mystery using only queries or reports in the real product or CRM."
+},
+"Hub World": {
+"a": [
+"lt",
+"ls"
+],
+"x": "A hub for a full onboarding program, with one world each for product, sales process, tools, and implementation."
+},
+"Clue Giver": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Link product terms or value messages with a one-word clue."
+},
+"Scale Guess": {
+"a": [
+"ls",
+"it"
+],
+"x": "Place a deal or deployment scenario on a scale from low risk to high risk."
+},
+"Explain It Without": {
+"a": [
+"ls",
+"lt"
+],
+"x": "Explain a technical feature to a customer without using jargon."
+},
+"Prompt Telephone": {
+"a": [
+"lt"
+],
+"x": "Pass a product description back and forth between AI and people to see how the message drifts."
+},
+"Hidden Saboteur": {
+"a": [
+"lt",
+"it"
+],
+"x": "One teammate is working from an outdated spec. Find who is steering the design wrong."
+},
+"Imposter Tasks": {
+"a": [
+"lt",
+"it"
+],
+"x": "Configure the product together while one person quietly introduces mistakes."
+},
+"Co-op Outbreak": {
+"a": [
+"it"
+],
+"x": "Keep a rollout on track as issues spread across sites, with a special ability for each role."
+},
+"Trade & Build": {
+"a": [
+"ls",
+"it"
+],
+"x": "Trade budget, engineers, and timeline to close a deal and deliver it."
+},
+"Route Builder": {
+"a": [
+"it",
+"is"
+],
+"x": "Connect integration points, or the stages of a sale, to complete routes."
+},
+"Deduction Grid": {
+"a": [
+"it",
+"lt"
+],
+"x": "Rule out which component, setting, or update caused the problem."
+},
+"Twenty Questions": {
+"a": [
+"ls",
+"it"
+],
+"x": "Find the customer's real problem using only yes-or-no discovery questions."
+},
+"Best Match Card": {
+"a": [
+"ls",
+"lt"
+],
+"x": "Prompt: 'The CFO asks about ROI.' Play your best response card."
+},
+"Kitchen Chaos": {
+"a": [
+"it",
+"is"
+],
+"x": "Run handoffs between sales, solutions, and delivery as orders speed up."
+},
+"Inspector Desk": {
+"a": [
+"is",
+"it"
+],
+"x": "Approve or reject deals or change requests against deal desk or security rules that change each day."
+},
+"Swipe Decisions": {
+"a": [
+"ls",
+"it"
+],
+"x": "Quick calls on discounts, scope, and timelines while keeping margin, customer trust, and speed in balance."
+},
+"Defuse Together": {
+"a": [
+"lt",
+"it"
+],
+"x": "One person sees the broken deployment, and the others have the troubleshooting guide."
+},
+"Habit Garden": {
+"a": [
+"lt",
+"is"
+],
+"x": "Daily tool use or CRM updates grow the team's garden."
+},
+"Collect the Set": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Earn cards for certifications, demos delivered, and first deals with a new product."
+},
+"Where Is This?": {
+"a": [
+"lt"
+],
+"x": "A cropped product or CRM screenshot. Name where it lives and how to get there."
+},
+"Elimination Quiz": {
+"a": [
+"lt",
+"ls"
+],
+"x": "A product knowledge showdown on the kickoff stage."
+},
+"Lifeline Ladder": {
+"a": [
+"lt",
+"ls"
+],
+"x": "Product and pricing questions, with 'ask the AI' as one of the lifelines."
+},
+"Estimate It": {
+"a": [
+"ls"
+],
+"x": "Guess a customer's time saved, cost, or payback period from real case studies."
+},
+"Pitch Tank": {
+"a": [
+"ls",
+"it"
+],
+"x": "Pitch a solution to a panel playing the CFO, the CIO, and the security lead."
+},
+"Technical Challenge": {
+"a": [
+"lt"
+],
+"x": "Everyone builds the same demo or configuration from bare-bones instructions, judged blind."
+},
+"Mystery Basket": {
+"a": [
+"lt",
+"ls"
+],
+"x": "A random product, customer, and constraint. Build a demo or pitch in 30 minutes."
+},
+"Speedrun": {
+"a": [
+"lt",
+"is"
+],
+"x": "Fastest correct time to build a quote, configure a feature, or update an opportunity."
+},
+"Secret Helper": {
+"a": [
+"lt",
+"is"
+],
+"x": "Secretly help one teammate learn the new tool this week."
+},
+"Crowd Plays": {
+"a": [
+"ls"
+],
+"x": "The kickoff audience votes on each move in a live deal scenario."
+},
+"Timeline": {
+"a": [
+"lt",
+"it"
+],
+"x": "Put product releases or implementation milestones in order."
+}
+};
+G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; });
 G.forEach((g, i) => g.id = "g" + i);
 
 const lab = Object.fromEntries([...CONTENT, ...SETTINGS]);
-const state = { c: null, s: null, q: "", pop: false, hide: false, used: new Set() };
+const state = { f: null, c: null, s: null, q: "", pop: false, hide: false, used: new Set() };
 try { const saved = JSON.parse(localStorage.getItem("shelf-used") || "[]"); saved.forEach(x => state.used.add(x)); } catch (e) {}
 try { state.hide = localStorage.getItem("shelf-hide") === "1"; } catch (e) {}
 
@@ -776,11 +1399,12 @@ function chips(el, list, key, cls) {
 
 function matches() {
   const q = state.q.trim().toLowerCase();
-  return G.filter(g => (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) &&
-                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
+  return G.filter(g => (!state.f || g.a.includes(state.f)) && (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) &&
+                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
           .sort((a, b) => a.e - b.e || a.n.localeCompare(b.n));
 }
 
+const FL = Object.fromEntries(FOCUS_AREAS);
 function card(g) {
   const used = state.used.has(g.n);
   const tags = g.c.map(k => `<span class="tag${k === state.c ? " hit" : ""}">${esc(lab[k])}</span>`).join("") +
@@ -791,6 +1415,8 @@ function card(g) {
     <div class="game-head"><div class="title-block"><h3>${esc(g.n)}</h3>${g.i ? `<span class="inspired">Inspired by ${esc(g.i)}</span>` : g.r ? `<span class="inspired feels">Feels like ${esc(g.r[0])}</span>` : ""}</div>
       <button type="button" class="used-btn" data-n="${esc(g.n)}" aria-pressed="${used}">${used ? "Used recently" : "Mark as used"}</button></div>
     <p class="how">${esc(g.h)}</p>
+    <div class="focus-tags">${g.a.map(k => `<span class="ftag${k === state.f ? " hit" : ""}">${esc(FL[k])}</span>`).join("")}</div>
+    <p class="example"><span>Example</span> ${esc(g.x)}</p>
     <div class="stats">
       <div class="stat"><span>Build effort</span><span><span class="pips" aria-hidden="true">${pips}</span> ${eff}</span></div>
       <div class="stat"><span>Players</span><span>${esc(g.g)}</span></div>
@@ -822,6 +1448,7 @@ function heat() {
 }
 
 function render(pickId) {
+  chips($("focus-chips"), FOCUS_AREAS, "f", "foc");
   chips($("content-chips"), CONTENT, "c");
   chips($("setting-chips"), SETTINGS, "s", "set");
   $("hide-used").checked = state.hide;
@@ -859,7 +1486,8 @@ $("surprise").addEventListener("click", () => {
   render(pool[Math.floor(Math.random() * pool.length)].id);
 });
 $("n-games").textContent = G.length;
-$("srclist").innerHTML = Object.values(SRC).sort((a, b) => a[0].localeCompare(b[0])).map(([l, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(l)}</a></li>`).join("");
+const USED = new Set(G.flatMap(g => g.src));
+$("srclist").innerHTML = Object.entries(SRC).filter(([k]) => USED.has(k)).map(([, v]) => v).sort((a, b) => a[0].localeCompare(b[0])).map(([l, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(l)}</a></li>`).join("");
 render();
 </script>
 
