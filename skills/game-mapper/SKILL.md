@@ -76,6 +76,7 @@ Then recommend two or three games from the shelf below that match the focus area
 - Build effort
 - One way to keep it fresh
 - Its reference game from the table, and what to borrow from it
+- Its fun-world theme, if it has one in the list below, or a new theme you suggest if the game looks too much like real work
 
 Let them choose. If they want to combine two formats, help with that. If the content spans several modules, consider Hub World as the frame, with each module as its own game. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
 
@@ -89,6 +90,8 @@ Once they pick, write a short brief:
 - **Content map:** a table of each content piece and the game part it becomes (card, lock, branch, clue, quest, round)
 - **Gaps to fill before building:** open questions and conflicts, and who to ask
 - **Keep it fresh:** the twist that makes this version feel new
+- **World and debrief question:** the fun world the game takes place in, and the one question that connects it back to real work afterward
+- **Fun and inclusion check:** how the game meets each rule in the fun and inclusion rules below, and what changes if it doesn't
 - **Reference game and feel spec:** the game this should feel like (from the table) and 3 to 5 specific things to borrow, like pacing, scoring, or how choices feel. Describe them from playing the game. Never decompile, copy, or reuse a commercial game's code, art, or assets.
 - **Name and look:** give the game its own name, theme, and art, even when it borrows a mechanic from a famous game
 - **Asset budget:** a hard spending cap for any paid image or 3D generation tools, or "none" if it uses only Claude Design
@@ -100,6 +103,66 @@ Once they pick, write a short brief:
   - for visual games, put together a short walkthrough or trailer at the end
 
 Ask if they want changes, then offer to start the build.
+
+## Fun and inclusion rules
+
+These apply to every game. Check the brief against them before handing it over.
+
+- **Change the world, keep the thinking.** If a game looks like the real job (a ticket queue, a CRM screen, a deal desk), people treat it like the job. Put the mechanic in a different world, then use one debrief question to bring it back to work.
+- **Score the team by default.** Team or co-op scoring beats individual rankings, so nobody is publicly last.
+- **Offer a relaxed mode for anything timed.** Time pressure rewards fast typists, not good thinkers.
+- **Give everyone a way in.** Talkers, planners, and doers each get a role.
+- **No prior experience needed to start.** Someone on day one can play alongside a ten-year veteran.
+- **Make failure funny.** A dragon setting the room on fire beats a red WRONG.
+- **Build it accessible.** Never rely on color alone, caption any audio, and make it work with a keyboard.
+
+### Ready-made fun-world themes
+
+These games feel too close to real work as written. Use the theme unless there's a good reason to stay literal.
+
+- **Triage Rush:** Dragon Hatchery. Eggs hatch at different speeds, some baby dragons are grumpier than others, and you only have three keepers. Feed the wrong one first and the nursery catches fire. Debrief question: "Which dragons were like the requests you get every day?"
+- **Software Practice Sim:** Ridiculous Missions. Practice in a safe copy of the real tool, but every task is absurd: build a dashboard tracking the office snack supply, or set up an account for a wizard's potion shop. Debrief question: "Which of those steps will you use for real this week?"
+- **Sequence Sort:** The Heist. Put the crew's steps in the right order to crack the vault. Get one out of order and the alarm goes off. Debrief question: "Which step in our real process is the one that trips the alarm?"
+- **Relay:** Rocket Launch. Each player runs one stage of the countdown and hands off to the next. A sloppy handoff and the rocket wobbles. Debrief question: "Where do our real handoffs wobble?"
+- **Daily Drip Quiz:** The Case File. Each correct answer unlocks one clue in a week-long whodunit. The culprit is revealed on Friday. Debrief question: "Which clue was hardest, and why?"
+- **Find the Risk:** Gremlin Hunt. Gremlins are hiding in a cartoon version of the plan. Click every one before they chew through the wiring. Debrief question: "Which gremlin have you actually run into?"
+- **Real-Tool Scavenger Hunt:** Treasure Map. Each clue leads to a spot in the real tool where a code word or silly picture is hidden. Collect them all to open the chest. Debrief question: "Which hiding spot will you go back to for real work?"
+- **Inspector Desk:** Space Station Customs. Approve or turn away visiting ships against the station's rulebook. The rules secretly mirror your real policy. Debrief question: "Which station rule matched one of ours most closely?"
+- **Tabletop Card Drill:** Starship Malfunction. Something has gone wrong on the ship, and the crew plays cards to find the cause and fix it before life support runs out. Debrief question: "What would the first three moves be on a real incident?"
+- **Crisis Simulation:** Storm on the Island. A storm hits the island resort, and messages pour in from guests, staff, and the mayor. Keep everyone safe and happy. Debrief question: "Which message would be a customer, an engineer, or an executive in real life?"
+- **Streak Challenge:** Keep the Campfire Lit. Each day you use the tool adds a log to the team's campfire. Miss too many days and it burns down to embers. Debrief question: "What made it easy or hard to keep your streak?"
+- **Business Simulation:** Theme Park Tycoon. Run a theme park for four seasons. Visitors are leads, rides are products, and the queue is your pipeline. Debrief question: "Which park decision was most like a pipeline decision you make?"
+- **Sort It:** Wizard Post Office. Sort magical letters into the right mailboxes before the owls get impatient. Each letter is really a customer need or a feature. Debrief question: "Which letters were hardest to place, and why?"
+- **Build the Map:** City Waterworks. Connect the city's pipes from the reservoir to every house. Each pipe is really a system or integration. Debrief question: "Where would a leak in our real setup show up first?"
+- **Spot the Mistake:** The Haunted Hallway. Walk the same hallway over and over. When something on the wall changes, turn back. Each poster is a piece of a proposal or config. Debrief question: "Which mistake would have reached a customer?"
+- **Ranking Challenge:** Draft Your Quest Party. Pick and rank heroes for a quest. Each hero is a feature or requirement, and the quest is the customer's goal. Debrief question: "Which hero would you actually bench in a real deal?"
+- **Token Budget:** Defend the Castle. Spend your coins on towers and traps before the wave arrives. Each tower is a feature, training, or support option, and the wave is go-live. Debrief question: "Which tower would you buy first on a real project?"
+- **Role-Play Simulation:** Warm-Up Customer. Start with an absurd customer, like a wizard buying cloud storage for spells, so nobody feels on the spot. Then play a realistic round. Debrief question: "What worked with the wizard that also worked with the real customer?"
+- **Mystery:** Shipwreck Investigation. Piece together what sank the ship from the logbook, the cargo, and the crew's stories. Each clue maps to a real log, setting, or interview. Debrief question: "What evidence would you look at first on a real failure?"
+- **Branching Scenario:** Choose Your Quest. Play the same decisions as a quest: the customer is a kingdom, discovery questions are scouting, and the deal is the treaty. Debrief question: "Which scouting question would you ask in a real discovery call?"
+
+### Inclusion notes for timed or competitive games
+
+- **Trivia Race:** Score by team, not by person, and show answers without names.
+- **Elimination Quiz:** Let knocked-out players keep answering on a team side board so nobody sits out.
+- **Lightning Drill:** Offer an untimed practice round first, and track personal bests instead of rankings.
+- **Speedrun:** Add an untimed 'clean run' category that rewards accuracy and good habits.
+- **Triage Rush:** Offer a relaxed mode with a slower queue, and score the team, not the individual.
+- **Kitchen Chaos:** Give quieter players a planning role, like reading the orders, so talking fast isn't the only way to help.
+- **Press Your Luck:** Play in pairs so nobody faces the risky calls alone.
+- **Roleplay Rumble:** Let people pass, play in pairs, or observe a round before stepping in.
+- **Pitch Challenge:** Accept audio or written pitches, not just video.
+- **Fantasy League:** Use a random draft order so it never feels like being picked last.
+- **Lifeline Ladder:** Let the audience help with a lifeline so the player in the spotlight isn't alone.
+- **Jeopardy Board:** Play in teams and let teams talk before answering.
+- **Imposter Tasks:** Make the imposter role opt-in, and debrief on the clues, not on who fooled whom.
+- **Hidden Saboteur:** Make the saboteur role opt-in, and keep the tone playful.
+- **Prompt Golf:** Pair newcomers with experienced players, and score quality alongside length.
+- **Technical Challenge:** Judge kindly and celebrate different approaches, not just the winner.
+- **Pitch Tank:** Let teams pitch together so nobody presents alone.
+- **Mystery Basket:** Give every team one 'phone a friend' to ask an expert.
+- **Capture the Flag:** Include easy flags anyone can solve, so beginners score early.
+- **Escape Room:** Add optional hints that cost a little time, so no team gets stuck and gives up.
 
 ## Settings
 

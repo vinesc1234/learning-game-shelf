@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="93 game formats for learning and selling technology, each with a reference game and a tech-company example.">
+<meta name="description" content="93 game formats for learning and selling technology, each with a reference game, a tech-company example, and fun and inclusion notes.">
 <title>Learning Game Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,6 +128,11 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 .ftag.hit { outline: 2px solid var(--accent); }
 .example { margin: 0; font-size: .93rem; border-left: 3px solid var(--accent); padding-left: 10px; border-radius: 0; }
 .example span { display: block; font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); }
+.play { background: var(--teal-soft); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+.play p { margin: 0; font-size: .93rem; }
+.play-label { font-family: var(--display); font-weight: 800; color: var(--teal); }
+.bridge { color: var(--muted); }
+.rules .rule-list { margin: 10px 0 2px; padding-left: 18px; display: grid; gap: 6px; max-width: 80ch; font-size: .95rem; }
 .empty { background: var(--card); border: 1px dashed var(--line); border-radius: 14px; padding: 24px; text-align: center; color: var(--muted); }
 .foot { color: var(--muted); font-size: .85rem; max-width: 70ch; }
 @media (prefers-reduced-motion: no-preference) { .game { transition: box-shadow .2s, border-color .2s, opacity .2s; } }
@@ -146,6 +151,19 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
       <li>Choose a game you haven't run lately</li>
     </ol>
   </header>
+
+  <details class="fit rules" open>
+    <summary>Fun and inclusion rules for every game</summary>
+    <ul class="rule-list">
+      <li><b>Change the world, keep the thinking.</b> If a game looks like the real job, people treat it like the job. Put the mechanic in a different world, then use one debrief question to bring it back to work.</li>
+      <li><b>Score the team by default.</b> Team or co-op scoring beats individual rankings, so nobody is publicly last.</li>
+      <li><b>Offer a relaxed mode for anything timed.</b> Time pressure rewards fast typists, not good thinkers.</li>
+      <li><b>Give everyone a way in.</b> Talkers, planners, and doers each get a role.</li>
+      <li><b>No prior experience needed to start.</b> Someone on day one can play alongside a ten-year veteran.</li>
+      <li><b>Make failure funny.</b> A dragon setting the room on fire beats a red WRONG.</li>
+      <li><b>Build it accessible.</b> Never rely on color alone, caption any audio, and make it work with a keyboard.</li>
+    </ul>
+  </details>
 
   <section class="panel" aria-label="Filters">
     <div class="rail">
@@ -167,6 +185,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
     <div class="toolbar">
       <span class="count" id="count" aria-live="polite"></span>
       <div class="tools">
+        <label class="toggle"><input type="checkbox" id="theme-only"> Only games with a fun-world theme</label>
         <label class="toggle"><input type="checkbox" id="pop-only"> Only games adapted from popular games</label>
         <label class="toggle"><input type="checkbox" id="hide-used"> Hide games I've used recently</label>
         <button class="btn" id="surprise" type="button">Surprise me</button>
@@ -234,7 +253,7 @@ const G = [
   {n:"Token Budget", h:"Spend a limited number of tokens across options, then compare and discuss choices.", c:["tradeoffs","judgment"], s:["room","call","meeting"], e:1, g:"3 to 30", t:"15 min",
    b:"Have Claude draft 12 to 15 options with real costs and benefits. You set the budget.", f:"Reveal a surprise cost after everyone has spent.", w:"The discussion afterward is the learning. Leave time for it."},
   {n:"Triage Rush", h:"Requests keep arriving. Sort them by priority before the queue overflows.", c:["tradeoffs","process","judgment"], s:["self","call"], e:2, g:"1 to 20", t:"10 min",
-   b:"Have Claude build a timed queue of tickets or requests, each with a correct priority and a reason.", f:"Speed up the queue each round.", w:"Time pressure can punish careful thinkers. Show the reasoning after each round."},
+   b:"Have Claude build the hatchery as a timed queue, with each egg standing in for a real request that has a correct priority and a reason, revealed in the debrief.", f:"Speed up the queue each round.", w:"Time pressure can punish careful thinkers. Show the reasoning after each round."},
   {n:"Real-Tool Scavenger Hunt", h:"Find or do things inside the actual tools and post proof.", c:["tools","habits"], s:["self","community","call"], e:1, g:"Any", t:"1 day to 1 week",
    b:"Have Claude write 10 tasks from beginner to advanced, plus how to check each one.", f:"Hide one golden task worth big points that few people find.", w:"Everyone needs access to the real tools."},
   {n:"Quest Board", h:"Ongoing points, badges, and a leaderboard for real contributions in a community.", c:["habits","tools"], s:["community"], e:2, g:"50 to 1,000+", t:"Weeks to quarters",
@@ -1375,11 +1394,135 @@ const FOCUS = {
 "x": "Put product releases or implementation milestones in order."
 }
 };
-G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; });
+const THEME = {
+"Triage Rush": [
+"Dragon Hatchery",
+"Eggs hatch at different speeds, some baby dragons are grumpier than others, and you only have three keepers. Feed the wrong one first and the nursery catches fire.",
+"Which dragons were like the requests you get every day?"
+],
+"Software Practice Sim": [
+"Ridiculous Missions",
+"Practice in a safe copy of the real tool, but every task is absurd: build a dashboard tracking the office snack supply, or set up an account for a wizard's potion shop.",
+"Which of those steps will you use for real this week?"
+],
+"Sequence Sort": [
+"The Heist",
+"Put the crew's steps in the right order to crack the vault. Get one out of order and the alarm goes off.",
+"Which step in our real process is the one that trips the alarm?"
+],
+"Relay": [
+"Rocket Launch",
+"Each player runs one stage of the countdown and hands off to the next. A sloppy handoff and the rocket wobbles.",
+"Where do our real handoffs wobble?"
+],
+"Daily Drip Quiz": [
+"The Case File",
+"Each correct answer unlocks one clue in a week-long whodunit. The culprit is revealed on Friday.",
+"Which clue was hardest, and why?"
+],
+"Find the Risk": [
+"Gremlin Hunt",
+"Gremlins are hiding in a cartoon version of the plan. Click every one before they chew through the wiring.",
+"Which gremlin have you actually run into?"
+],
+"Real-Tool Scavenger Hunt": [
+"Treasure Map",
+"Each clue leads to a spot in the real tool where a code word or silly picture is hidden. Collect them all to open the chest.",
+"Which hiding spot will you go back to for real work?"
+],
+"Inspector Desk": [
+"Space Station Customs",
+"Approve or turn away visiting ships against the station's rulebook. The rules secretly mirror your real policy.",
+"Which station rule matched one of ours most closely?"
+],
+"Tabletop Card Drill": [
+"Starship Malfunction",
+"Something has gone wrong on the ship, and the crew plays cards to find the cause and fix it before life support runs out.",
+"What would the first three moves be on a real incident?"
+],
+"Crisis Simulation": [
+"Storm on the Island",
+"A storm hits the island resort, and messages pour in from guests, staff, and the mayor. Keep everyone safe and happy.",
+"Which message would be a customer, an engineer, or an executive in real life?"
+],
+"Streak Challenge": [
+"Keep the Campfire Lit",
+"Each day you use the tool adds a log to the team's campfire. Miss too many days and it burns down to embers.",
+"What made it easy or hard to keep your streak?"
+],
+"Business Simulation": [
+"Theme Park Tycoon",
+"Run a theme park for four seasons. Visitors are leads, rides are products, and the queue is your pipeline.",
+"Which park decision was most like a pipeline decision you make?"
+],
+"Sort It": [
+"Wizard Post Office",
+"Sort magical letters into the right mailboxes before the owls get impatient. Each letter is really a customer need or a feature.",
+"Which letters were hardest to place, and why?"
+],
+"Build the Map": [
+"City Waterworks",
+"Connect the city's pipes from the reservoir to every house. Each pipe is really a system or integration.",
+"Where would a leak in our real setup show up first?"
+],
+"Spot the Mistake": [
+"The Haunted Hallway",
+"Walk the same hallway over and over. When something on the wall changes, turn back. Each poster is a piece of a proposal or config.",
+"Which mistake would have reached a customer?"
+],
+"Ranking Challenge": [
+"Draft Your Quest Party",
+"Pick and rank heroes for a quest. Each hero is a feature or requirement, and the quest is the customer's goal.",
+"Which hero would you actually bench in a real deal?"
+],
+"Token Budget": [
+"Defend the Castle",
+"Spend your coins on towers and traps before the wave arrives. Each tower is a feature, training, or support option, and the wave is go-live.",
+"Which tower would you buy first on a real project?"
+],
+"Role-Play Simulation": [
+"Warm-Up Customer",
+"Start with an absurd customer, like a wizard buying cloud storage for spells, so nobody feels on the spot. Then play a realistic round.",
+"What worked with the wizard that also worked with the real customer?"
+],
+"Mystery": [
+"Shipwreck Investigation",
+"Piece together what sank the ship from the logbook, the cargo, and the crew's stories. Each clue maps to a real log, setting, or interview.",
+"What evidence would you look at first on a real failure?"
+],
+"Branching Scenario": [
+"Choose Your Quest",
+"Play the same decisions as a quest: the customer is a kingdom, discovery questions are scouting, and the deal is the treaty.",
+"Which scouting question would you ask in a real discovery call?"
+]
+};
+const INCLUSIVE = {
+"Trivia Race": "Score by team, not by person, and show answers without names.",
+"Elimination Quiz": "Let knocked-out players keep answering on a team side board so nobody sits out.",
+"Lightning Drill": "Offer an untimed practice round first, and track personal bests instead of rankings.",
+"Speedrun": "Add an untimed 'clean run' category that rewards accuracy and good habits.",
+"Triage Rush": "Offer a relaxed mode with a slower queue, and score the team, not the individual.",
+"Kitchen Chaos": "Give quieter players a planning role, like reading the orders, so talking fast isn't the only way to help.",
+"Press Your Luck": "Play in pairs so nobody faces the risky calls alone.",
+"Roleplay Rumble": "Let people pass, play in pairs, or observe a round before stepping in.",
+"Pitch Challenge": "Accept audio or written pitches, not just video.",
+"Fantasy League": "Use a random draft order so it never feels like being picked last.",
+"Lifeline Ladder": "Let the audience help with a lifeline so the player in the spotlight isn't alone.",
+"Jeopardy Board": "Play in teams and let teams talk before answering.",
+"Imposter Tasks": "Make the imposter role opt-in, and debrief on the clues, not on who fooled whom.",
+"Hidden Saboteur": "Make the saboteur role opt-in, and keep the tone playful.",
+"Prompt Golf": "Pair newcomers with experienced players, and score quality alongside length.",
+"Technical Challenge": "Judge kindly and celebrate different approaches, not just the winner.",
+"Pitch Tank": "Let teams pitch together so nobody presents alone.",
+"Mystery Basket": "Give every team one 'phone a friend' to ask an expert.",
+"Capture the Flag": "Include easy flags anyone can solve, so beginners score early.",
+"Escape Room": "Add optional hints that cost a little time, so no team gets stuck and gives up."
+};
+G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; g.th = THEME[g.n]; g.inc = INCLUSIVE[g.n]; });
 G.forEach((g, i) => g.id = "g" + i);
 
 const lab = Object.fromEntries([...CONTENT, ...SETTINGS]);
-const state = { f: null, c: null, s: null, q: "", pop: false, hide: false, used: new Set() };
+const state = { f: null, c: null, s: null, q: "", th: false, pop: false, hide: false, used: new Set() };
 try { const saved = JSON.parse(localStorage.getItem("shelf-used") || "[]"); saved.forEach(x => state.used.add(x)); } catch (e) {}
 try { state.hide = localStorage.getItem("shelf-hide") === "1"; } catch (e) {}
 
@@ -1399,8 +1542,8 @@ function chips(el, list, key, cls) {
 
 function matches() {
   const q = state.q.trim().toLowerCase();
-  return G.filter(g => (!state.f || g.a.includes(state.f)) && (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) &&
-                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
+  return G.filter(g => (!state.f || g.a.includes(state.f)) && (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) && (!state.th || g.th) &&
+                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.th ? g.th.join(" ") : "", g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
           .sort((a, b) => a.e - b.e || a.n.localeCompare(b.n));
 }
 
@@ -1417,6 +1560,7 @@ function card(g) {
     <p class="how">${esc(g.h)}</p>
     <div class="focus-tags">${g.a.map(k => `<span class="ftag${k === state.f ? " hit" : ""}">${esc(FL[k])}</span>`).join("")}</div>
     <p class="example"><span>Example</span> ${esc(g.x)}</p>
+    ${g.th ? `<div class="play"><span class="play-label">Make it play: ${esc(g.th[0])}</span><p>${esc(g.th[1])}</p><p class="bridge"><b>Debrief question:</b> ${esc(g.th[2])}</p></div>` : ""}
     <div class="stats">
       <div class="stat"><span>Build effort</span><span><span class="pips" aria-hidden="true">${pips}</span> ${eff}</span></div>
       <div class="stat"><span>Players</span><span>${esc(g.g)}</span></div>
@@ -1427,6 +1571,7 @@ function card(g) {
       ${g.r ? `<div><dt>Borrow from ${esc(g.r[0])}</dt><dd>${esc(g.r[1])}</dd></div>` : ""}
       <div><dt>Build it with Claude</dt><dd>${esc(g.b)}</dd></div>
       <div><dt>Keep it fresh</dt><dd>${esc(g.f)}</dd></div>
+      ${g.inc ? `<div><dt>Make it inclusive</dt><dd>${esc(g.inc)}</dd></div>` : ""}
       <div><dt>Watch out</dt><dd>${esc(g.w)}</dd></div>
       ${g.src.length ? `<div><dt>Seen in</dt><dd class="seen">${g.src.map(k => `<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`).join("")}</dd></div>` : ""}
     </dl>
@@ -1472,6 +1617,7 @@ $("heat").addEventListener("click", e => {
   state.c = b.dataset.c; state.s = b.dataset.s; render();
   $("shelf").scrollIntoView({ behavior: "auto", block: "start" });
 });
+$("theme-only").addEventListener("change", e => { state.th = e.target.checked; render(); });
 $("pop-only").addEventListener("change", e => { state.pop = e.target.checked; render(); });
 $("q").addEventListener("input", e => { state.q = e.target.value; render(); });
 $("hide-used").addEventListener("change", e => {
