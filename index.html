@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="93 game formats for learning and selling technology, each with a reference game, a tech-company example, and fun and inclusion notes.">
+<meta name="description" content="73 game formats for learning and selling technology, each with a reference game and a tech-company example.">
 <title>Learning Game Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,7 +143,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 <div class="wrap">
   <header>
     <h1>Learning Game Shelf</h1>
-    <p class="lede"><span id="n-games">93</span> game formats for learning and selling technology, matched to the focus, the kind of content you were handed, and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
+    <p class="lede"><span id="n-games">73</span> game formats for learning and selling technology, matched to the focus, the kind of content you were handed, and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
     <ol class="steps">
       <li>Pick the focus: learning or implementing technology or sales</li>
       <li>Pick what most of the content is</li>
@@ -155,12 +155,11 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
   <details class="fit rules" open>
     <summary>Fun and inclusion rules for every game</summary>
     <ul class="rule-list">
-      <li><b>Change the world, keep the thinking.</b> If a game looks like the real job, people treat it like the job. Put the mechanic in a different world, then use one debrief question to bring it back to work.</li>
       <li><b>Score the team by default.</b> Team or co-op scoring beats individual rankings, so nobody is publicly last.</li>
       <li><b>Offer a relaxed mode for anything timed.</b> Time pressure rewards fast typists, not good thinkers.</li>
       <li><b>Give everyone a way in.</b> Talkers, planners, and doers each get a role.</li>
       <li><b>No prior experience needed to start.</b> Someone on day one can play alongside a ten-year veteran.</li>
-      <li><b>Make failure funny.</b> A dragon setting the room on fire beats a red WRONG.</li>
+      <li><b>Keep failure low-stakes.</b> Wrong answers should lead to a quick explanation and another try, never a public red mark.</li>
       <li><b>Build it accessible.</b> Never rely on color alone, caption any audio, and make it work with a keyboard.</li>
     </ul>
   </details>
@@ -185,7 +184,6 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
     <div class="toolbar">
       <span class="count" id="count" aria-live="polite"></span>
       <div class="tools">
-        <label class="toggle"><input type="checkbox" id="theme-only"> Only games with a fun-world theme</label>
         <label class="toggle"><input type="checkbox" id="pop-only"> Only games adapted from popular games</label>
         <label class="toggle"><input type="checkbox" id="hide-used"> Hide games I've used recently</label>
         <button class="btn" id="surprise" type="button">Surprise me</button>
@@ -240,38 +238,16 @@ const G = [
    b:"Use Claude Design for a 3D board and pieces, and have Claude build a challenge deck from the content.", f:"Add branching paths, shortcuts, and chance cards so no two runs play the same.", w:"If every square is the same quiz question, a new map is only a reskin."},
   {n:"Escape Room", h:"Solve a chain of locks. Each lock opens only when a step is done correctly.", c:["process","trouble","tools"], s:["self","call"], e:3, g:"1 to 5 per team", t:"30–45 min",
    b:"Map the process to 4 to 6 locks yourself first, then have Claude build the rooms, clues, and code checks as one page.", f:"Run teams in parallel on a video call and post finish times.", w:"One unclear clue blocks everyone. Playtest with someone who has never seen it."},
-  {n:"Sequence Sort", h:"Drag shuffled steps into the right order and check the answer.", c:["process"], s:["self","call","room","meeting"], e:1, g:"1 to 30", t:"5 min",
-   b:"Ask Claude to split the process into 6 to 10 steps and add one step that doesn't belong.", f:"Include a fake step that sounds right. Spotting it is the real test.", w:"Only works for processes with one right order."},
-  {n:"Branching Scenario", h:"Choose how to respond at each decision point. The story changes based on your choices and shows the consequences.", c:["judgment","trouble"], s:["self","call"], e:2, g:"1, or a room voting", t:"10–20 min",
-   b:"Write the decision points yourself, since that is the expertise. Then have Claude write the branches and build the page.", f:"On a live call, let the room vote on each choice and see the result together.", w:"Branches multiply fast. Keep to 3 or 4 decisions with 2 or 3 choices each."},
-  {n:"Mystery", h:"Search for clues, question characters, and name what went wrong and why.", c:["trouble","judgment","concepts"], s:["self","room","community"], e:3, g:"1 to 6 per team", t:"30–60 min",
-   b:"Rooms to search, clues, witnesses to question, and a final deduction, with 3D models from Claude Design.", f:"Release one clue a day in Slack and let teams post their theories.", w:"The biggest build on the shelf. Save it for content that is really about diagnosis."},
-  {n:"Spot the Mistake", h:"Find the errors planted in a document, screenshot, or AI answer.", c:["trouble","judgment","tools"], s:["self","call","room","meeting","community","event"], e:1, g:"Any", t:"5–10 min",
-   b:"Have Claude write a realistic AI answer with 3 planted errors and a key that explains each one.", f:"For AI fluency, plant made-up citations, invented numbers, or confident wrong math.", w:"Errors should be realistic. Obvious typos teach nothing."},
   {n:"Two Truths and a Lie", h:"Three statements, one false. Players vote on the lie, then hear why.", c:["facts","concepts"], s:["meeting","call","room","community"], e:1, g:"Any", t:"2–5 min",
    b:"Ask Claude for sets where the lie is a common misconception.", f:"Have participants write their own sets about the topic.", w:"Light. Best as an opener."},
-  {n:"Token Budget", h:"Spend a limited number of tokens across options, then compare and discuss choices.", c:["tradeoffs","judgment"], s:["room","call","meeting"], e:1, g:"3 to 30", t:"15 min",
-   b:"Have Claude draft 12 to 15 options with real costs and benefits. You set the budget.", f:"Reveal a surprise cost after everyone has spent.", w:"The discussion afterward is the learning. Leave time for it."},
-  {n:"Triage Rush", h:"Requests keep arriving. Sort them by priority before the queue overflows.", c:["tradeoffs","process","judgment"], s:["self","call"], e:2, g:"1 to 20", t:"10 min",
-   b:"Have Claude build the hatchery as a timed queue, with each egg standing in for a real request that has a correct priority and a reason, revealed in the debrief.", f:"Speed up the queue each round.", w:"Time pressure can punish careful thinkers. Show the reasoning after each round."},
-  {n:"Real-Tool Scavenger Hunt", h:"Find or do things inside the actual tools and post proof.", c:["tools","habits"], s:["self","community","call"], e:1, g:"Any", t:"1 day to 1 week",
-   b:"Have Claude write 10 tasks from beginner to advanced, plus how to check each one.", f:"Hide one golden task worth big points that few people find.", w:"Everyone needs access to the real tools."},
   {n:"Quest Board", h:"Ongoing points, badges, and a leaderboard for real contributions in a community.", c:["habits","tools"], s:["community"], e:2, g:"50 to 1,000+", t:"Weeks to quarters",
    b:"A Claude skill and scheduled task that read community posts and score them against a quest board.", f:"Quarterly resets, seasonal quests, and themed weeks.", w:"People will try to game it. Write anti-gaming rules first."},
-  {n:"Streak Challenge", h:"Do one small thing every day for a set number of days.", c:["habits","tools"], s:["community","self"], e:1, g:"Any", t:"5–30 days",
-   b:"Have Claude write the daily prompts, each one small, getting harder over time.", f:"Team streaks, where the whole team's streak breaks if anyone misses a day.", w:"Missing one day makes people quit. Allow a free skip."},
-  {n:"Role-Play Simulation", h:"Claude plays a customer or stakeholder. The learner practices the conversation and gets scored.", c:["judgment","tools"], s:["self","call"], e:2, g:"1", t:"10–15 min",
-   b:"A skill or Claude Project with the persona, their goals and objections, and a scoring rubric at the end.", f:"Give the persona a hidden goal the learner has to uncover.", w:"Score against your rubric, not Claude's general opinion. Test it against an answer key you write first."},
   {n:"Prompt Golf", h:"Reach a target output in the fewest words or attempts. Each round is a new hole.", c:["tools"], s:["call","room","community","event"], e:1, g:"5 to 200", t:"15–30 min",
    b:"Pick the target outputs, and have Claude help write a judging rubric.", f:"Each hole adds a constraint, like no examples allowed.", w:"Shortest is not always best. Score quality too."},
   {n:"Story Campaign", h:"A story told in weekly chapters. Each chapter's challenge moves the team's adventure forward.", c:["concepts","judgment","habits"], s:["community","meeting"], e:3, g:"Teams of 3 to 6", t:"4–8 weeks",
    b:"Have Claude draft a story arc where each chapter maps to one learning goal, then release a chapter a week.", f:"Let team choices change what happens in the next chapter.", w:"Needs steady weekly effort from you. Plan every chapter before launch."},
-  {n:"Sort It", h:"Drag items into the right categories, then see the reasoning.", c:["concepts","facts","judgment"], s:["self","call","room","meeting"], e:1, g:"1 to 30", t:"5 min",
-   b:"Ask Claude for 15 to 20 items and 3 or 4 categories, including a few borderline items.", f:"Use the categories Use AI, Don't use AI, and Use AI with a human check.", w:"Borderline items need explanations, or people just feel tricked."},
   {n:"Lightning Drill", h:"Rapid 60-second rounds of quick questions or shortcuts.", c:["facts","tools"], s:["meeting","call"], e:1, g:"Any", t:"5 min",
    b:"Have Claude write 20 one-line questions or shortcut drills.", f:"Track personal bests week over week.", w:"Only for things worth knowing by heart."},
-  {n:"Build the Map", h:"Assemble the pieces of a system or workflow diagram in the right places.", c:["concepts","process"], s:["room","call","self"], e:2, g:"1 to 6", t:"15 min",
-   b:"Have Claude split a diagram into labeled pieces and build drag-and-drop with snap points.", f:"Remove one piece and ask what breaks without it.", w:"The diagram has to be correct and simple."},
   {n:"Defend the Decision", h:"Teams argue opposite sides of a realistic scenario. Judges score the reasoning.", c:["judgment","tradeoffs"], s:["room","call","meeting"], e:1, g:"6 to 40", t:"20 min",
    b:"Have Claude write scenarios with no obvious answer and a judging guide.", f:"Teams switch sides halfway through.", w:"Needs a good facilitator."},
   {n:"Build Sprint", h:"Teams build something real with the tools in a set time, then demo it.", c:["tools","habits"], s:["event","community","room"], e:2, g:"10 to 500", t:"2 hours to 2 days",
@@ -280,10 +256,6 @@ const G = [
    b:"Have Claude draft bounty cards from your learning goals and post a few each week.", f:"Let members post their own bounties.", w:"Celebrate small entries too, or only experts will join."},
   {n:"Feature Auction", h:"Bid a limited currency on features, tools, or actions. True values are revealed after bidding.", c:["tradeoffs","concepts"], s:["room","call","event"], e:1, g:"6 to 100", t:"20 min",
    b:"Have Claude write 10 lots, each with a hidden true value and a reason.", f:"Reveal who overpaid and why.", w:"Fun but loud. Keep every lot tied to a learning goal."},
-  {n:"Find the Risk", h:"Click the hidden risks on a mock screen or document, like data that should not go into a tool.", c:["trouble","judgment"], s:["self","call","event"], e:1, g:"Any", t:"5–10 min",
-   b:"Have Claude build a mock screen with clickable hotspots, each explaining the risk.", f:"Count misses as well as finds.", w:"Close to Spot the Mistake. Pick this one when the content is visual."},
-  {n:"Relay", h:"Each teammate does one step of a process and hands off to the next.", c:["process"], s:["room","call"], e:1, g:"Teams of 4 to 8", t:"15 min",
-   b:"Have Claude split a process into handoff steps, with the check each person must do.", f:"Slip in an error early and see whether later steps catch it.", w:"Keep it team-based so nobody is singled out."},
   {n:"Choose Your Path", h:"Learners pick a role path, and each path has its own quests.", c:["concepts","tools","habits"], s:["self","community"], e:2, g:"Any", t:"Self-paced",
    b:"Have Claude map your content to 2 to 4 role paths with a short quest line each.", f:"Unlock a crossover quest when someone finishes two paths.", w:"Every path is more content to keep up to date."},
   {n:"This or That", h:"Quick polls between two reasonable options, followed by the expert's take.", c:["judgment","tradeoffs"], s:["meeting","community","event","call"], e:1, g:"Any", t:"2–5 min",
@@ -292,14 +264,8 @@ const G = [
    b:"Run a quick survey first, then have Claude group the answers and build a reveal board.", f:"Survey your actual customers or reps so the top answers teach something real.", w:"Only as good as the survey. Ten responses won't give you real top answers.", src:["sko"]},
   {n:"Press Your Luck", h:"Keep answering to build points, or stop and bank them. One wrong answer loses everything unbanked.", c:["facts","judgment"], s:["self","call"], e:2, g:"1 to 30", t:"10 min",
    b:"Have Claude build the question ladder and the bank-or-risk logic.", f:"Make later questions harder but worth more, so banking is a real decision.", w:"Can turn into pure gambling. Keep questions tied to your goals.", src:["art"]},
-  {n:"Daily Drip Quiz", h:"One or two scenario questions a day for weeks. Missed questions come back later until people get them right.", c:["facts","judgment","process"], s:["self","community"], e:2, g:"Any", t:"2 min a day, 2–6 weeks",
-   b:"Have Claude write scenario questions and a simple repeat schedule, delivered through Slack or email.", f:"Add a weekly team leaderboard and share the question most people missed.", w:"Needs a channel people already check every day.", src:["qstream"]},
   {n:"Alternate Reality Game", h:"A story that plays out across real channels like email, Slack, calls, and videos over weeks. Players solve puzzles to move it forward.", c:["concepts","judgment","habits"], s:["community","event"], e:3, g:"100s to 10,000s", t:"2–4 weeks",
    b:"Have Claude draft the story, characters, and a day-by-day message schedule. You run it.", f:"Let players choose how immersive it gets, from email only to live calls.", w:"The biggest time commitment on the shelf. One tech company's pre-conference version drew about 13,000 of 19,000 attendees, but an agency built it.", src:["arg"]},
-  {n:"Crisis Simulation", h:"Teams make decisions as new information arrives every few minutes by email or chat.", c:["judgment","tradeoffs","trouble"], s:["room","call"], e:2, g:"Teams of 4 to 6", t:"1–2 hours",
-   b:"Have Claude write the scenario and a timed list of new messages, with what each one should prompt the team to do.", f:"Send the messages through real channels, like a fake customer email.", w:"Feeling overwhelmed is part of it, so debrief carefully and send people out confident.", src:["arg"]},
-  {n:"Tabletop Card Drill", h:"A facilitator deals a hidden scenario. Teams play cards for tools and actions to figure out what happened and how to respond.", c:["trouble","process","judgment"], s:["room","call"], e:2, g:"4 to 10", t:"45–60 min",
-   b:"Have Claude design a deck from your own process: causes, clues, and response actions.", f:"Give each team a different deck so no two drills match.", w:"The best-known version is for security teams. Rebuild the deck around your process.", src:["bb","cards"]},
   {n:"Risk Card Game", h:"Players take turns playing cards that each name a way something could go wrong, applied to a real plan.", c:["trouble","concepts"], s:["room","call"], e:1, g:"3 to 8", t:"30–60 min",
    b:"Have Claude write a deck of risk cards for your area, like 'sensitive data pasted into a public tool.'", f:"Score a point for each card that really applies to the plan on the table.", w:"Works best with a real plan to test, not a made-up one.", src:["cards"]},
   {n:"Dungeon One-Shot", h:"A single-session quest in five beats: entrance, puzzle, setback, boss fight, reward.", c:["judgment","concepts"], s:["self","call","room"], e:2, g:"1 to 6", t:"20–40 min",
@@ -324,18 +290,12 @@ const G = [
    b:"Have Claude design the draft, scoring rules, and a weekly standings post.", f:"Allow trades halfway through the season.", w:"The draft can feel like a popularity contest. Use a random draft order.", src:["fantasy"]},
   {n:"Virtual Journey", h:"Activity moves the team along a map, like walking between office locations, and each stop unlocks something.", c:["habits"], s:["community","self"], e:2, g:"Any", t:"Weeks",
    b:"Have Claude design the map stops and what each one unlocks.", f:"Each stop reveals a story about that office or team.", w:"Logging progress has to be easy, or nobody moves.", src:["eli5"]},
-  {n:"Software Practice Sim", h:"A mock version of the tool where learners practice tasks, get hints, and earn points.", c:["tools","process"], s:["self"], e:3, g:"1", t:"15–30 min",
-   b:"Have Claude build a clickable mock of the key screens with a hint at each step.", f:"Add a timed expert mode with no hints.", w:"Breaks when the real tool changes. Stick to screens that rarely change.", src:["eli5"]},
-  {n:"Business Simulation", h:"Teams run part of a business over several rounds and live with the results, like the classic supply-chain Beer Game.", c:["concepts","tradeoffs"], s:["room","call"], e:3, g:"4 to 40", t:"1–2 hours",
-   b:"Have Claude design the rounds, the numbers, and a results sheet.", f:"Change one rule partway through and see who adapts.", w:"Hard to balance. Playtest the numbers before the session.", src:["zensimu"]},
   {n:"Blind Builder", h:"One person describes an image or design, and others recreate it without seeing it.", c:["process","concepts"], s:["room","call"], e:1, g:"2 to 30", t:"10 min",
    b:"Have Claude pick images that get harder each round.", f:"This is what prompting feels like. Run a round where the builder is an image AI.", w:"Frustrating if the first image is too complex.", src:["ispring"]},
   {n:"Jigsaw Teach-Back", h:"Small groups each master one piece of the material, then teach it to people from the other groups.", c:["concepts","process"], s:["room","call"], e:1, g:"8 to 40", t:"30–45 min",
    b:"Have Claude split the material into 4 or 5 balanced pieces with a one-page brief for each.", f:"Each teacher gives their audience a 3-question quiz.", w:"Uneven pieces mean uneven teaching.", src:["arlo"]},
   {n:"Reverse Brainstorm", h:"Brainstorm ways to make a problem worse, then flip each idea into a fix.", c:["trouble","judgment"], s:["room","call","meeting"], e:1, g:"4 to 40", t:"15 min",
    b:"Have Claude pick a realistic problem and seed a few 'make it worse' examples.", f:"'How could we make our AI rollout fail?' is a great prompt.", w:"Keep it light so it doesn't turn into complaining.", src:["arlo"]},
-  {n:"Ranking Challenge", h:"Groups rank a list or pick the few items that matter most, then defend their choices against an expert ranking.", c:["tradeoffs","judgment"], s:["room","call","meeting"], e:1, g:"4 to 40", t:"15 min",
-   b:"Have Claude write 12 items with an expert ranking and the reasons.", f:"Reveal the expert ranking and score how close each group got.", w:"Close to Token Budget. Use this one when there is an expert answer.", src:["arlo"]},
   {n:"Roleplay Rumble", h:"Pairs swap seller and customer roles, handling objections taken from real situations, round after round.", c:["judgment"], s:["room","event","call"], e:1, g:"10 to 200", t:"20–30 min",
    b:"Have Claude write objection cards from real deal notes, each with what a good response covers.", f:"Judges pick the best handling each round.", w:"Role-play feels like a test when stakes are high. Keep it low-key.", src:["sko"]},
   {n:"Pitch Challenge", h:"People record a short pitch or explanation ahead of time, and peers vote and score them.", c:["concepts","judgment"], s:["community","event"], e:1, g:"10 to 500", t:"1 week",
@@ -384,8 +344,6 @@ const G = [
    b:"Have Claude write prompt cards, like 'the best first use of AI for a new hire,' and answer cards.", f:"In Slack, post one prompt a day and let reactions pick the winner.", w:"Keep it work-safe. Have the judge explain each pick so it stays tied to learning.", src:[]},
   {n:"Kitchen Chaos", i:"Overcooked", h:"Orders keep arriving, and the team must split up the work, hand things off, and deliver before time runs out.", c:["process","tradeoffs"], s:["room","call"], e:2, g:"3 to 6 per team", t:"20 min",
    b:"Have Claude turn your process into stations and order tickets, with a timer that speeds up.", f:"Change who does what in round two and compare results.", w:"Chaos is the point, but the debrief has to connect it back to real handoffs.", src:[]},
-  {n:"Inspector Desk", i:"Papers, Please", h:"Requests arrive one at a time. Approve or reject each one against a rulebook that changes every day, under time pressure.", c:["judgment","trouble","process"], s:["self","call"], e:2, g:"1 to 30", t:"10–15 min",
-   b:"Have Claude write the rulebook, a few days of requests, and which ones break which rule.", f:"Each 'day' adds one new rule, like a policy update.", w:"Great for compliance and data-handling rules. Make the rules accurate.", src:[]},
   {n:"Swipe Decisions", i:"Reigns", h:"Make a quick yes-or-no decision on each card. Every choice moves meters like trust, cost, and speed, and you lose if any meter hits zero or overflows.", c:["judgment","tradeoffs"], s:["self","community"], e:2, g:"1", t:"5–10 min",
    b:"Have Claude write decision cards and how each choice moves each meter.", f:"Show players which decision ended their run and why.", w:"Meters simplify reality. Debrief on what the meters leave out.", src:[]},
   {n:"Defuse Together", i:"Keep Talking and Nobody Explodes", h:"One player sees the problem but has no manual. The others have the manual but can't see the problem. They solve it by talking.", c:["process","trouble","tools"], s:["call","room"], e:2, g:"2 to 6", t:"20–45 min",
@@ -483,49 +441,13 @@ const REF = {
 "The Room (puzzle game series)",
 "Puzzles nested inside puzzles, where solving one reveals the next, with clues hidden in the scene."
 ],
-"Sequence Sort": [
-"Cooking Mama",
-"Each step has to be done in the right order before the next one unlocks."
-],
-"Branching Scenario": [
-"Telltale's The Walking Dead",
-"Choices are remembered, and the game tells you when a character will remember what you did."
-],
-"Mystery": [
-"Return of the Obra Dinn",
-"Work out who, how, and why from limited evidence, and confirm a few answers at a time."
-],
-"Spot the Mistake": [
-"The Exit 8",
-"Walk the same hallway again and again, and turn back the moment something is off."
-],
 "Two Truths and a Lie": [
 "Two Truths and a Lie",
 "The party game itself."
 ],
-"Token Budget": [
-"Plants vs. Zombies",
-"Limited slots and a budget to spend before the round starts, so every pick has a cost."
-],
-"Triage Rush": [
-"Diner Dash",
-"Customers queue with patience meters, and serving them in a smart order is the whole game."
-],
-"Real-Tool Scavenger Hunt": [
-"Pokémon GO",
-"Go out into the real world, find things, and log proof to collect them."
-],
 "Quest Board": [
 "Destiny bounties",
 "A board of daily and weekly bounties you pick up, complete, and turn in for rewards."
-],
-"Streak Challenge": [
-"Duolingo",
-"A visible streak counter, a daily reminder, and a streak freeze for missed days."
-],
-"Role-Play Simulation": [
-"Mass Effect dialogue",
-"Pick from dialogue choices, the character reacts, and the relationship shifts."
 ],
 "Prompt Golf": [
 "Code golf",
@@ -535,17 +457,9 @@ const REF = {
 "Dungeons & Dragons campaigns",
 "Weekly sessions with recurring characters, where the party's choices carry forward."
 ],
-"Sort It": [
-"Unpacking",
-"Put each item where it belongs, and wrong spots are gently rejected."
-],
 "Lightning Drill": [
 "WarioWare",
 "Five-second microgames back to back, speeding up as you go."
-],
-"Build the Map": [
-"Pipe Mania",
-"Place pieces so the flow connects end to end before time runs out."
 ],
 "Defend the Decision": [
 "Ace Attorney",
@@ -562,14 +476,6 @@ const REF = {
 "Feature Auction": [
 "Modern Art (board game)",
 "Bid on items whose true value is only revealed after the round."
-],
-"Find the Risk": [
-"Hidden Folks",
-"Search a busy scene for specific things, with a counter of how many are left."
-],
-"Relay": [
-"Moving Out",
-"Carry things through a space together, with handoffs where teamwork breaks or works."
 ],
 "Choose Your Path": [
 "Skyrim skill trees",
@@ -607,21 +513,9 @@ const REF = {
 "Subway Surfers",
 "An endless runner with lanes to switch between and lives to lose."
 ],
-"Daily Drip Quiz": [
-"Anki flashcards",
-"Cards you miss come back sooner, and cards you know come back later."
-],
 "Alternate Reality Game": [
 "I Love Bees (Halo 2's alternate reality game)",
 "The story leaks into real channels, and the community solves it together."
-],
-"Crisis Simulation": [
-"Frostpunk",
-"Crises arrive on a clock, and every decision trades one problem for another."
-],
-"Tabletop Card Drill": [
-"Backdoors & Breaches",
-"A hidden incident, cards played to investigate, and a facilitator revealing what you find."
 ],
 "Risk Card Game": [
 "Elevation of Privilege",
@@ -675,14 +569,6 @@ const REF = {
 "The Oregon Trail",
 "Progress moves you along a map, and landmarks unlock stories along the way."
 ],
-"Software Practice Sim": [
-"PC Building Simulator",
-"Do the real procedure step by step in a safe copy, with optional hints."
-],
-"Business Simulation": [
-"RollerCoaster Tycoon",
-"Run the business, change one thing, and watch the numbers move each round."
-],
 "Build It Challenge": [
 "Poly Bridge",
 "Build with limited materials, test it, watch it fail, and try again."
@@ -706,10 +592,6 @@ const REF = {
 "Reverse Brainstorm": [
 "Untitled Goose Game",
 "Your job is to cause as much trouble as possible, on purpose."
-],
-"Ranking Challenge": [
-"Top Trumps",
-"Compare items stat by stat to decide which ranks higher."
 ],
 "Roleplay Rumble": [
 "Street Fighter",
@@ -794,35 +676,6 @@ const FOCUS = {
 ],
 "x": "Each lock is one step of configuring or deploying the product correctly."
 },
-"Sequence Sort": {
-"a": [
-"it",
-"is"
-],
-"x": "Put the deployment steps, or the stages of your sales process, in the right order."
-},
-"Branching Scenario": {
-"a": [
-"ls",
-"it"
-],
-"x": "A discovery call where each question you choose changes what the customer reveals, or a go-live decision with real consequences."
-},
-"Mystery": {
-"a": [
-"lt",
-"it"
-],
-"x": "Why did the customer's deployment fail? Gather logs, configs, and interviews to find the cause."
-},
-"Spot the Mistake": {
-"a": [
-"lt",
-"ls",
-"it"
-],
-"x": "Find the errors in an AI-written proposal, a config file, or a solution diagram."
-},
 "Two Truths and a Lie": {
 "a": [
 "lt",
@@ -830,48 +683,12 @@ const FOCUS = {
 ],
 "x": "Bust common myths about the product or a competitor."
 },
-"Token Budget": {
-"a": [
-"ls",
-"it"
-],
-"x": "Spend a fixed project budget across features, training, and support, or a discount budget across a deal, then compare outcomes."
-},
-"Triage Rush": {
-"a": [
-"it",
-"is"
-],
-"x": "Support tickets or inbound leads arrive faster than you can handle them, so you have to prioritize correctly."
-},
-"Real-Tool Scavenger Hunt": {
-"a": [
-"lt",
-"it",
-"is"
-],
-"x": "Find things in the product or the CRM, like a hidden setting, a report, or a dashboard."
-},
 "Quest Board": {
 "a": [
 "lt",
 "is"
 ],
 "x": "Points for real behaviors, like logging calls with AI, sharing a customer win, or finishing a certification."
-},
-"Streak Challenge": {
-"a": [
-"lt",
-"is"
-],
-"x": "Use the new tool once a day, or update your pipeline daily, for 30 days."
-},
-"Role-Play Simulation": {
-"a": [
-"ls",
-"lt"
-],
-"x": "Claude plays a skeptical CIO, and you practice discovery and objection handling, scored on your rubric."
 },
 "Prompt Golf": {
 "a": [
@@ -886,26 +703,12 @@ const FOCUS = {
 ],
 "x": "A season following one customer from first meeting through deployment to renewal, one chapter a week."
 },
-"Sort It": {
-"a": [
-"lt",
-"ls"
-],
-"x": "Sort features into product lines, or customer needs into the right solution."
-},
 "Lightning Drill": {
 "a": [
 "lt",
 "ls"
 ],
 "x": "Sixty seconds to name the right product for each customer need."
-},
-"Build the Map": {
-"a": [
-"lt",
-"it"
-],
-"x": "Assemble a reference architecture or an integration diagram."
 },
 "Defend the Decision": {
 "a": [
@@ -935,20 +738,6 @@ const FOCUS = {
 ],
 "x": "Bid on features for a customer's roadmap, then see which ones actually delivered value."
 },
-"Find the Risk": {
-"a": [
-"it",
-"is"
-],
-"x": "Click the risks in a mock deployment plan or deal record, like missing approvals or exposed data."
-},
-"Relay": {
-"a": [
-"it",
-"is"
-],
-"x": "Each teammate handles one stage, like qualify, demo, proposal, close, and deploy, and hands off to the next."
-},
 "Choose Your Path": {
 "a": [
 "lt",
@@ -976,32 +765,12 @@ const FOCUS = {
 ],
 "x": "Climb a ladder of harder product questions, banking points before you risk them."
 },
-"Daily Drip Quiz": {
-"a": [
-"lt",
-"ls"
-],
-"x": "Two questions a day on new features or pricing for the six weeks after a launch."
-},
 "Alternate Reality Game": {
 "a": [
 "lt",
 "ls"
 ],
 "x": "A pre-kickoff story about a competitor's secret launch, solved through clues in real channels."
-},
-"Crisis Simulation": {
-"a": [
-"it",
-"ls"
-],
-"x": "A major customer outage in the middle of a renewal, with messages arriving from support, the customer, and leadership."
-},
-"Tabletop Card Drill": {
-"a": [
-"it"
-],
-"x": "A deployment goes wrong, and teams play cards to diagnose and respond."
 },
 "Risk Card Game": {
 "a": [
@@ -1084,20 +853,6 @@ const FOCUS = {
 ],
 "x": "The team moves along a deployment or territory map as adoption milestones are hit."
 },
-"Software Practice Sim": {
-"a": [
-"lt",
-"it"
-],
-"x": "Practice configuring the product or the CRM in a safe mock-up."
-},
-"Business Simulation": {
-"a": [
-"ls",
-"is"
-],
-"x": "Run a sales territory over four quarters and live with your pipeline choices."
-},
 "Blind Builder": {
 "a": [
 "lt",
@@ -1117,13 +872,6 @@ const FOCUS = {
 "is"
 ],
 "x": "How could we make this rollout, or this new sales process, fail? Then flip each idea into a fix."
-},
-"Ranking Challenge": {
-"a": [
-"ls",
-"it"
-],
-"x": "Rank customer requirements or deal risks, then compare with the expert ranking."
 },
 "Roleplay Rumble": {
 "a": [
@@ -1285,13 +1033,6 @@ const FOCUS = {
 ],
 "x": "Run handoffs between sales, solutions, and delivery as orders speed up."
 },
-"Inspector Desk": {
-"a": [
-"is",
-"it"
-],
-"x": "Approve or reject deals or change requests against deal desk or security rules that change each day."
-},
 "Swipe Decisions": {
 "a": [
 "ls",
@@ -1394,114 +1135,11 @@ const FOCUS = {
 "x": "Put product releases or implementation milestones in order."
 }
 };
-const THEME = {
-"Triage Rush": [
-"Dragon Hatchery",
-"Eggs hatch at different speeds, some baby dragons are grumpier than others, and you only have three keepers. Feed the wrong one first and the nursery catches fire.",
-"Which dragons were like the requests you get every day?"
-],
-"Software Practice Sim": [
-"Ridiculous Missions",
-"Practice in a safe copy of the real tool, but every task is absurd: build a dashboard tracking the office snack supply, or set up an account for a wizard's potion shop.",
-"Which of those steps will you use for real this week?"
-],
-"Sequence Sort": [
-"The Heist",
-"Put the crew's steps in the right order to crack the vault. Get one out of order and the alarm goes off.",
-"Which step in our real process is the one that trips the alarm?"
-],
-"Relay": [
-"Rocket Launch",
-"Each player runs one stage of the countdown and hands off to the next. A sloppy handoff and the rocket wobbles.",
-"Where do our real handoffs wobble?"
-],
-"Daily Drip Quiz": [
-"The Case File",
-"Each correct answer unlocks one clue in a week-long whodunit. The culprit is revealed on Friday.",
-"Which clue was hardest, and why?"
-],
-"Find the Risk": [
-"Gremlin Hunt",
-"Gremlins are hiding in a cartoon version of the plan. Click every one before they chew through the wiring.",
-"Which gremlin have you actually run into?"
-],
-"Real-Tool Scavenger Hunt": [
-"Treasure Map",
-"Each clue leads to a spot in the real tool where a code word or silly picture is hidden. Collect them all to open the chest.",
-"Which hiding spot will you go back to for real work?"
-],
-"Inspector Desk": [
-"Space Station Customs",
-"Approve or turn away visiting ships against the station's rulebook. The rules secretly mirror your real policy.",
-"Which station rule matched one of ours most closely?"
-],
-"Tabletop Card Drill": [
-"Starship Malfunction",
-"Something has gone wrong on the ship, and the crew plays cards to find the cause and fix it before life support runs out.",
-"What would the first three moves be on a real incident?"
-],
-"Crisis Simulation": [
-"Storm on the Island",
-"A storm hits the island resort, and messages pour in from guests, staff, and the mayor. Keep everyone safe and happy.",
-"Which message would be a customer, an engineer, or an executive in real life?"
-],
-"Streak Challenge": [
-"Keep the Campfire Lit",
-"Each day you use the tool adds a log to the team's campfire. Miss too many days and it burns down to embers.",
-"What made it easy or hard to keep your streak?"
-],
-"Business Simulation": [
-"Theme Park Tycoon",
-"Run a theme park for four seasons. Visitors are leads, rides are products, and the queue is your pipeline.",
-"Which park decision was most like a pipeline decision you make?"
-],
-"Sort It": [
-"Wizard Post Office",
-"Sort magical letters into the right mailboxes before the owls get impatient. Each letter is really a customer need or a feature.",
-"Which letters were hardest to place, and why?"
-],
-"Build the Map": [
-"City Waterworks",
-"Connect the city's pipes from the reservoir to every house. Each pipe is really a system or integration.",
-"Where would a leak in our real setup show up first?"
-],
-"Spot the Mistake": [
-"The Haunted Hallway",
-"Walk the same hallway over and over. When something on the wall changes, turn back. Each poster is a piece of a proposal or config.",
-"Which mistake would have reached a customer?"
-],
-"Ranking Challenge": [
-"Draft Your Quest Party",
-"Pick and rank heroes for a quest. Each hero is a feature or requirement, and the quest is the customer's goal.",
-"Which hero would you actually bench in a real deal?"
-],
-"Token Budget": [
-"Defend the Castle",
-"Spend your coins on towers and traps before the wave arrives. Each tower is a feature, training, or support option, and the wave is go-live.",
-"Which tower would you buy first on a real project?"
-],
-"Role-Play Simulation": [
-"Warm-Up Customer",
-"Start with an absurd customer, like a wizard buying cloud storage for spells, so nobody feels on the spot. Then play a realistic round.",
-"What worked with the wizard that also worked with the real customer?"
-],
-"Mystery": [
-"Shipwreck Investigation",
-"Piece together what sank the ship from the logbook, the cargo, and the crew's stories. Each clue maps to a real log, setting, or interview.",
-"What evidence would you look at first on a real failure?"
-],
-"Branching Scenario": [
-"Choose Your Quest",
-"Play the same decisions as a quest: the customer is a kingdom, discovery questions are scouting, and the deal is the treaty.",
-"Which scouting question would you ask in a real discovery call?"
-]
-};
 const INCLUSIVE = {
 "Trivia Race": "Score by team, not by person, and show answers without names.",
 "Elimination Quiz": "Let knocked-out players keep answering on a team side board so nobody sits out.",
 "Lightning Drill": "Offer an untimed practice round first, and track personal bests instead of rankings.",
 "Speedrun": "Add an untimed 'clean run' category that rewards accuracy and good habits.",
-"Triage Rush": "Offer a relaxed mode with a slower queue, and score the team, not the individual.",
 "Kitchen Chaos": "Give quieter players a planning role, like reading the orders, so talking fast isn't the only way to help.",
 "Press Your Luck": "Play in pairs so nobody faces the risky calls alone.",
 "Roleplay Rumble": "Let people pass, play in pairs, or observe a round before stepping in.",
@@ -1518,11 +1156,11 @@ const INCLUSIVE = {
 "Capture the Flag": "Include easy flags anyone can solve, so beginners score early.",
 "Escape Room": "Add optional hints that cost a little time, so no team gets stuck and gives up."
 };
-G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; g.th = THEME[g.n]; g.inc = INCLUSIVE[g.n]; });
+G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; g.inc = INCLUSIVE[g.n]; });
 G.forEach((g, i) => g.id = "g" + i);
 
 const lab = Object.fromEntries([...CONTENT, ...SETTINGS]);
-const state = { f: null, c: null, s: null, q: "", th: false, pop: false, hide: false, used: new Set() };
+const state = { f: null, c: null, s: null, q: "", pop: false, hide: false, used: new Set() };
 try { const saved = JSON.parse(localStorage.getItem("shelf-used") || "[]"); saved.forEach(x => state.used.add(x)); } catch (e) {}
 try { state.hide = localStorage.getItem("shelf-hide") === "1"; } catch (e) {}
 
@@ -1542,8 +1180,8 @@ function chips(el, list, key, cls) {
 
 function matches() {
   const q = state.q.trim().toLowerCase();
-  return G.filter(g => (!state.f || g.a.includes(state.f)) && (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) && (!state.th || g.th) &&
-                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.th ? g.th.join(" ") : "", g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
+  return G.filter(g => (!state.f || g.a.includes(state.f)) && (!state.c || g.c.includes(state.c)) && (!state.s || g.s.includes(state.s)) && !(state.hide && state.used.has(g.n)) && (!state.pop || g.i) &&
+                       (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h, g.b, g.f, g.w].join(" ").toLowerCase().includes(q)))
           .sort((a, b) => a.e - b.e || a.n.localeCompare(b.n));
 }
 
@@ -1560,7 +1198,6 @@ function card(g) {
     <p class="how">${esc(g.h)}</p>
     <div class="focus-tags">${g.a.map(k => `<span class="ftag${k === state.f ? " hit" : ""}">${esc(FL[k])}</span>`).join("")}</div>
     <p class="example"><span>Example</span> ${esc(g.x)}</p>
-    ${g.th ? `<div class="play"><span class="play-label">Make it play: ${esc(g.th[0])}</span><p>${esc(g.th[1])}</p><p class="bridge"><b>Debrief question:</b> ${esc(g.th[2])}</p></div>` : ""}
     <div class="stats">
       <div class="stat"><span>Build effort</span><span><span class="pips" aria-hidden="true">${pips}</span> ${eff}</span></div>
       <div class="stat"><span>Players</span><span>${esc(g.g)}</span></div>
@@ -1617,7 +1254,6 @@ $("heat").addEventListener("click", e => {
   state.c = b.dataset.c; state.s = b.dataset.s; render();
   $("shelf").scrollIntoView({ behavior: "auto", block: "start" });
 });
-$("theme-only").addEventListener("change", e => { state.th = e.target.checked; render(); });
 $("pop-only").addEventListener("change", e => { state.pop = e.target.checked; render(); });
 $("q").addEventListener("input", e => { state.q = e.target.value; render(); });
 $("hide-used").addEventListener("change", e => {

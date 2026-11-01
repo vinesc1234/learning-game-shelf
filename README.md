@@ -1,6 +1,6 @@
 # Learning Game Shelf
 
-A catalog of 93 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
+A catalog of 73 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
 
 **Try it:** https://vinesc1234.github.io/learning-game-shelf/
 
@@ -16,8 +16,7 @@ The fix ended up being simple: the mechanic should come from the content. A proc
 - Every game card has an example for a technology company, how it plays, build effort, group size, time, a tip for building it with Claude, a twist to keep it fresh, the most common way it goes wrong, and links to real examples where I found them.
 - Every format names a well-known game to use as a reference, with what to borrow from it. Many borrow their mechanic straight from a popular board, party, video, or TV game, like Codenames, Overcooked, or Super Mario 64 (a filter shows just those). The rest list a game that feels right, like Diner Dash for a triage game or Wordle for a daily puzzle. Giving Claude a specific game to match gets much better results than describing a feel from scratch.
 - The game names belong to their owners. Borrow the mechanic by describing how it plays, never by copying code, art, or assets, and give your version its own name and look.
-- Games that look too much like the real job (a ticket queue, a CRM screen) get a fun-world theme, like a dragon hatchery instead of a support queue, plus one debrief question that brings it back to work. People treat a game that looks like their job as more work.
-- A short set of fun and inclusion rules sits at the top of the page, and timed or competitive games have notes on keeping them inclusive, like team scoring and a relaxed mode.
+- A short set of inclusion rules sits at the top of the page, and timed or competitive games have notes on keeping them inclusive, like team scoring and a relaxed mode.
 - A fit grid shows how many formats fit each pairing, so you can see where the gaps are.
 - "Mark as used" and "Hide games I've used recently" help you avoid repeating yourself. Those marks are saved in your own browser only.
 - `skills/game-mapper/SKILL.md` is a Claude skill for the step before the shelf. You drop in everything you were given, and Claude walks through it with you: what's actually in there, what conflicts, what type of content each piece is, what the learning goals are, and which two or three games fit. It ends with a game brief and a prompt to start building.
@@ -35,7 +34,7 @@ I started with about 30 formats I knew, then went looking for what other people 
 
 ## Known limits
 
-- It's tuned for technology and sales learning. Generic icebreakers and team-building games, like spaghetti towers or people bingo, are left out on purpose.
+- It's tuned for technology and sales learning. Generic icebreakers and team-building games, like spaghetti towers or people bingo, are left out on purpose, and so are games that look too much like the real job, like ticket queues or deal desks, since they feel like more work.
 - It's not truly exhaustive. Facilitation books like Gamestorming have 80+ more workshop techniques, though a lot of those are meeting methods more than games.
 - Some pairings are thin. There aren't many formats for teaching step-by-step processes at big events or in Slack, or habits in a 10-minute meeting. If you've run something that works there, I'd love to hear about it.
 - Ideas shared on Reddit and LinkedIn are underrepresented, since a lot of that is hard to search. Most sources are published articles.

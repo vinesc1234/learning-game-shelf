@@ -76,7 +76,6 @@ Then recommend two or three games from the shelf below that match the focus area
 - Build effort
 - One way to keep it fresh
 - Its reference game from the table, and what to borrow from it
-- Its fun-world theme, if it has one in the list below, or a new theme you suggest if the game looks too much like real work
 
 Let them choose. If they want to combine two formats, help with that. If the content spans several modules, consider Hub World as the frame, with each module as its own game. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
 
@@ -90,8 +89,7 @@ Once they pick, write a short brief:
 - **Content map:** a table of each content piece and the game part it becomes (card, lock, branch, clue, quest, round)
 - **Gaps to fill before building:** open questions and conflicts, and who to ask
 - **Keep it fresh:** the twist that makes this version feel new
-- **World and debrief question:** the fun world the game takes place in, and the one question that connects it back to real work afterward
-- **Fun and inclusion check:** how the game meets each rule in the fun and inclusion rules below, and what changes if it doesn't
+- **Inclusion check:** how the game meets each rule in the inclusion rules below, and what changes if it doesn't
 - **Reference game and feel spec:** the game this should feel like (from the table) and 3 to 5 specific things to borrow, like pacing, scoring, or how choices feel. Describe them from playing the game. Never decompile, copy, or reuse a commercial game's code, art, or assets.
 - **Name and look:** give the game its own name, theme, and art, even when it borrows a mechanic from a famous game
 - **Asset budget:** a hard spending cap for any paid image or 3D generation tools, or "none" if it uses only Claude Design
@@ -104,42 +102,16 @@ Once they pick, write a short brief:
 
 Ask if they want changes, then offer to start the build.
 
-## Fun and inclusion rules
+## Inclusion rules
 
 These apply to every game. Check the brief against them before handing it over.
 
-- **Change the world, keep the thinking.** If a game looks like the real job (a ticket queue, a CRM screen, a deal desk), people treat it like the job. Put the mechanic in a different world, then use one debrief question to bring it back to work.
 - **Score the team by default.** Team or co-op scoring beats individual rankings, so nobody is publicly last.
 - **Offer a relaxed mode for anything timed.** Time pressure rewards fast typists, not good thinkers.
 - **Give everyone a way in.** Talkers, planners, and doers each get a role.
 - **No prior experience needed to start.** Someone on day one can play alongside a ten-year veteran.
-- **Make failure funny.** A dragon setting the room on fire beats a red WRONG.
+- **Keep failure low-stakes.** Wrong answers should lead to a quick explanation and another try, never a public red mark.
 - **Build it accessible.** Never rely on color alone, caption any audio, and make it work with a keyboard.
-
-### Ready-made fun-world themes
-
-These games feel too close to real work as written. Use the theme unless there's a good reason to stay literal.
-
-- **Triage Rush:** Dragon Hatchery. Eggs hatch at different speeds, some baby dragons are grumpier than others, and you only have three keepers. Feed the wrong one first and the nursery catches fire. Debrief question: "Which dragons were like the requests you get every day?"
-- **Software Practice Sim:** Ridiculous Missions. Practice in a safe copy of the real tool, but every task is absurd: build a dashboard tracking the office snack supply, or set up an account for a wizard's potion shop. Debrief question: "Which of those steps will you use for real this week?"
-- **Sequence Sort:** The Heist. Put the crew's steps in the right order to crack the vault. Get one out of order and the alarm goes off. Debrief question: "Which step in our real process is the one that trips the alarm?"
-- **Relay:** Rocket Launch. Each player runs one stage of the countdown and hands off to the next. A sloppy handoff and the rocket wobbles. Debrief question: "Where do our real handoffs wobble?"
-- **Daily Drip Quiz:** The Case File. Each correct answer unlocks one clue in a week-long whodunit. The culprit is revealed on Friday. Debrief question: "Which clue was hardest, and why?"
-- **Find the Risk:** Gremlin Hunt. Gremlins are hiding in a cartoon version of the plan. Click every one before they chew through the wiring. Debrief question: "Which gremlin have you actually run into?"
-- **Real-Tool Scavenger Hunt:** Treasure Map. Each clue leads to a spot in the real tool where a code word or silly picture is hidden. Collect them all to open the chest. Debrief question: "Which hiding spot will you go back to for real work?"
-- **Inspector Desk:** Space Station Customs. Approve or turn away visiting ships against the station's rulebook. The rules secretly mirror your real policy. Debrief question: "Which station rule matched one of ours most closely?"
-- **Tabletop Card Drill:** Starship Malfunction. Something has gone wrong on the ship, and the crew plays cards to find the cause and fix it before life support runs out. Debrief question: "What would the first three moves be on a real incident?"
-- **Crisis Simulation:** Storm on the Island. A storm hits the island resort, and messages pour in from guests, staff, and the mayor. Keep everyone safe and happy. Debrief question: "Which message would be a customer, an engineer, or an executive in real life?"
-- **Streak Challenge:** Keep the Campfire Lit. Each day you use the tool adds a log to the team's campfire. Miss too many days and it burns down to embers. Debrief question: "What made it easy or hard to keep your streak?"
-- **Business Simulation:** Theme Park Tycoon. Run a theme park for four seasons. Visitors are leads, rides are products, and the queue is your pipeline. Debrief question: "Which park decision was most like a pipeline decision you make?"
-- **Sort It:** Wizard Post Office. Sort magical letters into the right mailboxes before the owls get impatient. Each letter is really a customer need or a feature. Debrief question: "Which letters were hardest to place, and why?"
-- **Build the Map:** City Waterworks. Connect the city's pipes from the reservoir to every house. Each pipe is really a system or integration. Debrief question: "Where would a leak in our real setup show up first?"
-- **Spot the Mistake:** The Haunted Hallway. Walk the same hallway over and over. When something on the wall changes, turn back. Each poster is a piece of a proposal or config. Debrief question: "Which mistake would have reached a customer?"
-- **Ranking Challenge:** Draft Your Quest Party. Pick and rank heroes for a quest. Each hero is a feature or requirement, and the quest is the customer's goal. Debrief question: "Which hero would you actually bench in a real deal?"
-- **Token Budget:** Defend the Castle. Spend your coins on towers and traps before the wave arrives. Each tower is a feature, training, or support option, and the wave is go-live. Debrief question: "Which tower would you buy first on a real project?"
-- **Role-Play Simulation:** Warm-Up Customer. Start with an absurd customer, like a wizard buying cloud storage for spells, so nobody feels on the spot. Then play a realistic round. Debrief question: "What worked with the wizard that also worked with the real customer?"
-- **Mystery:** Shipwreck Investigation. Piece together what sank the ship from the logbook, the cargo, and the crew's stories. Each clue maps to a real log, setting, or interview. Debrief question: "What evidence would you look at first on a real failure?"
-- **Branching Scenario:** Choose Your Quest. Play the same decisions as a quest: the customer is a kingdom, discovery questions are scouting, and the deal is the treaty. Debrief question: "Which scouting question would you ask in a real discovery call?"
 
 ### Inclusion notes for timed or competitive games
 
@@ -147,7 +119,6 @@ These games feel too close to real work as written. Use the theme unless there's
 - **Elimination Quiz:** Let knocked-out players keep answering on a team side board so nobody sits out.
 - **Lightning Drill:** Offer an untimed practice round first, and track personal bests instead of rankings.
 - **Speedrun:** Add an untimed 'clean run' category that rewards accuracy and good habits.
-- **Triage Rush:** Offer a relaxed mode with a slower queue, and score the team, not the individual.
 - **Kitchen Chaos:** Give quieter players a planning role, like reading the orders, so talking fast isn't the only way to help.
 - **Press Your Luck:** Play in pairs so nobody faces the risky calls alone.
 - **Roleplay Rumble:** Let people pass, play in pairs, or observe a round before stepping in.
@@ -175,7 +146,7 @@ These games feel too close to real work as written. Use the theme unless there's
 
 ## The game shelf
 
-This matches the Learning Game Shelf page in this repo (index.html), which has 93 formats. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Each game also lists which focus areas it serves and an example for a technology company. Generic icebreakers and team-building games are deliberately left off. Focus: Learn tech, Learn sales, Implement tech, Implement sales. Effort: 1 low, 2 medium, 3 high.
+This matches the Learning Game Shelf page in this repo (index.html), which has 73 formats. Games that looked too much like the real job, like ticket queues and deal desks, were left off because they feel like more work in a corporate setting. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Each game also lists which focus areas it serves and an example for a technology company. Generic icebreakers and team-building games are deliberately left off. Focus: Learn tech, Learn sales, Implement tech, Implement sales. Effort: 1 low, 2 medium, 3 high.
 
 | Game | Focus | Reference game | Best content types | Settings | Effort |
 |---|---|---|---|---|---|
@@ -184,36 +155,20 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 9
 | Jeopardy Board | Learn tech, Learn sales | Feels like Jeopardy! | Facts, Big ideas | Video call, Room, Team meeting | 1 |
 | Board Race | Learn tech, Learn sales | Feels like Mario Party | Facts, Big ideas, Tool skills | Self-paced, Room, Community | 2 |
 | Escape Room | Learn tech, Implement tech | Feels like The Room (puzzle game series) | Steps, Finding problems, Tool skills | Self-paced, Video call | 3 |
-| Sequence Sort | Implement tech, Implement sales | Feels like Cooking Mama | Steps | Self-paced, Video call, Room, Team meeting | 1 |
-| Branching Scenario | Learn sales, Implement tech | Feels like Telltale's The Walking Dead | Judgment, Finding problems | Self-paced, Video call | 2 |
-| Mystery | Learn tech, Implement tech | Feels like Return of the Obra Dinn | Finding problems, Judgment, Big ideas | Self-paced, Room, Community | 3 |
-| Spot the Mistake | Learn tech, Learn sales, Implement tech | Feels like The Exit 8 | Finding problems, Judgment, Tool skills | All settings | 1 |
 | Two Truths and a Lie | Learn tech, Learn sales | Feels like Two Truths and a Lie | Facts, Big ideas | Team meeting, Video call, Room, Community | 1 |
-| Token Budget | Learn sales, Implement tech | Feels like Plants vs. Zombies | Tradeoffs, Judgment | Room, Video call, Team meeting | 1 |
-| Triage Rush | Implement tech, Implement sales | Feels like Diner Dash | Tradeoffs, Steps, Judgment | Self-paced, Video call | 2 |
-| Real-Tool Scavenger Hunt | Learn tech, Implement tech, Implement sales | Feels like Pokémon GO | Tool skills, Habits | Self-paced, Community, Video call | 1 |
 | Quest Board | Learn tech, Implement sales | Feels like Destiny bounties | Habits, Tool skills | Community | 2 |
-| Streak Challenge | Learn tech, Implement sales | Feels like Duolingo | Habits, Tool skills | Community, Self-paced | 1 |
-| Role-Play Simulation | Learn sales, Learn tech | Feels like Mass Effect dialogue | Judgment, Tool skills | Self-paced, Video call | 2 |
 | Prompt Golf | Learn tech | Feels like Code golf | Tool skills | Video call, Room, Community, Big event | 1 |
 | Story Campaign | Learn sales, Implement tech | Feels like Dungeons & Dragons campaigns | Big ideas, Judgment, Habits | Community, Team meeting | 3 |
-| Sort It | Learn tech, Learn sales | Feels like Unpacking | Big ideas, Facts, Judgment | Self-paced, Video call, Room, Team meeting | 1 |
 | Lightning Drill | Learn tech, Learn sales | Feels like WarioWare | Facts, Tool skills | Team meeting, Video call | 1 |
-| Build the Map | Learn tech, Implement tech | Feels like Pipe Mania | Big ideas, Steps | Room, Video call, Self-paced | 2 |
 | Defend the Decision | Learn sales, Implement tech | Feels like Ace Attorney | Judgment, Tradeoffs | Room, Video call, Team meeting | 1 |
 | Build Sprint | Learn tech, Implement tech | Feels like Game jams like Ludum Dare | Tool skills, Habits | Big event, Community, Room | 2 |
 | Show-and-Tell Bounty | Learn tech, Implement sales | Feels like Monster Hunter quest board | Habits, Tool skills | Community, Video call | 1 |
 | Feature Auction | Learn sales, Implement tech | Feels like Modern Art (board game) | Tradeoffs, Big ideas | Room, Video call, Big event | 1 |
-| Find the Risk | Implement tech, Implement sales | Feels like Hidden Folks | Finding problems, Judgment | Self-paced, Video call, Big event | 1 |
-| Relay | Implement tech, Implement sales | Feels like Moving Out | Steps | Room, Video call | 1 |
 | Choose Your Path | Learn tech, Learn sales | Feels like Skyrim skill trees | Big ideas, Tool skills, Habits | Self-paced, Community | 2 |
 | This or That | Learn sales, Learn tech | Feels like Would You Rather | Judgment, Tradeoffs | Team meeting, Community, Big event, Video call | 1 |
 | Survey Says | Learn sales | Feels like Family Feud | Judgment, Facts, Big ideas | Room, Video call, Big event | 1 |
 | Press Your Luck | Learn tech, Learn sales | Feels like Can't Stop (board game) | Facts, Judgment | Self-paced, Video call | 2 |
-| Daily Drip Quiz | Learn tech, Learn sales | Feels like Anki flashcards | Facts, Judgment, Steps | Self-paced, Community | 2 |
 | Alternate Reality Game | Learn tech, Learn sales | Feels like I Love Bees (Halo 2's alternate reality game) | Big ideas, Judgment, Habits | Community, Big event | 3 |
-| Crisis Simulation | Implement tech, Learn sales | Feels like Frostpunk | Judgment, Tradeoffs, Finding problems | Room, Video call | 2 |
-| Tabletop Card Drill | Implement tech | Feels like Backdoors & Breaches | Finding problems, Steps, Judgment | Room, Video call | 2 |
 | Risk Card Game | Implement tech, Learn sales | Feels like Elevation of Privilege | Finding problems, Big ideas | Room, Video call | 1 |
 | Dungeon One-Shot | Learn sales | Feels like Zelda dungeons | Judgment, Big ideas | Self-paced, Video call, Room | 2 |
 | Chat Escape Room | Learn tech | Feels like Zork | Tool skills, Steps | Community, Self-paced | 1 |
@@ -226,12 +181,9 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 9
 | Bracket Tournament | Learn sales, Learn tech | Feels like March Madness brackets | Tradeoffs, Judgment | Community, Big event | 1 |
 | Fantasy League | Implement sales | Feels like Fantasy football | Habits | Community | 2 |
 | Virtual Journey | Implement sales, Implement tech | Feels like The Oregon Trail | Habits | Community, Self-paced | 2 |
-| Software Practice Sim | Learn tech, Implement tech | Feels like PC Building Simulator | Tool skills, Steps | Self-paced | 3 |
-| Business Simulation | Learn sales, Implement sales | Feels like RollerCoaster Tycoon | Big ideas, Tradeoffs | Room, Video call | 3 |
 | Blind Builder | Learn tech, Learn sales | Feels like Spaceteam | Steps, Big ideas | Room, Video call | 1 |
 | Jigsaw Teach-Back | Learn tech | Feels like Hanabi | Big ideas, Steps | Room, Video call | 1 |
 | Reverse Brainstorm | Implement tech, Implement sales | Feels like Untitled Goose Game | Finding problems, Judgment | Room, Video call, Team meeting | 1 |
-| Ranking Challenge | Learn sales, Implement tech | Feels like Top Trumps | Tradeoffs, Judgment | Room, Video call, Team meeting | 1 |
 | Roleplay Rumble | Learn sales | Feels like Street Fighter | Judgment | Room, Big event, Video call | 1 |
 | Pitch Challenge | Learn sales | Feels like American Idol | Big ideas, Judgment | Community, Big event | 1 |
 | Mash-Up Pitch | Learn sales, Learn tech | Feels like Snake Oil (party game) | Big ideas | Room, Big event, Video call | 1 |
@@ -256,7 +208,6 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 9
 | Twenty Questions | Learn sales, Implement tech | Inspired by Guess Who | Finding problems, Big ideas | Video call, Team meeting, Room | 1 |
 | Best Match Card | Learn sales, Learn tech | Inspired by Apples to Apples | Judgment, Big ideas | Room, Video call, Community | 1 |
 | Kitchen Chaos | Implement tech, Implement sales | Inspired by Overcooked | Steps, Tradeoffs | Room, Video call | 2 |
-| Inspector Desk | Implement sales, Implement tech | Inspired by Papers, Please | Judgment, Finding problems, Steps | Self-paced, Video call | 2 |
 | Swipe Decisions | Learn sales, Implement tech | Inspired by Reigns | Judgment, Tradeoffs | Self-paced, Community | 2 |
 | Defuse Together | Learn tech, Implement tech | Inspired by Keep Talking and Nobody Explodes | Steps, Finding problems, Tool skills | Video call, Room | 2 |
 | Habit Garden | Learn tech, Implement sales | Inspired by Animal Crossing and Stardew Valley | Habits | Community | 2 |
@@ -273,4 +224,4 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 9
 | Crowd Plays | Learn sales | Inspired by Twitch Plays | Judgment | Big event, Video call | 2 |
 | Timeline | Learn tech, Implement tech | Inspired by Timeline card game | Facts, Steps | Room, Video call, Self-paced | 1 |
 
-Thin spots on the shelf, where few formats fit: implementing sales overall (about 20 games), steps and processes in a 10-minute team meeting or at big events, habits in the room or in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
+Thin spots on the shelf, where few formats fit: implementing sales overall (about 14 games), steps and processes in Slack, at big events, or in a 10-minute team meeting, habits in the room or in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
