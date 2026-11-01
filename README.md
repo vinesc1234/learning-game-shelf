@@ -2,7 +2,7 @@
 
 A catalog of 82 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
 
-**Try it:** https://vinesc1234.github.io/learning-game-shelf/
+**Try it:** https://vinesc1234.github.io/learning-game-shelf/ (3D library) or https://vinesc1234.github.io/learning-game-shelf/shelf.html (classic shelf)
 
 ## Why I made it
 
@@ -12,7 +12,8 @@ The fix ended up being simple: the mechanic should come from the content. A proc
 
 ## What's in here
 
-- `index.html` is the shelf. Pick the focus, then what the content mostly is (facts, steps, judgment calls, finding problems, tradeoffs, tool skills, big ideas, or habits) and where people will play (in the room, on a video call, self-paced, in Slack, at a big event, or in a 10-minute team meeting). It shows the games that fit, easiest to build first.
+- `index.html` is a 3D library. All 82 games sit on carved wood bookcases as real 3D boxes with their own original cover art. Drag to look around, scroll to zoom, and click a box to pull it off the shelf and see how to run it. It has focus filters, search, a list view, and a reset button.
+- `shelf.html` is the classic shelf, with the full set of filters. Pick the focus, then what the content mostly is (facts, steps, judgment calls, finding problems, tradeoffs, tool skills, big ideas, or habits) and where people will play (in the room, on a video call, self-paced, in Slack, at a big event, or in a 10-minute team meeting). It shows the games that fit, easiest to build first.
 - Every game card has an example for a technology company, how it plays, build effort, group size, time, a tip for building it with Claude, a twist to keep it fresh, the most common way it goes wrong, and links to real examples where I found them.
 - Every format names a well-known game to use as a reference, with what to borrow from it. Many borrow their mechanic straight from a popular board, party, video, or TV game, like Codenames, Overcooked, or Super Mario 64 (a filter shows just those). The rest list a game that feels right, like Diner Dash for a triage game or Wordle for a daily puzzle. Giving Claude a specific game to match gets much better results than describing a feel from scratch.
 - The game names belong to their owners. Borrow the mechanic by describing how it plays, never by copying code, art, or assets, and give your version its own name and look.
