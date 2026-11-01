@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="73 game formats for learning and selling technology, each with a reference game and a tech-company example.">
+<meta name="description" content="82 game formats for learning and selling technology, each with a reference game and a tech-company example.">
 <title>Learning Game Shelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,7 +143,7 @@ dd.seen { display: flex; flex-wrap: wrap; gap: 4px 12px; }
 <div class="wrap">
   <header>
     <h1>Learning Game Shelf</h1>
-    <p class="lede"><span id="n-games">73</span> game formats for learning and selling technology, matched to the focus, the kind of content you were handed, and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
+    <p class="lede"><span id="n-games">82</span> game formats for learning and selling technology, matched to the focus, the kind of content you were handed, and where people will play. Changing the mechanic, not just the map, is what keeps the next game from feeling like the last one.</p>
     <ol class="steps">
       <li>Pick the focus: learning or implementing technology or sales</li>
       <li>Pick what most of the content is</li>
@@ -373,7 +373,16 @@ const G = [
   {n:"Crowd Plays", i:"Twitch Plays", h:"The whole audience votes on every move in a scenario, live, and sees the result of the majority choice.", c:["judgment"], s:["event","call"], e:2, g:"50 to 3,000", t:"15–20 min",
    b:"Have Claude write a branching scenario with a live poll at each choice.", f:"After a bad outcome, rewind and let the room choose differently.", w:"The majority isn't always right. That's a good thing to discuss.", src:[]},
   {n:"Timeline", i:"Timeline card game", h:"Place cards with events, features, or steps in the right order relative to the cards already on the table.", c:["facts","process"], s:["room","call","self"], e:1, g:"2 to 8", t:"10–15 min",
-   b:"Have Claude write cards with dates or step numbers on the back.", f:"Use the history of your own team's tools and decisions.", w:"Only works when the order really matters.", src:[]}
+   b:"Have Claude write cards with dates or step numbers on the back.", f:"Use the history of your own team's tools and decisions.", w:"Only works when the order really matters.", src:[]},
+  {n:"So What? Chain", h:"Someone names a product feature. The next person turns it into a customer benefit, the next asks 'so what?' and goes one level deeper, and so on around the group.", c:["concepts", "facts"], s:["meeting", "room", "call"], e:1, g:"4 to 30", t:"5–10 min", b:"Have Claude pull 15 features from your product material and draft a sample benefit chain for each, for the debrief.", f:"Finish each chain with the line a customer's CFO would care about.", w:"Chains can drift into buzzwords. Ask for a real customer example at the end.", src:["closecom", "wonderway"]},
+  {n:"Alphabet Improv", i:"the Alphabet game on Whose Line Is It Anyway?", h:"Pairs act out a short sales conversation where every line has to start with the next letter of the alphabet, from A to Z.", c:["judgment"], s:["room", "call"], e:1, g:"Pairs, any number", t:"10–15 min", b:"Have Claude write short scenario cards, like a first discovery call or a renewal check-in.", f:"Run it again with a harder scenario once people get the hang of it.", w:"It's silly on purpose. Keep the debrief on which lines actually moved the conversation.", src:["wonderway"]},
+  {n:"Just a Minute", i:"the BBC radio game Just a Minute", h:"Talk about one product for 60 seconds without hesitating or repeating a feature. Anyone can challenge a slip, and the challenger takes over.", c:["facts", "concepts"], s:["room", "call", "meeting"], e:1, g:"4 to 20", t:"10 min", b:"Have Claude pick topics from your product lines and write a cheat sheet of features for the judge.", f:"Rare-feature bonus: extra points for naming something nobody else mentioned.", w:"Fast talkers shine. Let people pass or tag in a teammate.", src:["teambuilding"]},
+  {n:"Category Spin", i:"Scattergories", h:"Spin for a random letter, then race to fill categories, like a feature, a benefit, a use case, and an objection, all starting with that letter.", c:["facts", "concepts"], s:["room", "call", "meeting"], e:1, g:"2 to 30", t:"5–10 min", b:"Have Claude build the letter spinner and an answer key for your products.", f:"Unique answers score double, so obvious ones don't win.", w:"Some letters are impossible. Let Claude drop letters with no good answers.", src:["teambuilding"]},
+  {n:"Spin the Wheel", h:"At the start of a team meeting, spin a wheel of two-minute challenges. Whoever it lands on takes the challenge, with a pass allowed.", c:["habits", "judgment"], s:["meeting", "call"], e:1, g:"5 to 15", t:"2–5 min a week", b:"Have Claude write 20 short challenges and build the wheel page.", f:"Add a new slice whenever a product or process changes.", w:"Being picked can feel like being put on the spot. Offer a pass, or let people spin for a teammate they'll help.", src:["slideswith"]},
+  {n:"Ugli Orange", h:"Two sides each need the same rare oranges and seem to be in conflict, until they discover they need different parts of the fruit. A classic negotiation exercise about uncovering what the other side really wants.", c:["tradeoffs", "judgment"], s:["room", "call"], e:1, g:"Pairs or small teams", t:"30–40 min", b:"Have Claude adapt the two role sheets and write the debrief questions.", f:"Rerun it with a version where the hidden interests only partly overlap.", w:"It's a well-known exercise, so check that nobody has done it before.", src:["mitneg", "jeffsu"]},
+  {n:"Boss Battle Deck", h:"Each 'boss' is a common way deals stall. Players use skill cards to beat it, and learn to recognize the pattern on real calls.", c:["judgment", "trouble"], s:["self", "room", "call"], e:2, g:"1 to 6", t:"5–15 min per boss", b:"Have Claude design the bosses from your real stall patterns and the skill cards from your sales methodology.", f:"Add a new boss whenever the team notices a new way deals get stuck.", w:"Keep the bosses real. A pattern nobody has seen won't stick.", src:["dealforge"]},
+  {n:"Amazing Race", i:"The Amazing Race", h:"Teams race around the venue following QR-code clues. At each pit stop they complete a short product or sales challenge before getting the next clue.", c:["facts", "tools", "concepts"], s:["event", "room"], e:2, g:"20 to 3,000", t:"45–90 min", b:"Have Claude write the clues, the pit stop challenges, and the answer checks.", f:"Add a detour at each stop: two challenge options, one quick and one harder.", w:"Plan the route so teams don't all crowd the same stop.", src:["socialpoint"]},
+  {n:"News Scout", h:"People share one useful piece of industry or customer news in a Slack channel each week. Reactions pick the month's best scout.", c:["habits", "concepts"], s:["community"], e:1, g:"10 to 500", t:"Ongoing", b:"Have Claude draft the channel rules and a weekly recap of the top posts.", f:"Ask winners to add one line on how they'd use the news in a customer conversation.", w:"Can turn into link dumping. Require one sentence on why it matters.", src:["closecom"]}
 ];
 const SRC = {
   arlo:["Arlo: 28 training activities and games","https://arlo.co/blog/training-activities-and-games"],
@@ -405,7 +414,15 @@ const SRC = {
   twine:["Teaching Professor: Twine branching toolkit","https://www.teachingprofessor.com/topics/online-learning/entwined-a-tool-kit-for-creating-branching-narratives"],
   wharton:["Wharton Learning Lab: Keep Talking and Nobody Explodes","https://simulations.wharton.upenn.edu/?p=6803"],
   karlsen:["Håvard Karlsen: using Keep Talking in a seminar","https://hkarlsen.rbind.io/posts/eng/002-keep-talking/"],
-  taboo:["Lucerne University: the Taboo method","https://rcc.hslu.ch/en/tools/utilities/methods/zeige/Taboo-Method"]
+  taboo:["Lucerne University: the Taboo method","https://rcc.hslu.ch/en/tools/utilities/methods/zeige/Taboo-Method"],
+  closecom:["Close: 11 interactive sales training ideas", "https://close.com/blog/interactive-sales-training-ideas"],
+  wonderway:["Wonderway: 7 sales games", "https://wonderway.io/blog/7-sales-games-that-will-boost-your-teams-performance"],
+  teambuilding:["TeamBuilding.com: 17 sales games", "https://teambuilding.com/blog/sales-games"],
+  slideswith:["Slides With Friends: 10 sales games", "https://slideswith.com/blog/sales-games"],
+  mitneg:["MIT OpenCourseWare: negotiation course notes", "https://ocw.mit.edu/courses/15-667-negotiation-and-conflict-management-spring-2001/a064e64a4011f19f27b9da68e17afabc_notes_on_n101.pdf"],
+  jeffsu:["Jeff Su: icebergs, hairy arms, and oranges", "https://jeffsu.org/icebergs-hairy-arms-and-oranges"],
+  dealforge:["Product Hunt: DealForge sales training game", "https://www.producthunt.com/products/dealforge-sales-training-game"],
+  socialpoint:["SocialPoint: games for sales kickoffs", "https://www.socialpoint.io/how-to-use-games-and-gamification-to-achieve-your-sales-kickoff-objectives/"]
 };
 const EXTRA_SRC = {
   "Trivia Race":["arlo","elb"], "Memory Match":["elb","h5p"], "Bingo":["arlo","sko"], "Jeopardy Board":["elb","sko"],
@@ -636,7 +653,12 @@ const REF = {
 "Puzzle Inside the Tool": [
 "SQL Murder Mystery",
 "Solve a mystery by running queries in the real tool."
-]
+],
+"So What? Chain": ["Word Association", "Each answer builds on the last, fast, with no long pauses."],
+"Spin the Wheel": ["game-show prize wheels", "A big spin, a moment of suspense, and a quick challenge."],
+"Ugli Orange": ["the Ugli Orange exercise", "Two secret briefs that look like a conflict, and a reveal that rewards asking questions."],
+"Boss Battle Deck": ["DealForge and Slay the Spire", "A hand of skill cards, a boss with a special trick, and short fights you can replay."],
+"News Scout": ["Product Hunt daily rankings", "Post, upvote, and see the best rise to the top."]
 };
 const FOCUS_AREAS = [["lt","Learning a technology"],["ls","Learning sales"],["it","Implementing technology"],["is","Implementing sales"]];
 const FOCUS = {
@@ -1133,7 +1155,16 @@ const FOCUS = {
 "it"
 ],
 "x": "Put product releases or implementation milestones in order."
-}
+},
+"So What? Chain": {"a": ["ls", "lt"], "x": "'Automatic backups' becomes 'no lost work,' then 'no weekend recovery calls,' then 'your team ships on time.'"},
+"Alphabet Improv": {"a": ["ls"], "x": "A discovery call: 'Are you seeing delays in onboarding?' 'Brutal ones, actually.' 'Can you walk me through the last one?'"},
+"Just a Minute": {"a": ["lt", "ls"], "x": "Sixty seconds on the data platform, without repeating a feature or saying 'um.'"},
+"Category Spin": {"a": ["lt", "ls"], "x": "Letter S: Scalability, Saves an admin's afternoon, Seasonal traffic spikes, 'Sounds expensive.'"},
+"Spin the Wheel": {"a": ["ls", "is"], "x": "Slices like 'your 20-second pitch for the new product,' 'an objection you heard this week and your answer,' or 'one CRM shortcut you love.'"},
+"Ugli Orange": {"a": ["ls"], "x": "After the reveal, map it to a real deal: what does procurement actually need, compared with what the champion needs?"},
+"Boss Battle Deck": {"a": ["ls", "is"], "x": "Bosses like 'The Champion Went Quiet,' 'Surprise Procurement Step,' and 'Budget Freeze,' beaten with cards like 'Find the economic buyer' or 'Confirm the decision process.'"},
+"Amazing Race": {"a": ["lt", "ls"], "x": "Pit stops for the new product demo, the pricing quiz, the competitor showdown, and the customer story, with the last stop at the opening party."},
+"News Scout": {"a": ["is", "ls"], "x": "A rep shares a competitor's price change with one line on how to handle it on calls, and it becomes the month's top post."}
 };
 const INCLUSIVE = {
 "Trivia Race": "Score by team, not by person, and show answers without names.",
@@ -1154,7 +1185,11 @@ const INCLUSIVE = {
 "Pitch Tank": "Let teams pitch together so nobody presents alone.",
 "Mystery Basket": "Give every team one 'phone a friend' to ask an expert.",
 "Capture the Flag": "Include easy flags anyone can solve, so beginners score early.",
-"Escape Room": "Add optional hints that cost a little time, so no team gets stuck and gives up."
+"Escape Room": "Add optional hints that cost a little time, so no team gets stuck and gives up.",
+"Alphabet Improv": "Let people play in pairs with a whispering coach, or observe one round first.",
+"Just a Minute": "Let players tag in a teammate when they get stuck.",
+"Spin the Wheel": "Always allow a pass, or let the person spin for a teammate they'll help.",
+"Amazing Race": "Offer an accessible route with no stairs, and let every team pick the quick or the hard challenge at each stop."
 };
 G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; g.inc = INCLUSIVE[g.n]; });
 G.forEach((g, i) => g.id = "g" + i);

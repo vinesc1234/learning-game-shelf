@@ -1,6 +1,6 @@
 # Learning Game Shelf
 
-A catalog of 73 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
+A catalog of 82 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
 
 **Try it:** https://vinesc1234.github.io/learning-game-shelf/
 
@@ -30,12 +30,12 @@ Then drop in your source material and say "let's map this."
 
 ## Where the formats came from
 
-I started with about 30 formats I knew, then went looking for what other people are actually running: L&D blogs, game tool makers like H5P and ELB Learning, sales kickoff planners, security training card games on GitHub, and companies that gamified their AI rollouts (Microsoft, Netskope, Google Workspace customers, and a Salesforce partner). The full source list is at the bottom of the page.
+I started with about 30 formats I knew, then went looking for what other people are actually running: L&D blogs, game tool makers like H5P and ELB Learning, sales kickoff planners, security training card games on GitHub, and companies that gamified their AI rollouts (Microsoft, Netskope, Google Workspace customers, and a Salesforce partner). A second pass looked specifically for sales and tech team games, like negotiation classics, sales meeting games, and sales card games. The full source list is at the bottom of the page.
 
 ## Known limits
 
 - It's tuned for technology and sales learning. Generic icebreakers and team-building games, like spaghetti towers or people bingo, are left out on purpose, and so are games that look too much like the real job, like ticket queues or deal desks, since they feel like more work.
 - It's not truly exhaustive. Facilitation books like Gamestorming have 80+ more workshop techniques, though a lot of those are meeting methods more than games.
 - Some pairings are thin. There aren't many formats for teaching step-by-step processes at big events or in Slack, or habits in a 10-minute meeting. If you've run something that works there, I'd love to hear about it.
-- Ideas shared on Reddit and LinkedIn are underrepresented, since a lot of that is hard to search. Most sources are published articles.
+- Ideas shared on Reddit, YouTube, and LinkedIn are underrepresented, since a lot of that is hard to search from outside. Most sources are published articles and GitHub projects.
 - Group sizes and times are starting points, not rules.

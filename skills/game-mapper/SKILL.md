@@ -77,7 +77,7 @@ Then recommend two or three games from the shelf below that match the focus area
 - One way to keep it fresh
 - Its reference game from the table, and what to borrow from it
 
-Let them choose. If they want to combine two formats, help with that. If the content spans several modules, consider Hub World as the frame, with each module as its own game. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
+Let them choose. If they want to combine two formats, help with that. If the content spans several modules, consider Hub World as the frame, with each module as its own game. For implementing sales, consider Boss Battle Deck or Spin the Wheel when the goal is putting a sales method into everyday practice. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
 
 ## Step 7: Write the game brief
 
@@ -134,6 +134,10 @@ These apply to every game. Check the brief against them before handing it over.
 - **Mystery Basket:** Give every team one 'phone a friend' to ask an expert.
 - **Capture the Flag:** Include easy flags anyone can solve, so beginners score early.
 - **Escape Room:** Add optional hints that cost a little time, so no team gets stuck and gives up.
+- **Alphabet Improv:** Let people play in pairs with a whispering coach, or observe one round first.
+- **Just a Minute:** Let players tag in a teammate when they get stuck.
+- **Spin the Wheel:** Always allow a pass, or let the person spin for a teammate they'll help.
+- **Amazing Race:** Offer an accessible route with no stairs, and let every team pick the quick or the hard challenge at each stop.
 
 ## Settings
 
@@ -146,7 +150,7 @@ These apply to every game. Check the brief against them before handing it over.
 
 ## The game shelf
 
-This matches the Learning Game Shelf page in this repo (index.html), which has 73 formats. Games that looked too much like the real job, like ticket queues and deal desks, were left off because they feel like more work in a corporate setting. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Each game also lists which focus areas it serves and an example for a technology company. Generic icebreakers and team-building games are deliberately left off. Focus: Learn tech, Learn sales, Implement tech, Implement sales. Effort: 1 low, 2 medium, 3 high.
+This matches the Learning Game Shelf page in this repo (index.html), which has 82 formats. Games that looked too much like the real job, like ticket queues and deal desks, were left off because they feel like more work in a corporate setting. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Each game also lists which focus areas it serves and an example for a technology company. Generic icebreakers and team-building games are deliberately left off. Focus: Learn tech, Learn sales, Implement tech, Implement sales. Effort: 1 low, 2 medium, 3 high.
 
 | Game | Focus | Reference game | Best content types | Settings | Effort |
 |---|---|---|---|---|---|
@@ -223,5 +227,14 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 7
 | Secret Helper | Learn tech, Implement sales | Inspired by Secret Santa | Habits | Community | 1 |
 | Crowd Plays | Learn sales | Inspired by Twitch Plays | Judgment | Big event, Video call | 2 |
 | Timeline | Learn tech, Implement tech | Inspired by Timeline card game | Facts, Steps | Room, Video call, Self-paced | 1 |
+| So What? Chain | Learn sales, Learn tech | Feels like Word Association | Big ideas, Facts | Team meeting, Room, Video call | 1 |
+| Alphabet Improv | Learn sales | Inspired by the Alphabet game on Whose Line Is It Anyway? | Judgment | Room, Video call | 1 |
+| Just a Minute | Learn tech, Learn sales | Inspired by the BBC radio game Just a Minute | Facts, Big ideas | Room, Video call, Team meeting | 1 |
+| Category Spin | Learn tech, Learn sales | Inspired by Scattergories | Facts, Big ideas | Room, Video call, Team meeting | 1 |
+| Spin the Wheel | Learn sales, Implement sales | Feels like game-show prize wheels | Habits, Judgment | Team meeting, Video call | 1 |
+| Ugli Orange | Learn sales | Feels like the Ugli Orange exercise | Tradeoffs, Judgment | Room, Video call | 1 |
+| Boss Battle Deck | Learn sales, Implement sales | Feels like DealForge and Slay the Spire | Judgment, Finding problems | Self-paced, Room, Video call | 2 |
+| Amazing Race | Learn tech, Learn sales | Inspired by The Amazing Race | Facts, Tool skills, Big ideas | Big event, Room | 2 |
+| News Scout | Implement sales, Learn sales | Feels like Product Hunt daily rankings | Habits, Big ideas | Community | 1 |
 
-Thin spots on the shelf, where few formats fit: implementing sales overall (about 14 games), steps and processes in Slack, at big events, or in a 10-minute team meeting, habits in the room or in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
+Thin spots on the shelf, where few formats fit: implementing sales overall (about 17 games), steps and processes in Slack, at big events, or in a 10-minute team meeting, habits in the room or in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
