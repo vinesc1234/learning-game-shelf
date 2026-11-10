@@ -38,6 +38,7 @@ canvas { display: block; }
 .fld input, .fld select { font: inherit; font-weight: 400; font-size: .85rem; color: var(--ink); background: var(--parch-2); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; }
 .fld input { width: 84px; }
 .fld select { max-width: 190px; }
+#len { max-width: 230px; }
 .fld input:focus-visible, .fld select:focus-visible, .clear:focus-visible { outline: 3px solid #FFD27A; outline-offset: 2px; }
 .clear { font: inherit; font-size: .8rem; font-weight: 700; background: none; border: 0; color: var(--brass-ink); text-decoration: underline; cursor: pointer; padding: 4px; }
 .count { font-family: var(--mono); font-size: .78rem; color: var(--muted); white-space: nowrap; }
@@ -99,6 +100,7 @@ canvas { display: block; }
   <div class="chips" id="chips" role="group" aria-label="Focus"></div>
   <div class="more" role="group" aria-label="More filters">
     <label class="fld"><span>People</span><input id="ppl" type="number" min="1" max="100000" inputmode="numeric" placeholder="Any"></label>
+    <label class="fld"><span>Length</span><select id="len"></select></label>
     <label class="fld"><span>Delivery</span><select id="del"></select></label>
     <label class="fld"><span>Content</span><select id="con"></select></label>
     <button type="button" class="clear" id="clear" hidden>Clear filters</button>
@@ -1591,6 +1593,7 @@ function openGame(m) {
   $("pbody").innerHTML = `<h2 id="ptitle">${esc(g.n)}</h2>${ref ? `<span class="ref">${ref}</span>` : ""}
     <button type="button" class="used-btn" id="usedb" aria-pressed="${used.has(g.n)}">${used.has(g.n) ? "Used recently" : "Mark as used"}</button>
     <p>${esc(g.h)}</p><div class="tags">${g.a.map(k => `<span class="tag">${esc(FOCUS_AREAS.find(f => f[0] === k)[1])}</span>`).join("")}</div>
+    <div><span class="lbl">Length</span><div class="tags">${g.len.map(k => `<span class="tag">${esc(LENN[k])}</span>`).join("")}</div></div>
     <div><span class="lbl">Delivery</span><div class="tags">${g.s.map(k => `<span class="tag">${esc(DELN[k])}</span>`).join("")}</div></div>
     <div><span class="lbl">Content</span><div class="tags">${g.c.map(k => `<span class="tag">${esc(CONN[k])}</span>`).join("")}</div></div>
     <p class="ex"><span class="lbl">Example</span>${esc(g.x)}</p>
@@ -1610,7 +1613,7 @@ kbd.addEventListener("focusout", () => { $("flabel").style.display = "none"; });
 kbd.addEventListener("click", e => { const b = e.target.closest("button"); if (b) openGame(pickables[+b.dataset.i]); });
 
 // ---------- filters ----------
-const flt = { f: null, q: "", n: null, s: "", c: "" };
+const flt = { f: null, q: "", n: null, s: "", c: "", l: "" };
 // group size text -> [min, max] people; games run per team or table scale up with more copies
 function sizeRange(t) {
   const s = t.toLowerCase().replace(/,/g, ""), INF = Infinity;
@@ -1628,8 +1631,23 @@ function sizeRange(t) {
   return [1, INF];
 }
 G.forEach(g => g.size = sizeRange(g.g));
+// game time text -> length buckets; a game can fit more than one (a deck of bosses can be a quick hit or a full session)
+const LEN = [["quick", "Quick: 15 min or less (a few key points)"], ["session", "One session: 15 to 60 min (one topic)"], ["long", "Long session: 1 hour to 2 days (a full module)"], ["weeks", "Weeks or longer (lots of content, released over time)"]];
+const LENN = { quick: "Quick (15 min or less)", session: "One session (15 to 60 min)", long: "Long session (1 hour to 2 days)", weeks: "Weeks or longer" };
+function lenBuckets(t) {
+  const s = t.toLowerCase(), out = new Set();
+  if (/week|month|quarter|ongoing|self-paced/.test(s)) out.add("weeks");
+  if (/session/.test(s)) out.add("session");
+  if (/hour|day/.test(s)) out.add("long");
+  const m = s.match(/(\d+)(?:\s*[–-]\s*(\d+))?\s*min/);
+  if (m) { const lo = +m[1], hi = +(m[2] || m[1]), top = /per /.test(s) ? 60 : hi;
+    if (lo <= 15) out.add("quick"); if (top > 15 && lo < 60) out.add("session"); if (top > 60) out.add("long"); }
+  if (/self-paced/.test(s)) out.add("long");
+  return [...out];
+}
+G.forEach(g => g.len = lenBuckets(g.t));
 function matches(g) { const q = flt.q.trim().toLowerCase();
-  return (!flt.f || g.a.includes(flt.f)) && (!flt.s || g.s.includes(flt.s)) && (!flt.c || g.c.includes(flt.c)) &&
+  return (!flt.f || g.a.includes(flt.f)) && (!flt.s || g.s.includes(flt.s)) && (!flt.c || g.c.includes(flt.c)) && (!flt.l || g.len.includes(flt.l)) &&
     (!flt.n || (flt.n >= g.size[0] && flt.n <= g.size[1])) &&
     (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h].join(" ").toLowerCase().includes(q)); }
 const DEL = [["room", "In the room"], ["call", "Video call"], ["self", "Self-paced"], ["community", "Slack or community"], ["event", "Big event (100+)"], ["meeting", "10-min team meeting"]];
@@ -1637,11 +1655,13 @@ const DELN = Object.fromEntries(DEL), CONN = Object.fromEntries(CONTENT);
 $("del").innerHTML = `<option value="">Any</option>` + DEL.map(([k, l]) => `<option value="${k}">${l}</option>`).join("");
 $("con").innerHTML = `<option value="">Any</option>` + CONTENT.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join("");
 $("ppl").addEventListener("input", e => { const v = parseInt(e.target.value, 10); flt.n = v > 0 ? v : null; applyFilter(); });
+$("len").innerHTML = `<option value="">Any</option>` + LEN.map(([k, l]) => `<option value="${k}">${l}</option>`).join("");
+$("len").addEventListener("change", e => { flt.l = e.target.value; applyFilter(); });
 $("del").addEventListener("change", e => { flt.s = e.target.value; applyFilter(); });
 $("con").addEventListener("change", e => { flt.c = e.target.value; applyFilter(); });
-$("clear").onclick = () => { Object.assign(flt, { f: null, q: "", n: null, s: "", c: "" }); $("q").value = ""; $("ppl").value = ""; $("del").value = ""; $("con").value = ""; applyFilter(); };
+$("clear").onclick = () => { Object.assign(flt, { f: null, q: "", n: null, s: "", c: "", l: "" }); $("q").value = ""; $("len").value = ""; $("ppl").value = ""; $("del").value = ""; $("con").value = ""; applyFilter(); };
 function chips() { $("chips").innerHTML = [["", "All"], ["lt", "Learn tech"], ["ls", "Learn sales"], ["it", "Implement tech"], ["is", "Implement sales"]].map(([k, l]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${(flt.f || "") === k}">${l}</button>`).join(""); }
-function applyFilter() { let n = 0; dirty = true; $("clear").hidden = !(flt.f || flt.q || flt.n || flt.s || flt.c);
+function applyFilter() { let n = 0; dirty = true; $("clear").hidden = !(flt.f || flt.q || flt.n || flt.s || flt.c || flt.l);
   pickables.forEach(m => { const ok = matches(m.userData.g); if (ok) n++; m.userData.dim = !ok; m.material.forEach(mm => mm.color.setScalar((ok ? 1 : .22) * (mm.toneMapped === false ? .92 : 1))); });
   $("count").textContent = `${n} of ${pickables.length} games`; chips(); if (!$("list").hidden) renderList(); }
 $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; flt.f = b.dataset.k || null; applyFilter(); });
