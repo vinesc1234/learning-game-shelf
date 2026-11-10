@@ -33,13 +33,20 @@ canvas { display: block; }
 .chip { font: inherit; font-size: .82rem; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--brass); border-color: var(--brass); color: #2A180D; font-weight: 700; }
 .search { font: inherit; font-size: .88rem; flex: 1 1 110px; min-width: 0; border: 1px solid var(--line); background: var(--parch-2); color: var(--ink); border-radius: 8px; padding: 6px 10px; }
+.more { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.fld { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.fld input, .fld select { font: inherit; font-weight: 400; font-size: .85rem; color: var(--ink); background: var(--parch-2); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; }
+.fld input { width: 84px; }
+.fld select { max-width: 190px; }
+.fld input:focus-visible, .fld select:focus-visible, .clear:focus-visible { outline: 3px solid #FFD27A; outline-offset: 2px; }
+.clear { font: inherit; font-size: .8rem; font-weight: 700; background: none; border: 0; color: var(--brass-ink); text-decoration: underline; cursor: pointer; padding: 4px; }
 .count { font-family: var(--mono); font-size: .78rem; color: var(--muted); white-space: nowrap; }
 .btn { font: inherit; font-weight: 700; font-size: .85rem; border: 0; background: var(--brass); color: #2A180D; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
 .chip:focus-visible, .btn:focus-visible, .search:focus-visible, .nav button:focus-visible, .x:focus-visible, .used-btn:focus-visible { outline: 3px solid #FFD27A; outline-offset: 2px; }
 .nav { position: fixed; z-index: 10; bottom: max(14px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; gap: 8px; align-items: center; padding: 6px; border-radius: 999px; background: color-mix(in srgb, var(--parch) 90%, transparent); border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.35); }
 .nav button { font: inherit; font-size: 1.05rem; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--parch-2); color: var(--ink); cursor: pointer; }
 .hint { font-size: .8rem; color: var(--muted); padding: 0 8px; white-space: nowrap; }
-@media (max-width: 640px) { .hint { display: none; } .bar h1 { font-size: .95rem; } .bar { padding: 8px 10px; gap: 6px 8px; } .chips { flex-wrap: nowrap; overflow-x: auto; width: 100%; scrollbar-width: none; } .chip { white-space: nowrap; } .count { display: none; } }
+@media (max-width: 640px) { .hint { display: none; } .bar h1 { font-size: .95rem; } .bar { padding: 8px 10px; gap: 6px 8px; } .chips { flex-wrap: nowrap; overflow-x: auto; width: 100%; scrollbar-width: none; } .chip { white-space: nowrap; } .count { display: none; } .more { width: 100%; } .fld select { max-width: 130px; } .fld input { width: 64px; } }
 .panel { position: fixed; z-index: 20; top: 0; right: 0; height: 100%; width: min(440px, 100vw); background: var(--parch); border-left: 1px solid var(--line); box-shadow: -20px 0 40px rgba(0,0,0,.4); transform: translateX(105%); transition: transform .35s cubic-bezier(.2,.8,.2,1); overflow-y: auto; padding: 22px 22px 40px; display: flex; flex-direction: column; gap: 12px; }
 .panel.open { transform: none; }
 @media (max-width: 640px) { .panel { top: auto; bottom: 0; height: min(78vh, 680px); width: 100vw; border-left: 0; border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; transform: translateY(105%); } }
@@ -90,6 +97,12 @@ canvas { display: block; }
 <header class="bar">
   <h1>Learning Game Library</h1>
   <div class="chips" id="chips" role="group" aria-label="Focus"></div>
+  <div class="more" role="group" aria-label="More filters">
+    <label class="fld"><span>People</span><input id="ppl" type="number" min="1" max="100000" inputmode="numeric" placeholder="Any"></label>
+    <label class="fld"><span>Delivery</span><select id="del"></select></label>
+    <label class="fld"><span>Content</span><select id="con"></select></label>
+    <button type="button" class="clear" id="clear" hidden>Clear filters</button>
+  </div>
   <input class="search" id="q" type="search" placeholder="Search games" aria-label="Search games">
   <span class="count" id="count" aria-live="polite"></span>
   <button class="btn ghost" id="listbtn" type="button" aria-pressed="false" aria-controls="list">☰ List view</button>
@@ -110,7 +123,7 @@ canvas { display: block; }
 
 <section class="list" id="list" aria-label="All games" hidden>
   <div class="list-head"><h2>All games</h2><span class="count" id="lcount"></span><button type="button" class="x" id="listx" aria-label="Close list">&times;</button></div>
-  <p class="list-note">Uses the focus and search filters above. Pick a game to jump to its box.</p>
+  <p class="list-note">Uses the filters above. Pick a game to jump to its box.</p>
   <div id="listbody" class="rows"></div>
 </section>
 <aside class="panel" id="panel" aria-label="Game details" tabindex="-1">
@@ -1578,6 +1591,8 @@ function openGame(m) {
   $("pbody").innerHTML = `<h2 id="ptitle">${esc(g.n)}</h2>${ref ? `<span class="ref">${ref}</span>` : ""}
     <button type="button" class="used-btn" id="usedb" aria-pressed="${used.has(g.n)}">${used.has(g.n) ? "Used recently" : "Mark as used"}</button>
     <p>${esc(g.h)}</p><div class="tags">${g.a.map(k => `<span class="tag">${esc(FOCUS_AREAS.find(f => f[0] === k)[1])}</span>`).join("")}</div>
+    <div><span class="lbl">Delivery</span><div class="tags">${g.s.map(k => `<span class="tag">${esc(DELN[k])}</span>`).join("")}</div></div>
+    <div><span class="lbl">Content</span><div class="tags">${g.c.map(k => `<span class="tag">${esc(CONN[k])}</span>`).join("")}</div></div>
     <p class="ex"><span class="lbl">Example</span>${esc(g.x)}</p>
     <div class="stats"><div><span class="lbl">Build effort</span><span>${"●".repeat(g.e)}${"○".repeat(3 - g.e)} ${eff}</span></div><div><span class="lbl">Players</span><span>${esc(g.g)}</span></div><div><span class="lbl">Time</span><span>${esc(g.t)}</span></div></div>
     ${g.r ? `<p><span class="lbl">Borrow from ${esc(g.r[0])}</span>${esc(g.r[1])}</p>` : ""}
@@ -1595,10 +1610,38 @@ kbd.addEventListener("focusout", () => { $("flabel").style.display = "none"; });
 kbd.addEventListener("click", e => { const b = e.target.closest("button"); if (b) openGame(pickables[+b.dataset.i]); });
 
 // ---------- filters ----------
-const flt = { f: null, q: "" };
-function matches(g) { const q = flt.q.trim().toLowerCase(); return (!flt.f || g.a.includes(flt.f)) && (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h].join(" ").toLowerCase().includes(q)); }
+const flt = { f: null, q: "", n: null, s: "", c: "" };
+// group size text -> [min, max] people; games run per team or table scale up with more copies
+function sizeRange(t) {
+  const s = t.toLowerCase().replace(/,/g, ""), INF = Infinity;
+  if (s === "any" || s.includes("any audience")) return [1, INF];
+  if (s.includes("any size") || s.includes("any number") || s.includes("small teams")) return [2, INF];
+  if (s.startsWith("100s to 10000s")) return [100, 100000];
+  if (s.startsWith("100s to 1000s")) return [100, 10000];
+  if (s.startsWith("100s")) return [100, INF];
+  let m = s.match(/^2 teams of (\d+) to (\d+)/); if (m) return [2 * +m[1], 2 * +m[2]];
+  m = s.match(/^2 teams to (\d+)/); if (m) return [4, +m[1]];
+  m = s.match(/^(\d+) to (\d+) teams/); if (m) return [2 * +m[1], 10 * +m[2]];
+  m = s.match(/(\d+) to (\d+)(\+?)/);
+  if (m) { const lo = +m[1], hi = +m[2]; if (m[3] || /per |teams of/.test(s)) return [lo, INF]; return [lo, hi]; }
+  m = s.match(/^(\d+)/); if (m) return [+m[1], +m[1]];
+  return [1, INF];
+}
+G.forEach(g => g.size = sizeRange(g.g));
+function matches(g) { const q = flt.q.trim().toLowerCase();
+  return (!flt.f || g.a.includes(flt.f)) && (!flt.s || g.s.includes(flt.s)) && (!flt.c || g.c.includes(flt.c)) &&
+    (!flt.n || (flt.n >= g.size[0] && flt.n <= g.size[1])) &&
+    (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h].join(" ").toLowerCase().includes(q)); }
+const DEL = [["room", "In the room"], ["call", "Video call"], ["self", "Self-paced"], ["community", "Slack or community"], ["event", "Big event (100+)"], ["meeting", "10-min team meeting"]];
+const DELN = Object.fromEntries(DEL), CONN = Object.fromEntries(CONTENT);
+$("del").innerHTML = `<option value="">Any</option>` + DEL.map(([k, l]) => `<option value="${k}">${l}</option>`).join("");
+$("con").innerHTML = `<option value="">Any</option>` + CONTENT.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join("");
+$("ppl").addEventListener("input", e => { const v = parseInt(e.target.value, 10); flt.n = v > 0 ? v : null; applyFilter(); });
+$("del").addEventListener("change", e => { flt.s = e.target.value; applyFilter(); });
+$("con").addEventListener("change", e => { flt.c = e.target.value; applyFilter(); });
+$("clear").onclick = () => { Object.assign(flt, { f: null, q: "", n: null, s: "", c: "" }); $("q").value = ""; $("ppl").value = ""; $("del").value = ""; $("con").value = ""; applyFilter(); };
 function chips() { $("chips").innerHTML = [["", "All"], ["lt", "Learn tech"], ["ls", "Learn sales"], ["it", "Implement tech"], ["is", "Implement sales"]].map(([k, l]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${(flt.f || "") === k}">${l}</button>`).join(""); }
-function applyFilter() { let n = 0; dirty = true;
+function applyFilter() { let n = 0; dirty = true; $("clear").hidden = !(flt.f || flt.q || flt.n || flt.s || flt.c);
   pickables.forEach(m => { const ok = matches(m.userData.g); if (ok) n++; m.userData.dim = !ok; m.material.forEach(mm => mm.color.setScalar((ok ? 1 : .22) * (mm.toneMapped === false ? .92 : 1))); });
   $("count").textContent = `${n} of ${pickables.length} games`; chips(); if (!$("list").hidden) renderList(); }
 $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; flt.f = b.dataset.k || null; applyFilter(); });
@@ -1625,9 +1668,11 @@ $("reset").onclick = () => { closePanel(); hovered = null; view.tx = bayX(0); vi
 // ---------- loop ----------
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; const clock = new THREE.Clock();
 let dirty = true;
+window.__view = view;
+window.__scr = n => { const m = gameMeshes.get(n); if (!m) return null; const v = m.userData.home.clone().project(camera); return [(v.x + 1) / 2 * innerWidth, (1 - v.y) / 2 * innerHeight]; };
 window.__step = n => { for (let i = 0; i < n; i++) { dirty = true; frame(); } };
 function frame() {
-  const dt = window.__still ? .05 : Math.min(clock.getDelta(), .05), t = clock.elapsedTime, k = reduce ? 1 : 1 - Math.pow(.0025, dt);
+  const dt = window.__still ? (window.__dt || .05) : Math.min(clock.getDelta(), .05), t = clock.elapsedTime, k = reduce ? 1 : 1 - Math.pow(window.__base || .0025, dt);
   view.x += (view.tx - view.x) * k; view.y += (view.ty - view.y) * k; view.z += (view.tz - view.z) * k;
   camera.position.set(view.x, view.y + (view.z - 120) * .1, view.z); camera.lookAt(view.x, view.y, -10);
   key.position.set(view.x - 160, 420, 380); key.target.position.set(view.x, 120, 0);
@@ -1636,7 +1681,7 @@ function frame() {
   let moving = Math.abs(view.tx - view.x) + Math.abs(view.ty - view.y) + Math.abs(view.tz - view.z) > .05;
   for (const m of pickables) { const ud = m.userData; const out = m === opened ? 16 : m === hovered && !ud.dim ? 4 : ud.dim ? -8 : 0;
     const target = ud.home.z + out; if (Math.abs(target - m.position.z) > .02) moving = true; m.position.z += (target - m.position.z) * k; const ry = m === opened && !ud.stack ? Math.max(-.35, Math.min(.35, (view.x - ud.home.x) * .002)) : ud.rot; m.rotation.y += (ry - m.rotation.y) * k; }
-  if (moving || dirty) { renderer.render(scene, camera); dirty = false; }
+  if ((moving || dirty) && !window.__skip) { renderer.render(scene, camera); dirty = false; }
   if (!window.__still) requestAnimationFrame(frame);
 }
 addEventListener("resize", () => { dirty = true; renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
