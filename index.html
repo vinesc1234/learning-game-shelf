@@ -1254,6 +1254,9 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = .92;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 $("stage").appendChild(renderer.domElement);
+// if the graphics card resets (sleep, driver update), wait for it to come back and redraw
+renderer.domElement.addEventListener("webglcontextlost", e => e.preventDefault());
+renderer.domElement.addEventListener("webglcontextrestored", () => { dirty = true; });
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color("#1A0E06");
@@ -1559,7 +1562,10 @@ async function populate() {
 // ---------- camera control ----------
 const view = { x: bayX(0), y: 160, z: 330, tx: bayX(0), ty: 160, tz: 330 };
 const LIM = { minX: -TOTAL / 2 + 60, maxX: TOTAL / 2 - 60, minZ: 70, maxZ: 560 };
-function clampView() { const half = Math.tan(THREE.MathUtils.degToRad(20)) * (view.tz + 10) * camera.aspect; let lo = -TOTAL / 2 + half - 30, hi = TOTAL / 2 - half + 30; if (lo > hi) lo = hi = 0; view.tx = Math.max(lo, Math.min(hi, view.tx)); view.tz = Math.max(LIM.minZ, Math.min(LIM.maxZ, view.tz)); const span = (view.tz - 60) * .36; view.ty = Math.max(70 + span * .2, Math.min(260 - span * .2, view.ty)); }
+const HOME = () => ({ tx: bayX(0), ty: 160, tz: 330 });
+function clampView() { if (![view.tx, view.ty, view.tz].every(Number.isFinite)) Object.assign(view, HOME());
+  const asp = Number.isFinite(camera.aspect) && camera.aspect > 0 ? camera.aspect : 1.6;
+  const half = Math.tan(THREE.MathUtils.degToRad(20)) * (view.tz + 10) * asp; let lo = -TOTAL / 2 + half - 30, hi = TOTAL / 2 - half + 30; if (lo > hi) lo = hi = 0; view.tx = Math.max(lo, Math.min(hi, view.tx)); view.tz = Math.max(LIM.minZ, Math.min(LIM.maxZ, view.tz)); const span = (view.tz - 60) * .36; view.ty = Math.max(70 + span * .2, Math.min(260 - span * .2, view.ty)); }
 const stage = $("stage"); const ptrs = new Map(); let dragMoved = 0, pinch0 = 0, z0 = 0;
 stage.addEventListener("pointerdown", e => { stage.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); dragMoved = 0;
   if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); z0 = view.tz; } stage.classList.add("dragging"); });
@@ -1693,7 +1699,9 @@ window.__scr = n => { const m = gameMeshes.get(n); if (!m) return null; const v 
 window.__step = n => { for (let i = 0; i < n; i++) { dirty = true; frame(); } };
 function frame() {
   const dt = window.__still ? (window.__dt || .05) : Math.min(clock.getDelta(), .05), t = clock.elapsedTime, k = reduce ? 1 : 1 - Math.pow(window.__base || .0025, dt);
+  if (![view.tx, view.ty, view.tz].every(Number.isFinite)) clampView();
   view.x += (view.tx - view.x) * k; view.y += (view.ty - view.y) * k; view.z += (view.tz - view.z) * k;
+  if (!Number.isFinite(view.x)) view.x = view.tx; if (!Number.isFinite(view.y)) view.y = view.ty; if (!Number.isFinite(view.z)) view.z = view.tz;
   camera.position.set(view.x, view.y + (view.z - 120) * .1, view.z); camera.lookAt(view.x, view.y, -10);
   key.position.set(view.x - 160, 420, 380); key.target.position.set(view.x, 120, 0);
   fill.position.set(view.x, 230, view.z + 60);
@@ -1703,7 +1711,7 @@ function frame() {
   if ((moving || dirty) && !window.__skip) { renderer.render(scene, camera); dirty = false; }
   if (!window.__still) requestAnimationFrame(frame);
 }
-addEventListener("resize", () => { dirty = true; renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+addEventListener("resize", () => { if (!innerWidth || !innerHeight) return; dirty = true; renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
 
 (async () => {
   const fams = [`800 20px "Bricolage Grotesque"`, `20px Bungee`, `20px "Alfa Slab One"`, `20px Righteous`, `20px "Lilita One"`, `900 20px Fraunces`, `500 10px "JetBrains Mono"`];
