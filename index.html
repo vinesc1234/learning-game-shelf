@@ -1378,7 +1378,7 @@ for (let p = 0; p <= NBAY; p++) {
   const fin = new THREE.Mesh(new THREE.ConeGeometry(PIL / 2, 34, 8), MAT.wood); fin.position.set(x, CASE_TOP + 70 + 17, -DEPTH / 2 + 2); fin.castShadow = true; room.add(fin);
 }
 // balcony rail in the foreground
-const rail = new THREE.Group(); room.add(rail);
+const rail = new THREE.Group(); // balcony rail left out of the scene on purpose
 { const RZ = 175, RH = 92, len = TOTAL + 600;
   const top = new THREE.Mesh(new THREE.BoxGeometry(len, 9, 14), MAT.trim); top.position.set(0, RH, RZ); top.castShadow = true; rail.add(top);
   const low = new THREE.Mesh(new THREE.BoxGeometry(len, 6, 10), MAT.wood); low.position.set(0, 14, RZ); rail.add(low);
@@ -1677,7 +1677,6 @@ function frame() {
   camera.position.set(view.x, view.y + (view.z - 120) * .1, view.z); camera.lookAt(view.x, view.y, -10);
   key.position.set(view.x - 160, 420, 380); key.target.position.set(view.x, 120, 0);
   fill.position.set(view.x, 230, view.z + 60);
-  rail.visible = view.z > 230;
   let moving = Math.abs(view.tx - view.x) + Math.abs(view.ty - view.y) + Math.abs(view.tz - view.z) > .05;
   for (const m of pickables) { const ud = m.userData; const out = m === opened ? 16 : m === hovered && !ud.dim ? 4 : ud.dim ? -8 : 0;
     const target = ud.home.z + out; if (Math.abs(target - m.position.z) > .02) moving = true; m.position.z += (target - m.position.z) * k; const ry = m === opened && !ud.stack ? Math.max(-.35, Math.min(.35, (view.x - ud.home.x) * .002)) : ud.rot; m.rotation.y += (ry - m.rotation.y) * k; }
