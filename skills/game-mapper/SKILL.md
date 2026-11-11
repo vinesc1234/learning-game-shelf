@@ -7,7 +7,7 @@ description: Use when someone drops in raw, mixed-up information for a learning 
 
 Learning designers get handed mismatched information: slide decks, Slack threads, notes, half-finished docs, conflicting versions. Often nobody knows what's really in it until it's laid out. This skill is a working session, not an automatic converter. Claude does the heavy reading and sorting; the designer makes the calls.
 
-Every game is for a technology company and serves one or more of four focus areas: learning a technology, learning sales, implementing technology, or implementing sales. The goal is a game that fits the content, so you aren't rebuilding the same board game with a new map every time.
+Every game is for a technology company and serves one or more of four focus areas: learning a technology, learning sales, implementing technology, or implementing sales. Every game has to link back to learning a technology or learning a sales method. The goal is a game that fits the content, so you aren't rebuilding the same board game with a new map every time.
 
 ## How to run the session
 
@@ -38,9 +38,9 @@ End by asking: "Anything missing, wrong, or that I misread?"
 
 Ask only what you don't already know, in one short message, at most five questions:
 1. What's the focus: learning a technology, learning sales, implementing technology, or implementing sales? (It can be more than one.)
-2. Who's playing? (roles, like sellers, sales engineers, customer success, or partners, and how familiar they are with the topic)
+2. Who's playing? (roles, like sellers, sales engineers, customer success, or partners, how familiar they are with the topic, and how many people)
 3. Where will they play? Use the settings list below.
-4. How much time do they have?
+4. How much time do they have, and how much content does the game need to hold?
 5. After playing, what should people be able to do that they can't today?
 
 ## Step 4: Sort the content together
@@ -73,11 +73,12 @@ First ask which formats they've used recently, so you can steer away from them.
 Then recommend two or three games from the shelf below that match the focus area, fit the dominant content type, and suit the setting. Include one stretch pick they probably haven't tried, and consider an adaptation of a popular game people already know, since familiar rules mean less explaining. For each:
 - Why it fits this specific content (point to actual pieces)
 - How the pieces would become game parts (for example, "the 5 escalation steps become 5 locks")
+- How it links back to learning the technology or the sales method
 - Build effort
 - One way to keep it fresh
 - Its reference game from the table, and what to borrow from it
 
-Let them choose. If they want to combine two formats, help with that. If the content spans several modules, consider Hub World as the frame, with each module as its own game. For implementing sales, consider Boss Battle Deck or Spin the Wheel when the goal is putting a sales method into everyday practice. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
+Let them choose. If they want to combine two formats, help with that. If the content spans several modules, consider Hub World as the frame, with each module as its own game. When one person will play alone, look first at the solo formats: Daily Word, Four Groups, Mini Crossword, Archive Detective, Crack the Character, Connect the Pairs, Hidden Picture, Memory Match, Method Solitaire, Deal Puzzle, Pipe Puzzle, and Automation Puzzle, plus the other self-paced games. When she wants people to learn AI while they learn the technology or the sales method, look at the games where players use AI to reach the goal: Prompt Golf, Break the Bot, AI or Not, Prompt Telephone, Promptathon, Best-Of Library Contest, Crack the Character, Train Your Buddy, Objection Arena, Hallucination Hunt, Bot Battle, Prompt Pictionary, Sidekick Dungeon, and Pitch Remix. In these, using AI well is part of how you win, so players practice prompting, checking AI answers, and steering it, on real product or sales method content. Always use an approved AI tool. For implementing sales, consider Boss Battle Deck or Spin the Wheel when the goal is putting a sales method into everyday practice. If the content is mostly habits or tool skills for an ongoing community, remember the AI adoption formats that real companies have reported results with: House Cup, Team Participation Challenge, Promptathon, Learning Expo, and Best-Of Library Contest.
 
 ## Step 7: Write the game brief
 
@@ -113,7 +114,7 @@ These apply to every game. Check the brief against them before handing it over.
 - **Keep failure low-stakes.** Wrong answers should lead to a quick explanation and another try, never a public red mark.
 - **Build it accessible.** Never rely on color alone, caption any audio, and make it work with a keyboard.
 
-### Inclusion notes for timed or competitive games
+### Inclusion notes for specific games
 
 - **Trivia Race:** Score by team, not by person, and show answers without names.
 - **Elimination Quiz:** Let knocked-out players keep answering on a team side board so nobody sits out.
@@ -138,6 +139,21 @@ These apply to every game. Check the brief against them before handing it over.
 - **Just a Minute:** Let players tag in a teammate when they get stuck.
 - **Spin the Wheel:** Always allow a pass, or let the person spin for a teammate they'll help.
 - **Amazing Race:** Offer an accessible route with no stairs, and let every team pick the quick or the hard challenge at each stop.
+- **Daily Word:** Sharing only the colored grid means nobody sees who struggled.
+- **Archive Detective:** Give a starter keyword list for anyone who freezes at an empty search box.
+- **Crack the Character:** Offer a hint after five questions, and let people restart without a score.
+- **Hidden Picture:** Add a text list of what to find, so it doesn't depend on eyesight alone.
+- **Memory Match:** No timer by default.
+- **Method Solitaire:** No timer, and unlimited undo, so it stays relaxing.
+- **Deal Puzzle:** Explain every option, not just the right one, so a wrong pick still teaches something.
+- **Automation Puzzle:** Let people step through one command at a time instead of watching it run at speed.
+- **Train Your Buddy:** Retries are unlimited, and nobody else sees the score.
+- **Objection Arena:** Let people type or speak their answers, and replay any round without it counting.
+- **Hallucination Hunt:** Play in pairs: one reads the explainer, one checks the docs.
+- **Bot Battle:** Score the bot, not the person, so nobody is judged on their typing.
+- **Prompt Pictionary:** Let teams write the prompt together, so nobody is put on the spot.
+- **Sidekick Dungeon:** Show example questions after two failed tries.
+- **Pitch Remix:** Pair people up, one prompting and one checking against the method.
 
 ## Settings
 
@@ -150,7 +166,7 @@ These apply to every game. Check the brief against them before handing it over.
 
 ## The game shelf
 
-This matches the Learning Game Shelf page in this repo (index.html), which has 82 formats. Games that looked too much like the real job, like ticket queues and deal desks, were left off because they feel like more work in a corporate setting. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Each game also lists which focus areas it serves and an example for a technology company. Generic icebreakers and team-building games are deliberately left off. Focus: Learn tech, Learn sales, Implement tech, Implement sales. Effort: 1 low, 2 medium, 3 high.
+This matches the Learning Game Shelf page in this repo (index.html), which has 101 formats. Games that looked too much like the real job, like ticket queues and deal desks, were left off because they feel like more work in a corporate setting. Every format names a reference game: "Inspired by" means the mechanic comes from that game, and "Feels like" means it is a good reference for pacing and feel. The shelf also lists how each plays, what to borrow from the reference game, build tips, twists, pitfalls, and links to real-world examples. Each game also lists which focus areas it serves and an example for a technology company. Generic icebreakers and team-building games are deliberately left off. Focus: Learn tech, Learn sales, Implement tech, Implement sales. Effort: 1 low, 2 medium, 3 high.
 
 | Game | Focus | Reference game | Best content types | Settings | Effort |
 |---|---|---|---|---|---|
@@ -236,5 +252,24 @@ This matches the Learning Game Shelf page in this repo (index.html), which has 8
 | Boss Battle Deck | Learn sales, Implement sales | Feels like DealForge and Slay the Spire | Judgment, Finding problems | Self-paced, Room, Video call | 2 |
 | Amazing Race | Learn tech, Learn sales | Inspired by The Amazing Race | Facts, Tool skills, Big ideas | Big event, Room | 2 |
 | News Scout | Implement sales, Learn sales | Feels like Product Hunt daily rankings | Habits, Big ideas | Community | 1 |
+| Daily Word | Learn tech, Learn sales | Inspired by Wordle | Facts, Big ideas | Self-paced, Community, Team meeting | 1 |
+| Four Groups | Learn tech, Learn sales | Inspired by NYT Connections | Big ideas, Facts | Self-paced, Community, Team meeting, Video call | 1 |
+| Mini Crossword | Learn tech, Learn sales | Inspired by the New York Times Mini Crossword | Facts | Self-paced, Community, Team meeting | 1 |
+| Archive Detective | Implement tech, Learn tech | Inspired by Her Story | Finding problems, Big ideas, Judgment | Self-paced | 2 |
+| Crack the Character | Learn sales, Implement sales | Feels like L.A. Noire interrogations | Judgment | Self-paced | 2 |
+| Connect the Pairs | Learn tech, Learn sales | Inspired by Flow Free | Big ideas, Facts | Self-paced | 2 |
+| Hidden Picture | Learn tech, Implement tech | Inspired by Where's Waldo? | Facts, Tool skills | Self-paced, Community | 2 |
+| Memory Match | Learn tech, Learn sales | Inspired by Concentration, the card game | Facts | Self-paced, Team meeting | 1 |
+| Method Solitaire | Learn sales, Implement sales | Inspired by Klondike Solitaire | Steps, Facts | Self-paced | 2 |
+| Deal Puzzle | Learn sales, Implement sales | Feels like daily chess puzzles | Judgment | Self-paced, Community, Team meeting | 1 |
+| Pipe Puzzle | Learn tech, Implement tech | Inspired by Pipe Mania | Big ideas, Steps | Self-paced | 2 |
+| Automation Puzzle | Learn tech | Inspired by Human Resource Machine | Tool skills, Steps, Big ideas | Self-paced | 3 |
+| Train Your Buddy | Learn tech, Learn sales | Inspired by Tamagotchi | Big ideas, Facts | Self-paced, Community | 2 |
+| Objection Arena | Learn sales, Implement sales | Feels like Punch-Out!! | Judgment | Self-paced | 2 |
+| Hallucination Hunt | Learn tech | Feels like Spot the Difference puzzles | Finding problems, Facts | Self-paced, Video call, Community | 1 |
+| Bot Battle | Learn tech, Learn sales | Inspired by BattleBots | Tool skills, Big ideas | Big event, Video call, Room | 2 |
+| Prompt Pictionary | Learn tech | Inspired by Pictionary | Big ideas | Video call, Room, Team meeting | 1 |
+| Sidekick Dungeon | Learn tech | Feels like Zelda's companion characters | Tool skills, Facts, Big ideas | Self-paced | 2 |
+| Pitch Remix | Learn sales, Learn tech | Feels like the Party Quirks game on Whose Line Is It Anyway? | Judgment, Big ideas | Video call, Room, Team meeting | 1 |
 
-Thin spots on the shelf, where few formats fit: implementing sales overall (about 17 games), steps and processes in Slack, at big events, or in a 10-minute team meeting, habits in the room or in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.
+Thin spots on the shelf, where few formats fit: implementing sales overall (about 21 games), steps and processes in Slack, at big events, or in a 10-minute team meeting, habits in the room or in a 10-minute team meeting, and tradeoffs for self-paced play. If the content lands in one of these, say so, suggest adapting the closest format, and offer to add the new format to the shelf if it works.

@@ -1,6 +1,6 @@
 # Learning Game Shelf
 
-A catalog of 82 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
+A catalog of 101 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
 
 **Try it:** https://vinesc1234.github.io/learning-game-shelf/ (3D library) or https://vinesc1234.github.io/learning-game-shelf/shelf.html (classic shelf)
 
@@ -12,7 +12,7 @@ The fix ended up being simple: the mechanic should come from the content. A proc
 
 ## What's in here
 
-- `index.html` is a 3D library. All 82 games sit on carved wood bookcases as real 3D boxes with their own original cover art. Drag to look around, scroll to zoom, and click a box to pull it off the shelf and see how to run it. You can filter by focus, number of people, length, delivery style, and content type, search by name, switch to a list view, and reset the camera.
+- `index.html` is a 3D library. All 101 games sit on carved wood bookcases as real 3D boxes with their own original cover art. Drag to look around, scroll to zoom, and click a box to pull it off the shelf and see how to run it. You can filter by focus, number of people, length, delivery style, content type, and whether players use AI, search by name, switch to a list view, and reset the camera.
 - `shelf.html` is the classic shelf, with the full set of filters. Pick the focus, then what the content mostly is (facts, steps, judgment calls, finding problems, tradeoffs, tool skills, big ideas, or habits) and where people will play (in the room, on a video call, self-paced, in Slack, at a big event, or in a 10-minute team meeting). It shows the games that fit, easiest to build first.
 - Every game card has an example for a technology company, how it plays, build effort, group size, time, a tip for building it with Claude, a twist to keep it fresh, the most common way it goes wrong, and links to real examples where I found them.
 - Every format names a well-known game to use as a reference, with what to borrow from it. Many borrow their mechanic straight from a popular board, party, video, or TV game, like Codenames, Overcooked, or Super Mario 64 (a filter shows just those). The rest list a game that feels right, like Diner Dash for a triage game or Wordle for a daily puzzle. Giving Claude a specific game to match gets much better results than describing a feel from scratch.
@@ -31,7 +31,7 @@ Then drop in your source material and say "let's map this."
 
 ## Where the formats came from
 
-I started with about 30 formats I knew, then went looking for what other people are actually running: L&D blogs, game tool makers like H5P and ELB Learning, sales kickoff planners, security training card games on GitHub, and companies that gamified their AI rollouts (Microsoft, Netskope, Google Workspace customers, and a Salesforce partner). A second pass looked specifically for sales and tech team games, like negotiation classics, sales meeting games, and sales card games. The full source list is at the bottom of the page.
+I started with about 30 formats I knew, then went looking for what other people are actually running: L&D blogs, game tool makers like H5P and ELB Learning, sales kickoff planners, security training card games on GitHub, and companies that gamified their AI rollouts (Microsoft, Netskope, Google Workspace customers, and a Salesforce partner). A second pass looked specifically for sales and tech team games, like negotiation classics, sales meeting games, and sales card games. A third pass added solo games people can enjoy on their own, like a daily word puzzle, a Connections-style sorting puzzle, a daily deal puzzle for practicing a sales method, and a pipe puzzle for learning how a product's systems connect. A fourth pass added games where players use AI to win, like teaching an AI buddy, climbing a ladder of AI buyers, and hunting for planted mistakes in an AI-written explainer, so people learn AI while they learn the product or the sales method. The full source list is at the bottom of the page.
 
 ## Known limits
 

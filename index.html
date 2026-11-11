@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="A 3D library of 82 learning game formats for learning and selling technology. Click a box to see how to run it.">
+<meta name="description" content="A 3D library of 101 learning game formats for learning and selling technology. Click a box to see how to run it.">
 <title>Learning Game Library 3D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +37,8 @@ canvas { display: block; }
 .fld { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; color: var(--muted); }
 .fld input, .fld select { font: inherit; font-weight: 400; font-size: .85rem; color: var(--ink); background: var(--parch-2); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; }
 .fld input { width: 84px; }
+.fld.chk { cursor: pointer; color: var(--ink); }
+.fld.chk input { width: 18px; height: 18px; accent-color: var(--brass); }
 .fld select { max-width: 190px; }
 #len { max-width: 230px; }
 .fld input:focus-visible, .fld select:focus-visible, .clear:focus-visible { outline: 3px solid #FFD27A; outline-offset: 2px; }
@@ -57,6 +59,7 @@ canvas { display: block; }
 .ref { font-size: .82rem; font-weight: 700; color: var(--brass-ink); }
 .panel p { margin: 0; line-height: 1.5; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag.ai { background: #2E6E6A; color: #F2FBF9; border-color: #2E6E6A; }
 .tag { font-size: .76rem; font-weight: 700; border-radius: 6px; padding: 2px 8px; background: var(--parch-2); border: 1px solid var(--line); }
 .ex { border-left: 3px solid var(--brass); padding-left: 10px; }
 .lbl { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); margin-bottom: 2px; }
@@ -103,6 +106,7 @@ canvas { display: block; }
     <label class="fld"><span>Length</span><select id="len"></select></label>
     <label class="fld"><span>Delivery</span><select id="del"></select></label>
     <label class="fld"><span>Content</span><select id="con"></select></label>
+    <label class="fld chk"><input id="aionly" type="checkbox"><span>Players use AI</span></label>
     <button type="button" class="clear" id="clear" hidden>Clear filters</button>
   </div>
   <input class="search" id="q" type="search" placeholder="Search games" aria-label="Search games">
@@ -307,7 +311,26 @@ const G = [
   {n:"Ugli Orange", h:"Two sides each need the same rare oranges and seem to be in conflict, until they discover they need different parts of the fruit. A classic negotiation exercise about uncovering what the other side really wants.", c:["tradeoffs", "judgment"], s:["room", "call"], e:1, g:"Pairs or small teams", t:"30–40 min", b:"Have Claude adapt the two role sheets and write the debrief questions.", f:"Rerun it with a version where the hidden interests only partly overlap.", w:"It's a well-known exercise, so check that nobody has done it before.", src:["mitneg", "jeffsu"]},
   {n:"Boss Battle Deck", h:"Each 'boss' is a common way deals stall. Players use skill cards to beat it, and learn to recognize the pattern on real calls.", c:["judgment", "trouble"], s:["self", "room", "call"], e:2, g:"1 to 6", t:"5–15 min per boss", b:"Have Claude design the bosses from your real stall patterns and the skill cards from your sales methodology.", f:"Add a new boss whenever the team notices a new way deals get stuck.", w:"Keep the bosses real. A pattern nobody has seen won't stick.", src:["dealforge"]},
   {n:"Amazing Race", i:"The Amazing Race", h:"Teams race around the venue following QR-code clues. At each pit stop they complete a short product or sales challenge before getting the next clue.", c:["facts", "tools", "concepts"], s:["event", "room"], e:2, g:"20 to 3,000", t:"45–90 min", b:"Have Claude write the clues, the pit stop challenges, and the answer checks.", f:"Add a detour at each stop: two challenge options, one quick and one harder.", w:"Plan the route so teams don't all crowd the same stop.", src:["socialpoint"]},
-  {n:"News Scout", h:"People share one useful piece of industry or customer news in a Slack channel each week. Reactions pick the month's best scout.", c:["habits", "concepts"], s:["community"], e:1, g:"10 to 500", t:"Ongoing", b:"Have Claude draft the channel rules and a weekly recap of the top posts.", f:"Ask winners to add one line on how they'd use the news in a customer conversation.", w:"Can turn into link dumping. Require one sentence on why it matters.", src:["closecom"]}
+  {n:"News Scout", h:"People share one useful piece of industry or customer news in a Slack channel each week. Reactions pick the month's best scout.", c:["habits", "concepts"], s:["community"], e:1, g:"10 to 500", t:"Ongoing", b:"Have Claude draft the channel rules and a weekly recap of the top posts.", f:"Ask winners to add one line on how they'd use the news in a customer conversation.", w:"Can turn into link dumping. Require one sentence on why it matters.", src:["closecom"]},
+  {n:"Daily Word", i:"Wordle", h:"Guess the day's product or tech term in six tries. Each guess shows which letters are right, and the answer comes with a one-line explanation.", c:["facts", "concepts"], s:["self", "community", "meeting"], e:1, g:"Any", t:"2–5 min a day", b:"Have Claude pick 20 terms from the material, write a one-line explanation for each, and build a page that serves one word a day.", f:"Let people post their colored grid in Slack (no answers), so it turns into a small daily ritual.", w:"Only single-word terms work. Save phrases for a different game.", src:["yale", "amuse"]},
+  {n:"Four Groups", i:"NYT Connections", h:"Sixteen terms hide four groups of four. Players sort them out, with four mistakes allowed before the puzzle ends.", c:["concepts", "facts"], s:["self", "community", "meeting", "call"], e:1, g:"Any", t:"5–10 min", b:"Give Claude your content and have it build the groups with one sneaky overlap, plus a reveal that explains each group.", f:"Make the last group the tricky one: terms that sound alike but belong to different products.", w:"If the groups are obvious it's just a quiz. Test it on someone who hasn't seen the content.", src:["tcea"]},
+  {n:"Mini Crossword", i:"the New York Times Mini Crossword", h:"A small crossword where every answer comes from the material. Quick enough for a coffee break.", c:["facts"], s:["self", "community", "meeting"], e:1, g:"Any", t:"5 min", b:"Have Claude write the clues and fill the grid, then build a page that checks each answer.", f:"Write clues as tiny customer stories instead of definitions.", w:"Grids with obscure words get frustrating. Keep the filler words simple.", src:["amuse"]},
+  {n:"Archive Detective", i:"Her Story", h:"Players search a collection of short clips, emails, or chat logs by keyword. Each search turns up new pieces, and they put the story together themselves.", c:["trouble", "concepts", "judgment"], s:["self"], e:2, g:"1", t:"20–40 min", b:"Have Claude write a made-up story, split it into 30 to 60 short pieces, and build a search page that only shows the top few results.", f:"Hide one piece that changes how everything else reads.", w:"Players can get lost. Add a notebook where they pin what they've found.", src:["herstory"]},
+  {n:"Crack the Character", h:"Chat with an AI buyer who is hiding what they really need. Use the discovery questions from your sales method to find it before your question budget runs out.", c:["judgment"], s:["self"], e:2, g:"1", t:"10–15 min", b:"Write a short character sheet with a hidden need, and have Claude play the character, revealing the need only when asked the kinds of questions your sales method teaches.", f:"Add a new character each month with a different hidden need.", w:"Use an approved AI tool, and keep the characters playful so it doesn't feel like a test.", src:[]},
+  {n:"Connect the Pairs", i:"Flow Free", h:"Draw lines to link matching pairs on a grid, like a feature and the problem it solves, without any lines crossing.", c:["concepts", "facts"], s:["self"], e:2, g:"1", t:"5–10 min", b:"Have Claude write the pairs and build a grid puzzle with levels that get bigger.", f:"Show a one-line 'why' each time a pair connects, so the puzzle teaches as you go.", w:"The puzzle can take over from the content. Keep the grids small.", src:[]},
+  {n:"Hidden Picture", i:"Where's Waldo?", h:"A busy illustrated product screen or dashboard hides ten things to find, each one a feature or setting worth knowing.", c:["facts", "tools"], s:["self", "community"], e:2, g:"Any", t:"5–10 min", b:"Use Claude Design to draw the scene, then have Claude build the page with click-to-find spots and a short note on each find.", f:"Hide one bonus item almost nobody finds.", w:"Tiny targets are hard to click on a laptop. Keep them big enough.", src:[]},
+  {n:"Memory Match", i:"Concentration, the card game", h:"Flip two cards at a time to match a term with what it does. Fewer flips is a better score.", c:["facts"], s:["self", "meeting"], e:1, g:"1 to 4", t:"3–5 min", b:"Have Claude write 8 to 12 pairs and build a flip-card page.", f:"Pair a customer quote with the feature it's asking for.", w:"It tests memory more than understanding. Use it to review terms people have already met.", src:[]},
+  {n:"Method Solitaire", i:"Klondike Solitaire", h:"A solitaire deal where every card is a stage, question, or check from your sales method. Build each pile in the right order to clear the board.", c:["process", "facts"], s:["self"], e:2, g:"1", t:"5–10 min", b:"Give Claude your sales method's stages and key questions, and have it build the deck and a one-page solitaire game.", f:"Add wild cards that are real customer quotes, which go wherever the method says they belong.", w:"Only works if the method has a clear order. Check the deck with whoever owns the method.", src:[]},
+  {n:"Deal Puzzle", h:"One short deal snapshot a day and one question: what's the best next move, using your sales method? Pick a move and see why it works or doesn't.", c:["judgment"], s:["self", "community", "meeting"], e:1, g:"Any", t:"2–5 min a day", b:"Have Claude write 20 short snapshots from your sales method, each with one best move, two tempting wrong ones, and why.", f:"Let people rate each puzzle's difficulty and serve harder ones as they improve.", w:"Keep snapshots short. If it takes a paragraph to explain, it's a case study, not a puzzle.", src:[]},
+  {n:"Pipe Puzzle", i:"Pipe Mania", h:"Rotate tiles to route data from where it starts to where it needs to go, passing through the right systems on the way.", c:["concepts", "process"], s:["self"], e:2, g:"1", t:"5–10 min", b:"Have Claude turn your product's architecture into a set of puzzle levels, from simple to tricky.", f:"Later levels add a system the data must avoid, like one that shouldn't see customer details.", w:"Use the real system names so the puzzle maps to the product.", src:[]},
+  {n:"Automation Puzzle", i:"Human Resource Machine", h:"Drag a few simple commands into order to make a little worker finish a task, then watch it run. Fewer steps scores better.", c:["tools", "process", "concepts"], s:["self"], e:3, g:"1", t:"15–30 min", b:"Have Claude design 6 to 10 levels based on how your automation or AI agent tool works, plus the command blocks.", f:"After each level, show how the same solution looks in the real tool.", w:"The biggest build of the solo games. Start with three levels and test them.", src:[]},
+  {n:"Train Your Buddy", i:"Tamagotchi", h:"An AI plays a brand-new hire who knows nothing about the product. Teach it in your own words until it can pass a short quiz, which only works if you really understand the topic.", c:["concepts", "facts"], s:["self", "community"], e:2, g:"1", t:"10–20 min", b:"Tell Claude to play a buddy who only knows what the player teaches it, and to take a 5-question quiz when the player says it's ready.", f:"Unlock a tougher buddy, like a skeptical engineer, after the first one passes.", w:"The AI has to be told firmly not to use outside knowledge, or it passes without your help. Test that first.", src:["teachyou"]},
+  {n:"Objection Arena", h:"Climb a ladder of AI buyers, each with a signature objection. Answer using your sales method to win the round, and the AI explains what landed and what didn't.", c:["judgment"], s:["self"], e:2, g:"1", t:"10–20 min", b:"Write five buyer personas, each with one signature objection and a tell, and have Claude play them and score each answer against your sales method.", f:"Add a final boss who mixes every objection from the ladder.", w:"Keep the scoring tied to the method, so it rewards the method and not just smooth talking.", src:["mindtickle"]},
+  {n:"Hallucination Hunt", h:"Claude writes a confident product explainer with a few planted mistakes. Players check it against the real docs and find every one.", c:["trouble", "facts"], s:["self", "call", "community"], e:1, g:"Any", t:"10 min", b:"Ask Claude to write a short explainer from your docs, secretly change 4 or 5 facts, and keep an answer key.", f:"Include one mistake that sounds more believable than the truth.", w:"Make sure the docs players check against are current, or the 'right' answer is wrong too.", src:[]},
+  {n:"Bot Battle", i:"BattleBots", h:"Each player or team writes instructions for a small AI assistant. The bots face the same tough customer questions, and the most accurate, most helpful answers win each round.", c:["tools", "concepts"], s:["event", "call", "room"], e:2, g:"2 to 50", t:"30–45 min", b:"Have Claude write ten tough customer questions about your product, and set up a simple way to run every team's instructions on each question.", f:"Add a surprise round where the right answer is 'I don't know,' to reward bots that don't guess.", w:"Use an approved AI tool and product docs that are fine to share.", src:[]},
+  {n:"Prompt Pictionary", i:"Pictionary", h:"Players use an image AI to draw a product idea without naming it, and everyone else guesses what it is.", c:["concepts"], s:["call", "room", "meeting"], e:1, g:"4 to 30", t:"10–15 min", b:"Have Claude pick 15 product concepts and make a card for each, with the words you're not allowed to use in the prompt.", f:"Run a round where the picture has to show a customer problem instead of a feature.", w:"Image tools can be slow. Generate between turns, and use an approved tool.", src:[]},
+  {n:"Sidekick Dungeon", h:"A short text dungeon where your only help is an AI sidekick that knows the product docs. Each locked door needs an answer you can only get by asking the sidekick a good question.", c:["tools", "facts", "concepts"], s:["self"], e:2, g:"1", t:"20–30 min", b:"Give Claude the product docs as the sidekick's knowledge, and write five doors that each need one specific fact.", f:"Make the last door need the sidekick to compare two features, so vague questions don't work.", w:"The sidekick has to stick to the docs. Tell it to say when it doesn't know.", src:[]},
+  {n:"Pitch Remix", h:"Everyone gets the same product pitch and a secret buyer card. They use AI to rewrite the pitch for that buyer, following the sales method, and the group guesses which buyer each pitch was for.", c:["judgment", "concepts"], s:["call", "room", "meeting"], e:1, g:"3 to 30", t:"15 min", b:"Have Claude write a base pitch and eight buyer cards, like a CFO, a security lead, or a skeptical engineer.", f:"If nobody can guess the buyer, the rewrite didn't land. That's the whole scoring system.", w:"AI rewrites can sound good but skip the method's steps. Check for that in the debrief.", src:[]}
 ];
 const SRC = {
   arlo:["Arlo: 28 training activities and games","https://arlo.co/blog/training-activities-and-games"],
@@ -347,7 +370,13 @@ const SRC = {
   mitneg:["MIT OpenCourseWare: negotiation course notes", "https://ocw.mit.edu/courses/15-667-negotiation-and-conflict-management-spring-2001/a064e64a4011f19f27b9da68e17afabc_notes_on_n101.pdf"],
   jeffsu:["Jeff Su: icebergs, hairy arms, and oranges", "https://jeffsu.org/icebergs-hairy-arms-and-oranges"],
   dealforge:["Product Hunt: DealForge sales training game", "https://www.producthunt.com/products/dealforge-sales-training-game"],
-  socialpoint:["SocialPoint: games for sales kickoffs", "https://www.socialpoint.io/how-to-use-games-and-gamification-to-achieve-your-sales-kickoff-objectives/"]
+  socialpoint:["SocialPoint: games for sales kickoffs", "https://www.socialpoint.io/how-to-use-games-and-gamification-to-achieve-your-sales-kickoff-objectives/"],
+  yale:["Work at Yale: making a custom Wordle for a meeting", "https://your.yale.edu/sites/default/files/files/WorkatYale/Custom_Wordle_Link_Instructions.pdf"],
+  amuse:["Amuse Labs: puzzles for employee training and engagement", "https://amuselabs.com/?p=7711"],
+  tcea:["TCEA: making your own Connections puzzles", "https://blog.tcea.org/?p=61388"],
+  herstory:["Kill Screen: Her Story and asking the right questions", "https://killscreen.com/listening-her-story-looking-right-questions"],
+  teachyou:["Teach AI How to Code: learning by teaching an AI (research paper)", "https://arxiv.org/abs/2309.14534"],
+  mindtickle:["Mindtickle: AI role-play for persona-specific objection handling", "https://www.mindtickle.com/blog/how-ai-role-play-supports-persona-specific-objection-handling/"]
 };
 const EXTRA_SRC = {
   "Trivia Race":["arlo","elb"], "Memory Match":["elb","h5p"], "Bingo":["arlo","sko"], "Jeopardy Board":["elb","sko"],
@@ -583,7 +612,13 @@ const REF = {
 "Spin the Wheel": ["game-show prize wheels", "A big spin, a moment of suspense, and a quick challenge."],
 "Ugli Orange": ["the Ugli Orange exercise", "Two secret briefs that look like a conflict, and a reveal that rewards asking questions."],
 "Boss Battle Deck": ["DealForge and Slay the Spire", "A hand of skill cards, a boss with a special trick, and short fights you can replay."],
-"News Scout": ["Product Hunt daily rankings", "Post, upvote, and see the best rise to the top."]
+"News Scout": ["Product Hunt daily rankings", "Post, upvote, and see the best rise to the top."],
+"Crack the Character": ["L.A. Noire interrogations", "Ask questions, watch for tells, and decide when you've found the truth."],
+"Deal Puzzle": ["daily chess puzzles", "One position, one best move, and an explanation once you find it."],
+"Objection Arena": ["Punch-Out!!", "A ladder of opponents, each with a signature move and a tell you learn to read."],
+"Hallucination Hunt": ["Spot the Difference puzzles", "Look closely, compare against the real thing, and find everything that's off."],
+"Sidekick Dungeon": ["Zelda's companion characters", "A helper who knows things you don't, as long as you ask the right way."],
+"Pitch Remix": ["the Party Quirks game on Whose Line Is It Anyway?", "Same scene, a secret character, and the fun of guessing who it was for."]
 };
 const FOCUS_AREAS = [["lt","Learning a technology"],["ls","Learning sales"],["it","Implementing technology"],["is","Implementing sales"]];
 const FOCUS = {
@@ -1089,7 +1124,26 @@ const FOCUS = {
 "Ugli Orange": {"a": ["ls"], "x": "After the reveal, map it to a real deal: what does procurement actually need, compared with what the champion needs?"},
 "Boss Battle Deck": {"a": ["ls", "is"], "x": "Bosses like 'The Champion Went Quiet,' 'Surprise Procurement Step,' and 'Budget Freeze,' beaten with cards like 'Find the economic buyer' or 'Confirm the decision process.'"},
 "Amazing Race": {"a": ["lt", "ls"], "x": "Pit stops for the new product demo, the pricing quiz, the competitor showdown, and the customer story, with the last stop at the opening party."},
-"News Scout": {"a": ["is", "ls"], "x": "A rep shares a competitor's price change with one line on how to handle it on calls, and it becomes the month's top post."}
+"News Scout": {"a": ["is", "ls"], "x": "A rep shares a competitor's price change with one line on how to handle it on calls, and it becomes the month's top post."},
+"Daily Word": {"a": ["lt", "ls"], "x": "Monday's word is LATENCY. After the last guess, a line explains why customers notice it."},
+"Four Groups": {"a": ["lt", "ls"], "x": "Tiles like SSO, audit log, champion, renewal, and seat count that sort into security features, buyer roles, deal stages, and pricing terms."},
+"Mini Crossword": {"a": ["lt", "ls"], "x": "A 5x5 grid where 1-Across is 'What a customer wants when nothing loads (6)': UPTIME."},
+"Archive Detective": {"a": ["it", "lt"], "x": "Search a made-up customer's support chats and system notes to work out why their integration kept failing, learning how the product connects along the way."},
+"Crack the Character": {"a": ["ls", "is"], "x": "An 'IT director' who says they want a cheaper plan. The method's questions about impact and timing uncover that they really need to pass an audit next quarter."},
+"Connect the Pairs": {"a": ["lt", "ls"], "x": "Connect single sign-on to 'too many passwords' and usage dashboards to 'can't prove value at renewal.'"},
+"Hidden Picture": {"a": ["lt", "it"], "x": "Find the ten places the new release shows up on a crowded dashboard, with a one-line note on what each one does."},
+"Memory Match": {"a": ["lt", "ls"], "x": "Match API with 'lets two apps talk to each other' and churn with 'customers who don't renew.'"},
+"Method Solitaire": {"a": ["ls", "is"], "x": "One pile per stage of the sales method, with cards like 'confirm the decision process' that only fit in one spot."},
+"Deal Puzzle": {"a": ["ls", "is"], "x": "'The champion loves the demo, but nobody has mentioned budget.' The best move is to find out who signs off before sending a proposal."},
+"Pipe Puzzle": {"a": ["lt", "it"], "x": "Route a customer's order from the web form through the API and billing to the dashboard."},
+"Automation Puzzle": {"a": ["lt"], "x": "Teach the worker to sort incoming requests by priority, the same logic as setting up a routing rule in the product."},
+"Train Your Buddy": {"a": ["lt", "ls"], "x": "Teach the buddy how single sign-on works, well enough that it can explain it back the way you'd want a customer to hear it."},
+"Objection Arena": {"a": ["ls", "is"], "x": "Round 3 is the 'we already have a tool for that' buyer. The method's move is to ask what the current tool can't do yet."},
+"Hallucination Hunt": {"a": ["lt"], "x": "The explainer says the integration syncs every hour. The docs say every 15 minutes. Players spot it and note where they checked."},
+"Bot Battle": {"a": ["lt", "ls"], "x": "Teams build a bot that answers pricing and security questions about the product, then see which one stays accurate under pressure."},
+"Prompt Pictionary": {"a": ["lt"], "x": "Get the image AI to show 'data that stays in the customer's region' without using the words data, region, or location."},
+"Sidekick Dungeon": {"a": ["lt"], "x": "A door asks for the upload limit on the enterprise plan. A vague 'tell me about uploads' doesn't open it; a specific question does."},
+"Pitch Remix": {"a": ["ls", "lt"], "x": "Rewrite the same pitch for a CFO and a security lead, and see whether the room can tell which is which."}
 };
 const INCLUSIVE = {
 "Trivia Race": "Score by team, not by person, and show answers without names.",
@@ -1114,9 +1168,25 @@ const INCLUSIVE = {
 "Alphabet Improv": "Let people play in pairs with a whispering coach, or observe one round first.",
 "Just a Minute": "Let players tag in a teammate when they get stuck.",
 "Spin the Wheel": "Always allow a pass, or let the person spin for a teammate they'll help.",
-"Amazing Race": "Offer an accessible route with no stairs, and let every team pick the quick or the hard challenge at each stop."
+"Amazing Race": "Offer an accessible route with no stairs, and let every team pick the quick or the hard challenge at each stop.",
+"Daily Word": "Sharing only the colored grid means nobody sees who struggled.",
+"Archive Detective": "Give a starter keyword list for anyone who freezes at an empty search box.",
+"Crack the Character": "Offer a hint after five questions, and let people restart without a score.",
+"Hidden Picture": "Add a text list of what to find, so it doesn't depend on eyesight alone.",
+"Memory Match": "No timer by default.",
+"Method Solitaire": "No timer, and unlimited undo, so it stays relaxing.",
+"Deal Puzzle": "Explain every option, not just the right one, so a wrong pick still teaches something.",
+"Automation Puzzle": "Let people step through one command at a time instead of watching it run at speed.",
+"Train Your Buddy": "Retries are unlimited, and nobody else sees the score.",
+"Objection Arena": "Let people type or speak their answers, and replay any round without it counting.",
+"Hallucination Hunt": "Play in pairs: one reads the explainer, one checks the docs.",
+"Bot Battle": "Score the bot, not the person, so nobody is judged on their typing.",
+"Prompt Pictionary": "Let teams write the prompt together, so nobody is put on the spot.",
+"Sidekick Dungeon": "Show example questions after two failed tries.",
+"Pitch Remix": "Pair people up, one prompting and one checking against the method."
 };
-G.forEach(g => { if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; g.inc = INCLUSIVE[g.n]; });
+const AIUSE = ["Prompt Golf", "Break the Bot", "AI or Not", "Prompt Telephone", "Promptathon", "Best-Of Library Contest", "Crack the Character", "Train Your Buddy", "Objection Arena", "Hallucination Hunt", "Bot Battle", "Prompt Pictionary", "Sidekick Dungeon", "Pitch Remix"];
+G.forEach(g => { g.ai = AIUSE.includes(g.n); if (!g.src) g.src = EXTRA_SRC[g.n] || []; if (!g.i && REF[g.n]) g.r = REF[g.n]; g.a = FOCUS[g.n].a; g.x = FOCUS[g.n].x; g.inc = INCLUSIVE[g.n]; });
 G.forEach((g, i) => g.id = "g" + i);
 
 /* ---------- Game room: original box art for every game ---------- */
@@ -1327,10 +1397,15 @@ const items = []; // {kind, w, g?, list?, n?}
   }
 }
 const widthOf = it => it.kind === "box" ? SH3[look(it.g).shape][0] * K : it.kind === "stack" ? 40 : it.kind === "books" ? it.n * 3.4 : [8, 14, 16][it.d];
-const shelves = []; { let cur = [], wsum = 4;
-  for (const it of items) { const w = widthOf(it) + 2.4; if (wsum + w > BAY - 4) { shelves.push(cur); cur = []; wsum = 4; } cur.push(it); wsum += w; }
-  if (cur.length) shelves.push(cur); }
-const NBAY = Math.ceil(shelves.length / SHELVES);
+// pack shelves greedily at a given shelf capacity
+function packAt(cap) { const out = []; let cur = [], wsum = 4;
+  for (const it of items) { const w = widthOf(it) + 2.4; if (wsum + w > cap && cur.length) { out.push(cur); cur = []; wsum = 4; } cur.push(it); wsum += w; }
+  if (cur.length) out.push(cur); return out; }
+// as many bookcases as needed, then spread the games evenly so no bookcase sits half empty (books fill the gaps)
+const NBAY = Math.ceil(packAt(BAY - 4).length / SHELVES);
+let shelves; { let lo = 20, hi = BAY - 4;
+  for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (packAt(mid).length <= NBAY * SHELVES) hi = mid; else lo = mid; }
+  shelves = packAt(hi); }
 const TOTAL = NBAY * BAY + (NBAY + 1) * PIL;
 const bayX = b => PIL + b * (BAY + PIL) + BAY / 2 - TOTAL / 2;   // center x of bay b
 
@@ -1453,7 +1528,7 @@ async function coverCanvas(g, shape) {
   const c = document.createElement("canvas"); c.width = cw; c.height = ch; const x = c.getContext("2d");
   if (img) x.drawImage(img, 0, 0, cw, ch); else { x.fillStyle = L.p[0]; x.fillRect(0, 0, cw, ch); }
   x.scale(SC, SC);
-  if (shape !== "small") { x.font = `500 7.5px "JetBrains Mono"`; x.fillStyle = L.p[3]; x.globalAlpha = .9; x.textBaseline = "top"; x.fillText(g.a.map(k => FSHORT[k]).join(" · ").toUpperCase(), 8, 7, w - 16); x.globalAlpha = 1; }
+  if (shape !== "small") { x.font = `500 7.5px "JetBrains Mono"`; x.fillStyle = L.p[3]; x.globalAlpha = .9; x.textBaseline = "top"; x.fillText((g.ai ? ["Uses AI"] : []).concat(g.a.map(k => FSHORT[k])).join(" · ").toUpperCase(), 8, 7, w - 16); x.globalAlpha = 1; }
   const top = shape === "small" ? 8 : 20;
   drawTitle(x, g, L, 9, top, w - 18, h - top - m - 30, Math.min(32, w * .17));
   x.font = `500 8px "JetBrains Mono"`; x.fillStyle = "#F4F1E8"; x.textBaseline = "middle";
@@ -1598,7 +1673,7 @@ function openGame(m) {
   const eff = ["", "Low", "Medium", "High"][g.e];
   $("pbody").innerHTML = `<h2 id="ptitle">${esc(g.n)}</h2>${ref ? `<span class="ref">${ref}</span>` : ""}
     <button type="button" class="used-btn" id="usedb" aria-pressed="${used.has(g.n)}">${used.has(g.n) ? "Used recently" : "Mark as used"}</button>
-    <p>${esc(g.h)}</p><div class="tags">${g.a.map(k => `<span class="tag">${esc(FOCUS_AREAS.find(f => f[0] === k)[1])}</span>`).join("")}</div>
+    <p>${esc(g.h)}</p><div class="tags">${g.a.map(k => `<span class="tag">${esc(FOCUS_AREAS.find(f => f[0] === k)[1])}</span>`).join("")}${g.ai ? `<span class="tag ai">Players use AI</span>` : ""}</div>
     <div><span class="lbl">Length</span><div class="tags">${g.len.map(k => `<span class="tag">${esc(LENN[k])}</span>`).join("")}</div></div>
     <div><span class="lbl">Delivery</span><div class="tags">${g.s.map(k => `<span class="tag">${esc(DELN[k])}</span>`).join("")}</div></div>
     <div><span class="lbl">Content</span><div class="tags">${g.c.map(k => `<span class="tag">${esc(CONN[k])}</span>`).join("")}</div></div>
@@ -1619,7 +1694,7 @@ kbd.addEventListener("focusout", () => { $("flabel").style.display = "none"; });
 kbd.addEventListener("click", e => { const b = e.target.closest("button"); if (b) openGame(pickables[+b.dataset.i]); });
 
 // ---------- filters ----------
-const flt = { f: null, q: "", n: null, s: "", c: "", l: "" };
+const flt = { f: null, q: "", n: null, s: "", c: "", l: "", ai: false };
 // group size text -> [min, max] people; games run per team or table scale up with more copies
 function sizeRange(t) {
   const s = t.toLowerCase().replace(/,/g, ""), INF = Infinity;
@@ -1653,7 +1728,7 @@ function lenBuckets(t) {
 }
 G.forEach(g => g.len = lenBuckets(g.t));
 function matches(g) { const q = flt.q.trim().toLowerCase();
-  return (!flt.f || g.a.includes(flt.f)) && (!flt.s || g.s.includes(flt.s)) && (!flt.c || g.c.includes(flt.c)) && (!flt.l || g.len.includes(flt.l)) &&
+  return (!flt.f || g.a.includes(flt.f)) && (!flt.s || g.s.includes(flt.s)) && (!flt.c || g.c.includes(flt.c)) && (!flt.l || g.len.includes(flt.l)) && (!flt.ai || g.ai) &&
     (!flt.n || (flt.n >= g.size[0] && flt.n <= g.size[1])) &&
     (!q || [g.n, g.i || "", g.r ? g.r.join(" ") : "", g.x, g.h].join(" ").toLowerCase().includes(q)); }
 const DEL = [["room", "In the room"], ["call", "Video call"], ["self", "Self-paced"], ["community", "Slack or community"], ["event", "Big event (100+)"], ["meeting", "10-min team meeting"]];
@@ -1663,11 +1738,12 @@ $("con").innerHTML = `<option value="">Any</option>` + CONTENT.map(([k, l]) => `
 $("ppl").addEventListener("input", e => { const v = parseInt(e.target.value, 10); flt.n = v > 0 ? v : null; applyFilter(); });
 $("len").innerHTML = `<option value="">Any</option>` + LEN.map(([k, l]) => `<option value="${k}">${l}</option>`).join("");
 $("len").addEventListener("change", e => { flt.l = e.target.value; applyFilter(); });
+$("aionly").addEventListener("change", e => { flt.ai = e.target.checked; applyFilter(); });
 $("del").addEventListener("change", e => { flt.s = e.target.value; applyFilter(); });
 $("con").addEventListener("change", e => { flt.c = e.target.value; applyFilter(); });
-$("clear").onclick = () => { Object.assign(flt, { f: null, q: "", n: null, s: "", c: "", l: "" }); $("q").value = ""; $("len").value = ""; $("ppl").value = ""; $("del").value = ""; $("con").value = ""; applyFilter(); };
+$("clear").onclick = () => { Object.assign(flt, { f: null, q: "", n: null, s: "", c: "", l: "", ai: false }); $("q").value = ""; $("len").value = ""; $("aionly").checked = false; $("ppl").value = ""; $("del").value = ""; $("con").value = ""; applyFilter(); };
 function chips() { $("chips").innerHTML = [["", "All"], ["lt", "Learn tech"], ["ls", "Learn sales"], ["it", "Implement tech"], ["is", "Implement sales"]].map(([k, l]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${(flt.f || "") === k}">${l}</button>`).join(""); }
-function applyFilter() { let n = 0; dirty = true; $("clear").hidden = !(flt.f || flt.q || flt.n || flt.s || flt.c || flt.l);
+function applyFilter() { let n = 0; dirty = true; $("clear").hidden = !(flt.f || flt.q || flt.n || flt.s || flt.c || flt.l || flt.ai);
   pickables.forEach(m => { const ok = matches(m.userData.g); if (ok) n++; m.userData.dim = !ok; m.material.forEach(mm => mm.color.setScalar((ok ? 1 : .22) * (mm.toneMapped === false ? .92 : 1))); });
   $("count").textContent = `${n} of ${pickables.length} games`; chips(); if (!$("list").hidden) renderList(); }
 $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; flt.f = b.dataset.k || null; applyFilter(); });
