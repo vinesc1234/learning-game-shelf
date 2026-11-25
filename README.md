@@ -2,7 +2,7 @@
 
 A catalog of 101 learning game formats for technology companies, matched to the focus (learning a technology, learning sales, implementing technology, or implementing sales), the kind of content you have, and where people will play. It comes with a Claude skill that helps you sort messy source material and pick a game that fits.
 
-**Try it:** https://vinesc1234.github.io/learning-game-shelf/ (3D library) or https://vinesc1234.github.io/learning-game-shelf/shelf.html (classic shelf)
+**Try it:** https://vinesc1234.github.io/learning-game-shelf/
 
 ## Why I made it
 
@@ -12,14 +12,12 @@ The fix ended up being simple: the mechanic should come from the content. A proc
 
 ## What's in here
 
-- `index.html` is a 3D library. All 101 games sit on carved wood bookcases as real 3D boxes with their own original cover art. Drag to look around, scroll to zoom, and click a box to pull it off the shelf and see how to run it. You can filter by focus, number of people, length, delivery style, content type, and whether players use AI, search by name, switch to a list view, and reset the camera.
-- `shelf.html` is the classic shelf, with the full set of filters. Pick the focus, then what the content mostly is (facts, steps, judgment calls, finding problems, tradeoffs, tool skills, big ideas, or habits) and where people will play (in the room, on a video call, self-paced, in Slack, at a big event, or in a 10-minute team meeting). It shows the games that fit, easiest to build first.
-- Every game card has an example for a technology company, how it plays, build effort, group size, time, a tip for building it with Claude, a twist to keep it fresh, the most common way it goes wrong, and links to real examples where I found them.
-- Every format names a well-known game to use as a reference, with what to borrow from it. Many borrow their mechanic straight from a popular board, party, video, or TV game, like Codenames, Overcooked, or Super Mario 64 (a filter shows just those). The rest list a game that feels right, like Diner Dash for a triage game or Wordle for a daily puzzle. Giving Claude a specific game to match gets much better results than describing a feel from scratch.
+- `index.html` is a 3D library. All 101 games sit on carved wood bookcases as real 3D boxes with their own original cover art. Drag to look around, scroll to zoom, and click a box to pull it off the shelf and see how to run it. Click **Let's build a game** to describe what you're working with and answer a few guiding questions (goal, group size, length, where people will play, content type, whether players should use AI, and the feel you want). It suggests the best-matching games, highlights them on the shelves, and writes a starter prompt you can copy into Claude to build the one you pick. The list view gives every game its own old-style library checkout card, with stamps for time, players, focus, where to play, and build effort, plus a **Let's build!** button that jumps straight to a starter prompt for that game. There's also a reset button for the camera.
+- Every game's details panel has an example for a technology company, how it plays, build effort, group size, time, a tip for building it with Claude, a twist to keep it fresh, the most common way it goes wrong, and links to real examples where I found them.
+- Every format names a well-known game to use as a reference, with what to borrow from it. Many borrow their mechanic straight from a popular board, party, video, or TV game, like Codenames, Overcooked, or Super Mario 64. The rest list a game that feels right, like Diner Dash for a triage game or Wordle for a daily puzzle. Giving Claude a specific game to match gets much better results than describing a feel from scratch.
 - The game names belong to their owners. Borrow the mechanic by describing how it plays, never by copying code, art, or assets, and give your version its own name and look.
-- A short set of inclusion rules sits at the top of the page, and timed or competitive games have notes on keeping them inclusive, like team scoring and a relaxed mode.
-- A fit grid shows how many formats fit each pairing, so you can see where the gaps are.
-- "Mark as used" and "Hide games I've used recently" help you avoid repeating yourself. Those marks are saved in your own browser only.
+- Games that could leave someone out, like timed or competitive ones, have notes on keeping them inclusive, like team scoring and a relaxed mode.
+- "Mark as used" puts a USED sticker on a game's box so you can avoid repeating yourself. Those marks are saved in your own browser only.
 - `skills/game-mapper/SKILL.md` is a Claude skill for the step before the shelf. You drop in everything you were given, and Claude walks through it with you: what's actually in there, what conflicts, what type of content each piece is, what the learning goals are, and which two or three games fit. It ends with a game brief and a prompt to start building.
 
 ## Using the skill
@@ -31,7 +29,7 @@ Then drop in your source material and say "let's map this."
 
 ## Where the formats came from
 
-I started with about 30 formats I knew, then went looking for what other people are actually running: L&D blogs, game tool makers like H5P and ELB Learning, sales kickoff planners, security training card games on GitHub, and companies that gamified their AI rollouts (Microsoft, Netskope, Google Workspace customers, and a Salesforce partner). A second pass looked specifically for sales and tech team games, like negotiation classics, sales meeting games, and sales card games. A third pass added solo games people can enjoy on their own, like a daily word puzzle, a Connections-style sorting puzzle, a daily deal puzzle for practicing a sales method, and a pipe puzzle for learning how a product's systems connect. A fourth pass added games where players use AI to win, like teaching an AI buddy, climbing a ladder of AI buyers, and hunting for planted mistakes in an AI-written explainer, so people learn AI while they learn the product or the sales method. The full source list is at the bottom of the page.
+I started with about 30 formats I knew, then went looking for what other people are actually running: L&D blogs, game tool makers like H5P and ELB Learning, sales kickoff planners, security training card games on GitHub, and companies that gamified their AI rollouts (Microsoft, Netskope, Google Workspace customers, and a Salesforce partner). A second pass looked specifically for sales and tech team games, like negotiation classics, sales meeting games, and sales card games. A third pass added solo games people can enjoy on their own, like a daily word puzzle, a Connections-style sorting puzzle, a daily deal puzzle for practicing a sales method, and a pipe puzzle for learning how a product's systems connect. A fourth pass added games where players use AI to win, like teaching an AI buddy, climbing a ladder of AI buyers, and hunting for planted mistakes in an AI-written explainer, so people learn AI while they learn the product or the sales method. Each game links to the examples behind it.
 
 ## Known limits
 
