@@ -7,7 +7,7 @@
 <title>Learning Game Library 3D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&family=Bungee&family=Alfa+Slab+One&family=Righteous&family=Lilita+One&family=Fraunces:opsz,wght@9..144,900&family=Special+Elite&family=Caveat:wght@600;700&family=Kalam:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&family=Bungee&family=Alfa+Slab+One&family=Righteous&family=Lilita+One&family=Fraunces:opsz,wght@9..144,900&family=Inter:wght@400;500;600&family=Special+Elite&family=Caveat:wght@600;700&family=Kalam:wght@400&display=swap">
 <style>
 body { margin: 0; }
 [hidden] { display: none !important; }
@@ -173,6 +173,63 @@ body.bopen .bar { display: none; }
 .cfoot p { margin: 0; font-family: "Kalam", cursive; font-size: .95rem; }
 .lempty { padding: 18px; text-align: center; font-family: "Kalam", cursive; border-bottom: 1.5px solid var(--rule); }
 @media (max-width: 420px) { .lrow, .chead { grid-template-columns: 74px 1fr; } .lstamp span { font-size: .74rem; } .stampbtn { font-size: .62rem; padding: 3px 4px; } }
+.bx { --bg: #F6E9D6; --paper: #FBF3E7; --sand: #EAD9BF; --line: #D9C3A3; --ink: #2A1A0E; --soft: #6B5440; --link: #7A4E12; --accent: #C9923A;
+  width: min(440px, 100vw); background: var(--bg); color: var(--ink); font-family: Inter, "Segoe UI", sans-serif; padding: 26px 22px 40px; border-right: 1px solid var(--line); box-shadow: 20px 0 40px rgba(0,0,0,.4); }
+#bxbody { display: flex; flex-direction: column; gap: 18px; min-height: 100%; }
+.bx h1, .bx h2, .bx .bxq { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; margin: 0; }
+.bx .top { display: flex; align-items: center; gap: 12px; }
+.bx .top h1 { flex: 1; font-size: 24px; }
+.bx .round { width: 44px; height: 44px; flex: none; border-radius: 22px; border: 1px solid var(--line); background: var(--sand); color: var(--ink); font-size: 18px; cursor: pointer; display: grid; place-items: center; }
+.bx .bxq { font-size: 30px; line-height: 1.1; display: block; }
+.bx .sub { margin: 0; font-size: 15px; color: var(--soft); line-height: 1.45; }
+.bx textarea { min-height: 190px; resize: vertical; box-sizing: border-box; padding: 16px; border-radius: 16px; border: 2px solid var(--ink); background: var(--paper); font: inherit; font-size: 16px; line-height: 1.5; color: var(--ink); width: 100%; }
+.bx .small { font-size: 13px; color: var(--soft); font-weight: 500; }
+.bx .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.bx .pill { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--line); background: var(--sand); font: inherit; font-size: 14px; color: var(--ink); cursor: pointer; }
+.bx .primary { min-height: 56px; width: 100%; border-radius: 14px; border: none; background: var(--accent); font: inherit; font-weight: 600; font-size: 17px; color: var(--ink); cursor: pointer; }
+.bx .ghost2 { min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line); background: transparent; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; }
+.bx .textlink { min-height: 44px; border: none; background: none; font: inherit; font-size: 14px; color: var(--link); text-decoration: underline; cursor: pointer; padding: 0 4px; }
+.bx .foot { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+.bx .gbox { padding: 16px; border-radius: 18px; background: var(--ink); color: var(--bg); box-shadow: 6px 6px 0 #B89A72; display: flex; flex-direction: column; gap: 12px; }
+.bx .gbox .gtop { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.bx .gbox .glabel { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #E3CFB0; display: block; }
+.bx .gbox .gtitle { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 19px; line-height: 1.2; display: block; overflow-wrap: anywhere; }
+.bx .gbox .prog { flex: none; padding: 5px 9px; border-radius: 10px; background: var(--accent); color: var(--ink); font-size: 12px; font-weight: 600; }
+.bx .slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.bx .slot { min-height: 54px; padding: 4px 2px; border-radius: 10px; font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+.bx .slot .sl { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+.bx .slot .sv { font-size: 13px; font-weight: 600; }
+.bx .slot.cur { border: 2px dashed var(--accent); background: #3E2A1B; color: var(--bg); }
+.bx .slot.cur .sl { color: #E3CFB0; }
+.bx .slot.full { border: none; background: var(--bg); color: var(--ink); }
+.bx .slot.full .sl { color: var(--soft); }
+.bx .slot.empty { border: 2px dashed var(--soft); background: transparent; color: #C9B08C; }
+.bx .slot.empty .sv { font-size: 15px; }
+.bx .ghint { font-size: 12px; color: #E3CFB0; }
+.bx .stack { position: relative; margin-top: 6px; }
+.bx .stack::before, .bx .stack::after { content: ""; position: absolute; border-radius: 20px; z-index: 0; }
+.bx .stack::before { inset: 14px 10px -6px 10px; background: #E3CFB0; transform: rotate(3deg); }
+.bx .stack::after { inset: 7px 5px -3px 5px; background: var(--sand); transform: rotate(-2deg); }
+.bx .qcard { position: relative; z-index: 1; border-radius: 20px; background: var(--paper); border: 2px solid var(--ink); padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; }
+.bx .qcard .clabel { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); font-weight: 600; }
+.bx .qcard h2 { font-size: 25px; line-height: 1.15; }
+.bx .opts { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.bx .opt { min-height: 48px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); font: inherit; font-size: 15px; color: var(--ink); text-align: left; cursor: pointer; }
+.bx .opt[aria-pressed="true"] { border: 2px solid var(--ink); background: var(--accent); font-weight: 600; }
+.bx .navrow { display: flex; justify-content: space-between; align-items: center; }
+.bx .rcard2 { border-radius: 16px; background: var(--paper); border: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.bx .rcard2.best { border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); }
+.bx .rcard2 h3 { margin: 0; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 20px; }
+.bx .rcard2 .rref { font-size: 13px; color: var(--link); font-weight: 600; }
+.bx .rcard2 p { margin: 0; font-size: 14px; line-height: 1.45; }
+.bx .chips2 { display: flex; flex-wrap: wrap; gap: 6px; }
+.bx .chips2 span { padding: 4px 10px; border-radius: 10px; background: var(--sand); font-size: 12px; color: #4A3423; }
+.bx .racts { display: flex; flex-wrap: wrap; gap: 8px; }
+.bx .racts .go { min-height: 44px; padding: 0 16px; border-radius: 12px; border: none; background: var(--accent); font: inherit; font-weight: 600; font-size: 14px; color: var(--ink); cursor: pointer; }
+.bx h2.sect { font-size: 22px; margin-top: 6px; }
+.bx textarea.ptext { min-height: 300px; font: 13px/1.5 "JetBrains Mono", Consolas, monospace; border-width: 1px; border-color: var(--line); }
+.bx .copied2 { font-size: 13px; color: var(--link); font-weight: 600; text-align: center; }
+.bx button:focus-visible, .bx textarea:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
 .loading { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: #140A04; color: #F2D9AE; font-family: var(--display); font-size: 1.1rem; transition: opacity .6s; }
 .loading.done { opacity: 0; pointer-events: none; }
 .fallback { max-width: 46ch; text-align: center; line-height: 1.5; padding: 20px; }
@@ -221,24 +278,7 @@ body.bopen .bar { display: none; }
     <button type="button" class="x lx" id="listx" aria-label="Close list">&times;</button></div>
   <div id="listbody" class="cstack"></div>
 </section>
-<section class="builder" id="builder" aria-labelledby="btitle" hidden>
-  <div class="list-head"><h2 id="btitle">Let's build a game</h2><button type="button" class="x" id="builderx" aria-label="Close">&times;</button></div>
-  <p class="list-note">Tell us what you're working with. We'll match it to games on the shelf and write a starter prompt you can take to Claude.</p>
-  <label class="bq" for="bdesc">What's the game about?</label>
-  <textarea id="bdesc" rows="5" placeholder="Paste or describe what you have: a new product feature, the steps of a sales method, onboarding notes, a messy Slack thread..."></textarea>
-  <div class="ideas"><span class="lbl">Need a starting point? Try one</span><div class="tags" id="ideas"></div></div>
-  <div class="bgrid">
-    <label class="bfld"><span>What should people walk away with?</span><select id="bgoal"></select></label>
-    <label class="bfld"><span>How many people will play?</span><select id="bppl"></select></label>
-    <label class="bfld"><span>How long should it run?</span><select id="blen"></select></label>
-    <label class="bfld"><span>Where will they play?</span><select id="bdel"></select></label>
-    <label class="bfld"><span>What is the content mostly?</span><select id="bcon"></select></label>
-    <label class="bfld"><span>Should players use AI?</span><select id="bai"></select></label>
-    <label class="bfld"><span>What should it feel like?</span><select id="bfeel"></select></label>
-  </div>
-  <button type="button" class="btn big" id="bfind">Find my games</button>
-  <div id="bresults" aria-live="polite"></div>
-</section>
+<section class="builder bx" id="builder" aria-labelledby="btitle" hidden><div id="bxbody"></div></section>
 <aside class="panel" id="panel" aria-label="Game details" tabindex="-1">
   <button type="button" class="x" id="x" aria-label="Close details">&times;</button>
   <div id="pbody" style="display:flex;flex-direction:column;gap:12px"></div>
@@ -1891,41 +1931,39 @@ $("listbuild").onclick = () => setBuilder(true);
 $("listbody").addEventListener("click", e => { const lb = e.target.closest("[data-lb]"); if (lb) { buildFrom(lb.dataset.lb); return; } const b = e.target.closest(".lname"); if (!b) return; const m = gameMeshes.get(b.dataset.n); if (!m) return; $("list").hidden = true; $("listbtn").setAttribute("aria-pressed", "false"); openGame(m); });
 $("reset").onclick = () => { closePanel(); hovered = null; view.tx = bayX(0); view.ty = 160; view.tz = 330; clampView(); dirty = true; };
 
-// ---------- builder: describe the content, answer a few guiding questions, get matched games and a starter prompt ----------
-const GOALS = [["", "Not sure yet"], ["lt", "Know a technology better"], ["ls", "Get better at a sales method"], ["it", "Actually start using a technology"], ["is", "Put a sales method into practice"]];
-const PPL = [["", "Not sure"], ["1", "Just one person"], ["6", "A small group (2 to 10)"], ["25", "A team (10 to 50)"], ["100", "A big group (50 to 200)"], ["500", "An event (200+)"]];
-const AIQ = [["", "No preference"], ["ai", "Yes, I want them practicing AI"], ["noai", "Keep it AI-free"]];
-const FEEL = [["", "Not sure"], ["warm", "A quick, lively warm-up"], ["puzzle", "A puzzle to solve"], ["story", "A story or adventure"], ["compete", "A friendly competition"], ["coop", "Working together as a team"]];
+// ---------- builder: describe the game, then fill the game box one card at a time ----------
+const QS = [
+  { key: "goal", label: "Goal", title: "What should people walk away with?", opts: [["Know a technology better", "Know tech", "lt"], ["Get better at a sales method", "Sales skill", "ls"], ["Actually start using a technology", "Use tech", "it"], ["Put a sales method into practice", "Sales habit", "is"]] },
+  { key: "ppl", label: "Players", title: "How many people will play?", opts: [["Just one, self-paced", "Solo", 1], ["A small group, 2 to 8", "2–8", 6], ["A team, 9 to 25", "9–25", 15], ["A big room, 25 to 200", "25–200", 80], ["An event, 200+", "200+", 500]] },
+  { key: "len", label: "Time", title: "How long should it run?", opts: [["About 5 to 15 minutes", "Quick", "quick"], ["One session, 15 to 60 minutes", "Session", "session"], ["An hour to two days", "Long", "long"], ["A little at a time over weeks", "Weeks", "weeks"]] },
+  { key: "del", label: "Where", title: "Where will people play?", opts: [["In the same room", "Room", "room"], ["On a video call", "Call", "call"], ["On their own time", "Own time", "self"], ["In Slack or a community", "Slack", "community"], ["At a big event", "Event", "event"], ["In a 10-minute team meeting", "Meeting", "meeting"]] },
+  { key: "ai", label: "AI", title: "Should players use AI while they play?", opts: [["Yes, I want them practicing AI", "Yes", "ai"], ["Keep it AI-free", "No AI", "noai"]] },
+  { key: "feel", label: "Feel", title: "What should it feel like?", opts: [["A quick, lively warm-up", "Warm-up", "warm"], ["A puzzle to solve", "Puzzle", "puzzle"], ["A story or adventure", "Story", "story"], ["A friendly competition", "Rivals", "compete"], ["Working together as a team", "Teamwork", "coop"]] },
+];
+const STARTERS = ["Customer objections", "A new feature to explain", "Our sales method steps", "Product terms new hires mix up", "How our systems connect", "A tool rollout"];
 const FEELRX = { puzzle: /puzzle|mystery|clue|escape|deduc|crossword|solitaire|pipe|hunt|detective/i, story: /story|quest|adventure|dungeon|campaign|journey|hub|chapter|character/i,
   compete: /race|tournament|battle|arena|leaderboard|bracket|compete|pitch|auction|elimination|speedrun|ladder/i, coop: /together|co-op|team|teach|jigsaw|pair|relay|defuse|kitchen|outbreak/i };
-const IDEAS = ["A new product feature sellers need to explain", "The steps of our sales method", "How our platform's systems connect", "A tool rollout we want people to actually use", "Common customer objections and how to handle them", "Product terms new hires keep mixing up"];
-// words in the description that hint at the kind of content
-const CONTENT_RX = { facts: /\b(term|terms|definition|acronym|spec|specs|pricing|price|plans?|names?|vocabulary|jargon|mixing up|features?)\b/gi,
+const CONTENT_RX = { facts: /\b(term|terms|definition|acronym|spec|specs|pricing|price|plans?|names?|vocabulary|jargon|mix up|mixing up|features?)\b/gi,
   process: /\b(steps?|process|workflow|setup|set up|onboarding|configure|order|stages?|how to|checklist|procedure)\b/gi,
   judgment: /\b(scenario|decide|decision|objections?|discovery|negotiat\w*|questions?|situations?|handle|handling|conversation|calls?)\b/gi,
   trouble: /\b(troubleshoot\w*|issues?|errors?|risks?|security|bugs?|fail\w*|broken|problems?|mistakes?)\b/gi,
   tradeoffs: /\b(prioriti\w*|budget|tradeoffs?|trade-offs?|choose|compare|versus|vs)\b/gi,
-  tools: /\b(tool|tools|software|platform|click|hands-on|demo|crm|dashboard|app|ai tool|prompt\w*)\b/gi,
-  concepts: /\b(architecture|how it works|integrat\w*|concepts?|systems?|connects?|why|value|benefits?|explain)\b/gi,
+  tools: /\b(tool|tools|software|platform|click|hands-on|demo|crm|dashboard|app|rollout|prompt\w*)\b/gi,
+  concepts: /\b(architecture|how it works|integrat\w*|concepts?|systems?|connects?|connect|why|value|benefits?|explain)\b/gi,
   habits: /\b(adoption|adopt|habits?|daily|regularly|rollout|roll out|actually use|behavior|routine)\b/gi };
-const SALES_RX = /\b(sales|sell\w*|deal|deals|buyer|customer|prospect|pipeline|objection|discovery|pitch|quota|meddicc|spin|challenger|renewal|negotiat\w*)\b/i;
-const TECH_RX = /\b(product|feature|platform|api|integration|system|software|technical|data|security|tool|ai|cloud|architecture|setup)\b/i;
+const SALES_RX = /\b(sales|sell\w*|deal|deals|buyer|customer|prospect|pipeline|objections?|discovery|pitch|quota|meddicc|spin|challenger|renewal|negotiat\w*)\b/i;
+const TECH_RX = /\b(product|feature|platform|api|integration|systems?|software|technical|data|security|tool|ai|cloud|architecture|setup)\b/i;
 const IMPL_RX = /\b(rollout|roll out|adopt\w*|actually use|go live|launch|implement\w*|in practice|everyday)\b/i;
 const STOP = new Set("about after again also because been before being from have into just like more most need only other over some such than that their them then there these they this those through very want what when where which while with would your ours our we the and for are was were you".split(" "));
-const opts = (el, list) => { $(el).innerHTML = list.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join(""); };
-opts("bgoal", GOALS); opts("bppl", PPL); opts("blen", [["", "Not sure"], ...LEN]); opts("bdel", [["", "Not sure"], ...DEL]);
-opts("bcon", [["", "Let us figure it out from the description"], ...CONTENT]); opts("bai", AIQ); opts("bfeel", FEEL);
-$("ideas").innerHTML = IDEAS.map(t => `<button type="button">${esc(t)}</button>`).join("");
-$("ideas").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const d = $("bdesc"); d.value = d.value.trim() ? d.value.trim() + "\n" + b.textContent : b.textContent; d.focus(); });
-function setBuilder(open) { $("builder").hidden = !open; document.body.classList.toggle("bopen", open); $("buildbtn").setAttribute("aria-expanded", String(open)); if (open) { setList(false); closePanel(); $("bdesc").focus(); } }
-$("buildbtn").onclick = () => setBuilder($("builder").hidden);
-$("builderx").onclick = () => setBuilder(false);
+const BX = { step: 0, text: "", ans: {}, picked: null, results: null, prompt: "" };
+const N = QS.length;
 
-function readInputs() {
-  const desc = $("bdesc").value.trim();
+function bxInputs() {
+  const desc = BX.text.trim(), A = BX.ans;
   const inferred = {}; for (const [k, rx] of Object.entries(CONTENT_RX)) { const m = desc.match(rx); if (m) inferred[k] = m.length; }
   const words = [...new Set((desc.toLowerCase().match(/[a-z][a-z-]{3,}/g) || []).filter(w => !STOP.has(w)))];
-  return { desc, goal: $("bgoal").value, ppl: +$("bppl").value || 0, len: $("blen").value, del: $("bdel").value, con: $("bcon").value, ai: $("bai").value, feel: $("bfeel").value,
+  const val = k => (A[k] && A[k] !== "Auto") ? QS.find(q => q.key === k).opts.find(o => o[1] === A[k])[2] : "";
+  return { desc, goal: val("goal"), ppl: +val("ppl") || 0, len: val("len"), del: val("del"), con: "", ai: val("ai"), feel: val("feel"),
     inferred, words, sales: SALES_RX.test(desc), tech: TECH_RX.test(desc), impl: IMPL_RX.test(desc) };
 }
 function scoreGame(g, I) {
@@ -1935,67 +1973,23 @@ function scoreGame(g, I) {
   if (I.ppl) { if (I.ppl >= g.size[0] && I.ppl <= g.size[1]) { sc += 3; why.push(I.ppl === 1 ? "Works solo" : `Fits about ${I.ppl} people`); } else sc -= 5; }
   if (I.len) { if (g.len.includes(I.len)) { sc += 3; why.push(LENN[I.len]); } else sc -= 2; }
   if (I.del) { if (g.s.includes(I.del)) { sc += 3; why.push(DELN[I.del]); } else sc -= 2; }
-  if (I.con) { if (g.c.includes(I.con)) { sc += g.c[0] === I.con ? 4 : 3; why.push(CONN[I.con]); } else sc -= 2; }
-  else { let hit = 0; for (const [k, n] of Object.entries(I.inferred)) if (g.c.includes(k)) { sc += Math.min(2, n * .8); hit++; if (hit === 1) why.push(`${CONN[k]} in your description`); } }
+  let hit = 0; for (const [k, n] of Object.entries(I.inferred)) if (g.c.includes(k)) { sc += Math.min(2, n * .8); if (++hit === 1) why.push(`${CONN[k]} in your notes`); }
   if (I.ai === "ai") { if (g.ai) { sc += 4; why.push("Players use AI"); } else sc -= 2; }
   if (I.ai === "noai" && g.ai) sc -= 6;
   if (I.feel) { const txt = [g.n, g.h, g.i || "", g.r ? g.r[0] : ""].join(" ");
     if (I.feel === "warm") { if (g.e === 1 && g.len.includes("quick")) { sc += 2; why.push("Quick warm-up"); } }
-    else if (FEELRX[I.feel].test(txt)) { sc += 2; why.push(FEEL.find(f => f[0] === I.feel)[1]); } }
+    else if (FEELRX[I.feel].test(txt)) { sc += 2; why.push(QS[5].opts.find(o => o[2] === I.feel)[1]); } }
   if (I.words.length) { const txt = [g.n, g.h, g.x, g.i || "", g.r ? g.r.join(" ") : ""].join(" ").toLowerCase(); let w = 0; for (const t of I.words) if (txt.includes(t)) w += .5; sc += Math.min(3, w); }
   if (used.has(g.n)) { sc -= 1; why.push("You've used this one"); }
   sc -= g.e * .2;
   return { g, sc, why };
 }
 function refOf(g) { return g.i ? `Inspired by ${g.i}` : g.r ? `Feels like ${g.r[0]}` : ""; }
-let lastInputs = null;
-function findGames() {
-  const I = readInputs(); lastInputs = I;
-  if (!I.desc && !I.goal && !I.ppl && !I.len && !I.del && !I.con && !I.ai && !I.feel) { $("bresults").innerHTML = `<p class="list-note">Describe your content or pick at least one answer above, then try again.</p>`; return; }
-  const ranked = G.map(g => scoreGame(g, I)).sort((a, b) => b.sc - a.sc || a.g.e - b.g.e);
-  const top = ranked.slice(0, 3), more = ranked.slice(3, 9);
-  $("bresults").innerHTML = `<h3 class="rhead">Your best matches</h3>` + top.map((r, i) => `<div class="rcard${i ? "" : " top"}">
-      <h3>${esc(r.g.n)}</h3>${refOf(r.g) ? `<span class="ref">${esc(refOf(r.g))}</span>` : ""}
-      <div class="why">${r.why.slice(0, 5).map(w => `<span>${esc(w)}</span>`).join("")}</div>
-      <p>${esc(r.g.h)}</p><p><span class="lbl">Example</span>${esc(r.g.x)}</p>
-      <div class="ractions"><button type="button" class="go" data-build="${esc(r.g.n)}">Build this one</button><button type="button" data-show="${esc(r.g.n)}">See it on the shelf</button></div></div>`).join("")
-    + `<h3 class="rhead">Other good fits</h3><div class="more-fits">${more.map(r => `<button type="button" data-show="${esc(r.g.n)}">${esc(r.g.n)}</button>`).join("")}</div>
-       <div id="promptbox"></div>`;
-  flt.only = new Set([...top, ...more].map(r => r.g.n)); applyFilter();
-  $("matchtext").textContent = `Showing your ${flt.only.size} best matches.`; $("matchnote").hidden = false;
-  const first = gameMeshes.get(top[0].g.n); if (first) flyTo(first, 300);
-  $("bresults").querySelector(".rhead").scrollIntoView({ behavior: "smooth", block: "start" });
-}
-$("bfind").onclick = findGames;
-function showPrompt(g) {
-  const I = readInputs(); lastInputs = I;
-  $("promptbox").innerHTML = `<h3 class="rhead">Your starter prompt for ${esc(g.n)}</h3><p class="list-note">Copy this into Claude to start building. Fill in the description and questions above first, then press Update prompt, so Claude knows what you're working with.</p>
-    <textarea id="prompt" readonly></textarea><div class="copyrow"><button type="button" class="btn" id="copyprompt">Copy prompt</button><button type="button" class="btn ghost" id="updprompt" data-for="${esc(g.n)}">Update prompt</button><span class="copied" id="copied" aria-live="polite"></span></div>`;
-  $("prompt").value = buildPrompt(g, I);
-}
-function buildFrom(name) {
-  const g = G.find(x => x.n === name); if (!g) return;
-  setBuilder(true);
-  $("bresults").innerHTML = `<h3 class="rhead">Building: ${esc(g.n)}</h3><p class="list-note">${esc(g.h)}</p><div id="promptbox"></div>`;
-  showPrompt(g);
-  const m = gameMeshes.get(name); if (m) flyTo(m, 300);
-  $("bdesc").focus();
-}
-$("showall").onclick = () => { flt.only = null; applyFilter(); $("matchnote").hidden = true; };
 function buildPrompt(g, I) {
-  const lab = (list, k) => (list.find(x => x[0] === String(k)) || [, ""])[1];
-  const lines = [];
-  lines.push("I'm building a learning game for people at a technology company. Build it with me, step by step.");
-  lines.push("", "WHAT THE GAME IS ABOUT", I.desc || "(I'll paste my content next.)");
-  const ctx = [];
-  if (I.goal) ctx.push(`Goal: ${lab(GOALS, I.goal)}`);
-  if (I.ppl) ctx.push(`Players: ${lab(PPL, I.ppl)}`);
-  if (I.del) ctx.push(`Where: ${lab(DEL, I.del)}`);
-  if (I.len) ctx.push(`Length: ${LENN[I.len]}`);
-  if (I.con) ctx.push(`Content is mostly: ${CONN[I.con]}`);
-  if (I.ai === "ai") ctx.push("Players should use AI as part of how they win, so they practice AI while they learn");
-  if (I.ai === "noai") ctx.push("Keep the game itself AI-free");
-  if (ctx.length) lines.push("", "CONTEXT", ...ctx.map(c => "- " + c));
+  const lines = ["I'm building a learning game for people at a technology company. Build it with me, step by step.", "", "WHAT THE GAME IS ABOUT", I.desc || "(I'll paste my content next.)"];
+  const ctx = []; const A = BX.ans;
+  QS.forEach(q => { const v = A[q.key]; if (v && v !== "Auto") { const o = q.opts.find(x => x[1] === v); ctx.push(`${q.title} ${o[0]}`); } });
+  if (ctx.length) lines.push("", "WHAT I KNOW SO FAR", ...ctx.map(c => "- " + c));
   lines.push("", "THE FORMAT I PICKED", `${g.n}${refOf(g) ? ` (${refOf(g)})` : ""}`, `How it plays: ${g.h}`);
   if (g.r) lines.push(`What to borrow from ${g.r[0]}: ${g.r[1]}`);
   lines.push(`Example for a tech company: ${g.x}`, `Build tip: ${g.b}`, `Keep it fresh: ${g.f}`, `Watch out: ${g.w}`);
@@ -2005,18 +1999,92 @@ function buildPrompt(g, I) {
     "1. Break my content into pieces and tell me what kind each piece is (facts, steps, judgment calls, problems to spot, tradeoffs, tool skills, big ideas, or habits). Flag anything missing, conflicting, or out of date.",
     "2. Suggest up to three learning goals, each written as \"After playing, people can...\". Each one should link back to learning the technology or the sales method.",
     "3. Show me how each piece of content becomes part of the game, like a card, a lock, a round, or a clue.",
-    "Then wait for my OK before you build.",
-    "", `Give the game its own name and look. Describe what to borrow from ${g.i || (g.r ? g.r[0] : "the reference game")} in words, and never copy its art, code, or assets.`);
+    "Then wait for my OK before you build.", "",
+    `Give the game its own name and look. Describe what to borrow from ${g.i || (g.r ? g.r[0] : "the reference game")} in words, and never copy its art, code, or assets.`);
   return lines.join("\n");
 }
-$("bresults").addEventListener("click", async e => {
-  const show = e.target.closest("[data-show]"); const bld = e.target.closest("[data-build]");
-  if (show) { const m = gameMeshes.get(show.dataset.show); if (m) { setBuilder(false); openGame(m); } }
-  if (bld) { const g = G.find(x => x.n === bld.dataset.build); showPrompt(g); $("promptbox").scrollIntoView({ behavior: "smooth", block: "start" }); }
-  if (e.target.id === "updprompt") { const g = G.find(x => x.n === e.target.dataset.for); showPrompt(g); $("copied").textContent = "Updated"; }
-  if (e.target.id === "copyprompt") { const t = $("prompt"); let ok = false;
-    try { await navigator.clipboard.writeText(t.value); ok = true; } catch (err) { t.select(); try { ok = document.execCommand("copy"); } catch (e2) {} }
-    $("copied").textContent = ok ? "Copied" : "Select the text and copy it"; }
+
+const backBtn = `<button type="button" class="round" data-act="back" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>`;
+function topBar(withBack) { return `<div class="top">${withBack ? backBtn : ""}<h1 id="btitle">Let's build a game</h1><button type="button" class="round" data-act="close" aria-label="Close">&times;</button></div>`; }
+function gameBox() {
+  const t = BX.text.trim(); const title = BX.picked ? BX.picked.n : t ? (t.length > 46 ? t.slice(0, 44) + "…" : t) : "Untitled game";
+  const filled = QS.filter(q => BX.ans[q.key]).length;
+  return `<div class="gbox"><div class="gtop"><div><span class="glabel">Your game box</span><span class="gtitle">${esc(title)}</span></div><span class="prog">${filled} of ${N}</span></div>
+    <div class="slots">${QS.map((q, i) => { const v = BX.ans[q.key]; const cur = BX.step === i + 1; const cls = cur ? "cur" : v ? "full" : "empty";
+      return `<button type="button" class="slot ${cls}" data-go="${i + 1}" aria-label="${esc(q.label)}: ${esc(v || "not set")}. Change"><span class="sl">${esc(q.label)}</span><span class="sv">${esc(v || "?")}</span></button>`; }).join("")}</div>
+    <span class="ghint">Tap any slot to change it.</span></div>`;
+}
+function renderBX(focusSel) {
+  const st = BX.step; let h = "";
+  if (st === 0) {
+    h = topBar(false) + `<div style="display:flex;flex-direction:column;gap:10px"><label for="bxabout" class="bxq">What's the game about?</label><p class="sub">Paste notes, a Slack thread, or a sentence. We'll ask the rest next.</p></div>
+      <textarea id="bxabout" placeholder="e.g. Our reps freeze when buyers say “we already use a competitor”…">${esc(BX.text)}</textarea>
+      <div style="display:flex;flex-direction:column;gap:10px"><span class="small">Or start from one of these</span><div class="pills">${STARTERS.map(x => `<button type="button" class="pill" data-starter="${esc(x)}">${esc(x)}</button>`).join("")}</div></div>
+      <div class="foot"><button type="button" class="primary" data-act="start">${BX.picked ? "Next: fill the box" : "Next: build the box"}</button>
+      <button type="button" class="textlink" data-act="skipall">${BX.picked ? `Skip the questions, write my ${esc(BX.picked.n)} prompt` : "Skip the questions, just find games"}</button></div>`;
+  } else if (st >= 1 && st <= N) {
+    const q = QS[st - 1];
+    h = topBar(true) + gameBox() + `<div class="stack"><div class="qcard"><span class="clabel">Card ${st} of ${N}</span><h2 id="bxq">${esc(q.title)}</h2>
+      <div class="opts">${q.opts.map(o => `<button type="button" class="opt" data-pick="${esc(o[1])}" aria-pressed="${BX.ans[q.key] === o[1]}">${esc(o[0])}</button>`).join("")}</div></div></div>
+      <div class="navrow"><button type="button" class="ghost2" data-act="back">← Back</button><button type="button" class="textlink" data-act="skip">Not sure, skip</button></div>`;
+  } else if (st === N + 1) {
+    h = topBar(true) + gameBox() + `<h2 class="sect" id="bxq">Your box is packed.</h2><p class="sub">Anything marked Auto, we'll work out from your description. Tap a slot above to change an answer.</p>
+      <div class="foot"><button type="button" class="primary" data-act="find">${BX.picked ? `Write my ${esc(BX.picked.n)} prompt` : "Find my games"}</button><button type="button" class="textlink" data-act="back">Back to the last card</button></div>`;
+  } else if (st === N + 2) {
+    const R = BX.results;
+    h = topBar(true) + gameBox() + `<h2 class="sect" id="bxq">Your best matches</h2>` + R.top.map((r, i) => `<div class="rcard2${i ? "" : " best"}"><h3>${esc(r.g.n)}</h3>${refOf(r.g) ? `<span class="rref">${esc(refOf(r.g))}</span>` : ""}
+        <div class="chips2">${r.why.slice(0, 5).map(w => `<span>${esc(w)}</span>`).join("")}</div><p>${esc(r.g.h)}</p>
+        <div class="racts"><button type="button" class="go" data-build="${esc(r.g.n)}">Build this one</button><button type="button" class="ghost2" data-show="${esc(r.g.n)}">See it on the shelf</button></div></div>`).join("")
+      + `<h2 class="sect">Other good fits</h2><div class="pills">${R.more.map(r => `<button type="button" class="pill" data-show="${esc(r.g.n)}">${esc(r.g.n)}</button>`).join("")}</div>
+      <p class="sub">They're lit up on the shelves too.</p>`;
+  } else {
+    const g = BX.picked;
+    h = topBar(true) + gameBox() + `<h2 class="sect" id="bxq">Your starter prompt</h2><p class="sub">Copy this into Claude to start building ${esc(g.n)}. ${BX.text.trim() ? "" : "Add your notes first so Claude knows what you're working with."}</p>
+      <textarea class="ptext" id="bxprompt" readonly>${esc(BX.prompt)}</textarea>
+      <div class="foot"><button type="button" class="primary" data-act="copy">Copy prompt</button><span class="copied2" id="bxcopied" aria-live="polite"></span>
+      <button type="button" class="textlink" data-act="edit">${BX.text.trim() ? "Change my answers" : "Add my notes and answers"}</button>
+      <button type="button" class="textlink" data-show="${esc(g.n)}">See it on the shelf</button></div>`;
+  }
+  $("bxbody").innerHTML = h;
+  const f = focusSel && $("bxbody").querySelector(focusSel); if (f) f.focus({ preventScroll: false });
+  $("builder").scrollTop = 0;
+}
+function bxGo(step, focus) { BX.step = step; renderBX(focus || (step === 0 ? "#bxabout" : "#bxq")); }
+function setBuilder(open) { $("builder").hidden = !open; document.body.classList.toggle("bopen", open); $("buildbtn").setAttribute("aria-expanded", String(open));
+  if (open) { if (!$("list").hidden) setList(false); closePanel(); if (!$("bxbody").innerHTML) bxGo(0); else renderBX(); } }
+function bxFind() {
+  if (BX.picked) { BX.prompt = buildPrompt(BX.picked, bxInputs()); bxGo(N + 3); return; }
+  const I = bxInputs(); const ranked = G.map(g => scoreGame(g, I)).sort((a, b) => b.sc - a.sc || a.g.e - b.g.e);
+  BX.results = { top: ranked.slice(0, 3), more: ranked.slice(3, 9) };
+  flt.only = new Set(ranked.slice(0, 9).map(r => r.g.n)); applyFilter();
+  $("matchtext").textContent = `Showing your ${flt.only.size} best matches.`; $("matchnote").hidden = false;
+  const first = gameMeshes.get(ranked[0].g.n); if (first) flyTo(first, 300);
+  bxGo(N + 2);
+}
+function buildFrom(name) { const g = G.find(x => x.n === name); if (!g) return; BX.picked = g; BX.fromList = true; BX.prompt = buildPrompt(g, bxInputs()); BX.step = N + 3; setBuilder(true); renderBX("#bxq"); const m = gameMeshes.get(name); if (m) flyTo(m, 300); }
+function bxFresh() { BX.picked = null; BX.fromList = false; if (BX.step > N + 1) BX.step = 0; if ($("bxbody").innerHTML) renderBX(); setBuilder(true); }
+$("buildbtn").onclick = () => { if ($("builder").hidden) bxFresh(); else setBuilder(false); };
+$("listbuild").onclick = bxFresh;
+$("showall").onclick = () => { flt.only = null; applyFilter(); $("matchnote").hidden = true; };
+$("bxbody").addEventListener("input", e => { if (e.target.id === "bxabout") BX.text = e.target.value; });
+$("bxbody").addEventListener("click", async e => {
+  const t = e.target.closest("button"); if (!t) return;
+  const act = t.dataset.act;
+  if (t.dataset.starter) { BX.text = BX.text.trim() ? BX.text.trim() + "\n" + t.dataset.starter : t.dataset.starter; renderBX("#bxabout"); return; }
+  if (t.dataset.go) { bxGo(+t.dataset.go); return; }
+  if (t.dataset.pick) { BX.ans[QS[BX.step - 1].key] = t.dataset.pick; bxGo(BX.step + 1); return; }
+  if (t.dataset.build) { BX.picked = G.find(x => x.n === t.dataset.build); BX.fromList = false; BX.prompt = buildPrompt(BX.picked, bxInputs()); bxGo(N + 3); return; }
+  if (t.dataset.show) { const m = gameMeshes.get(t.dataset.show); if (m) { setBuilder(false); openGame(m); } return; }
+  if (act === "close") setBuilder(false);
+  if (act === "start") bxGo(1);
+  if (act === "skipall") { QS.forEach(q => { if (!BX.ans[q.key]) BX.ans[q.key] = "Auto"; }); bxFind(); }
+  if (act === "skip") { BX.ans[QS[BX.step - 1].key] = "Auto"; bxGo(BX.step + 1); }
+  if (act === "find") bxFind();
+  if (act === "edit") bxGo(0);
+  if (act === "back") { if (BX.step === N + 3 && BX.results && !BX.fromList) bxGo(N + 2); else if (BX.step > N + 1) bxGo(N + 1); else bxGo(Math.max(0, BX.step - 1)); }
+  if (act === "copy") { const ta = $("bxprompt"); let ok = false;
+    try { await navigator.clipboard.writeText(ta.value); ok = true; } catch (err) { ta.select(); try { ok = document.execCommand("copy"); } catch (e2) {} }
+    $("bxcopied").textContent = ok ? "Copied. Paste it into Claude." : "Select the text above and copy it."; }
 });
 
 // ---------- loop ----------
